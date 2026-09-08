@@ -1,0 +1,12 @@
+.vercel
+.DS_Store
+Thumbs.db
+*.pyc
+__pycache__/
+
+# Fichiers de travail, sources et maquettes
+_sources/
+_*.html
+_*.py
+_*.png
+_*.js

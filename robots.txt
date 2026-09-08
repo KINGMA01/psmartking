@@ -1,0 +1,8 @@
+# Autorise tous les robots à crawler le site.
+# Après l'hébergement, si le domaine n'est pas psmartking.com,
+# remplace l'URL du Sitemap ci-dessous.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://psmartking.com/sitemap.xml

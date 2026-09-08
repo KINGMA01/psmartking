@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr" data-page="home">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#4169E1">
+  <title>P-SmartKing — Stationnement à Montréal, sans stress</title>
+  <meta name="description" content="Application gratuite pour savoir où se garer à Montréal : règles, durée, prix, et guidage jusqu'à la place. Rejoins la liste d'attente.">
+  <meta name="author" content="DnK Vision">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://psmartking.com/">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://psmartking.com/sitemap.xml">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="logo.png?v=6" type="image/png">
+  <link rel="apple-touch-icon" href="logo.png?v=6">
+  <!-- Search Console : après l'hébergement, colle le code de validation dans content="" (Google Search Console → Paramètres → Vérification de la propriété → balise HTML). Un seul endroit : cette ligne. -->
+  <meta name="google-site-verification" content="">
+  <!-- Google Maps : colle la clé dans maps-config.js (Maps JavaScript API + Places API New). -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="P-SmartKing">
+  <meta property="og:locale" content="fr_CA">
+  <meta property="og:url" content="https://psmartking.com/">
+  <meta property="og:title" content="P-SmartKing — Stationnement à Montréal, sans stress">
+  <meta property="og:description" content="Où tu as le droit de te garer, combien de temps, combien ça coûte — et le guidage jusqu'à la place. Bientôt disponible.">
+  <meta property="og:image" content="https://psmartking.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="P-SmartKing — se garer à Montréal sans y passer ta journée">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="P-SmartKing — Stationnement à Montréal, sans stress">
+  <meta name="twitter:description" content="Où tu as le droit de te garer, combien de temps, combien ça coûte — et le guidage jusqu'à la place.">
+  <meta name="twitter:image" content="https://psmartking.com/og-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://psmartking.com/#organization",
+        "name": "DnK Vision",
+        "email": "psmartking@dnkvision.com",
+        "url": "https://psmartking.com/",
+        "logo": "https://psmartking.com/logo.png",
+        "sameAs": [
+          "https://www.facebook.com/share/1BtWMiGnzs/?mibextid=wwXIfr",
+          "https://www.instagram.com/psmartking_dnk",
+          "https://www.tiktok.com/@psmartking"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://psmartking.com/#website",
+        "url": "https://psmartking.com/",
+        "name": "P-SmartKing",
+        "inLanguage": "fr-CA",
+        "publisher": { "@id": "https://psmartking.com/#organization" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "P-SmartKing",
+        "url": "https://psmartking.com/",
+        "applicationCategory": "NavigationApplication",
+        "operatingSystem": "iOS, Android",
+        "description": "Application mobile gratuite qui indique où se garer à Montréal : règles, durée, prix, et guidage jusqu'à la place.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD" },
+        "areaServed": { "@type": "City", "name": "Montreal" },
+        "creator": { "@id": "https://psmartking.com/#organization" }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#contenu" data-i18n="a11y.skip">Aller au contenu</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html" aria-label="P-SmartKing, accueil">
+        <span class="logo-mark" aria-hidden="true">
+          <img src="logo.png?v=6" alt="" width="40" height="40">
+        </span>
+        <span class="logo-text">P-SmartKing</span>
+      </a>
+      <nav class="nav-desktop" aria-label="Navigation principale">
+        <a href="index.html" data-i18n="nav.home">Accueil</a>
+        <a href="comment.html" data-i18n="nav.how">Comment ça marche</a>
+        <a href="fonctionnalites.html" data-i18n="nav.features">Fonctionnalités</a>
+        <a href="a-propos.html" data-i18n="nav.about">À propos</a>
+        <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+        <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Langue">
+          <button type="button" class="lang-btn is-active" data-lang="fr" aria-pressed="true">FR</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="btn btn-primary btn-sm" href="liste-attente.html" data-i18n="nav.cta">Rejoindre la liste d'attente</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-mobile" data-i18n-aria="a11y.menu">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="sr-only" data-i18n="a11y.menu">Ouvrir le menu</span>
+        </button>
+      </div>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile" hidden>
+      <a href="index.html" data-i18n="nav.home">Accueil</a>
+      <a href="comment.html" data-i18n="nav.how">Comment ça marche</a>
+      <a href="fonctionnalites.html" data-i18n="nav.features">Fonctionnalités</a>
+      <a href="a-propos.html" data-i18n="nav.about">À propos</a>
+      <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <a class="btn btn-primary" href="liste-attente.html" data-i18n="nav.cta">Rejoindre la liste d'attente</a>
+    </nav>
+  </header>
+
+  <main id="contenu">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="hero-city">Montréal</p>
+          <h1 id="hero-title" data-i18n="hero.title">Se garer à Montréal sans y passer ta journée.</h1>
+          <p class="lead" data-i18n="hero.sub">P-SmartKing te dit où tu as le droit de te garer, combien de temps, combien ça coûte. Et t'amène jusqu'à la place.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="liste-attente.html" data-i18n="nav.cta">Rejoindre la liste d'attente</a>
+            <a class="btn btn-on-dark" href="comment.html" data-i18n="hero.how">Voir comment ça marche</a>
+            <a class="btn btn-download" href="#" hidden data-download data-i18n="hero.download">Télécharger gratuitement</a>
+          </div>
+        </div>
+        <div class="hero-stage">
+          <aside class="map-callout map-callout-no">
+            <span class="callout-icon callout-icon-no" aria-hidden="true">P</span>
+            <p data-i18n="hero.float1Sub">Les lignes rouges, stationnement interdit.</p>
+          </aside>
+          <div class="phone" role="img" aria-labelledby="mockup-caption">
+            <p id="mockup-caption" class="sr-only" data-i18n="hero.mockupAlt">Aperçu de l'application P-SmartKing : carte de Montréal avec une place disponible.</p>
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <div class="app-status"><span>9:41</span><span class="app-status-icons">●●●</span></div>
+                <div class="app-top">
+                  <div class="app-brand"><img class="app-logo" src="logo.png?v=6" alt=""><span>P-SmartKing</span></div>
+                  <span class="app-chip" data-i18n="mockup.live">Live</span>
+                </div>
+                <div class="app-search" data-i18n="mockup.search">Où veux-tu te garer ?</div>
+                <div class="app-map">
+                  <div class="map-grid"></div>
+                  <span class="map-street map-street-h s1 map-line-no"></span>
+                  <span class="map-street map-street-h s2 map-line-yes"></span>
+                  <span class="map-street map-street-h s5 map-line-yes"></span>
+                  <span class="map-street map-street-v s3 map-line-yes"></span>
+                  <span class="map-street map-street-v s4 map-line-no"></span>
+                  <span class="map-street map-street-v s6 map-line-no"></span>
+                  <span class="map-block b1"></span>
+                  <span class="map-block b2"></span>
+                  <span class="map-pin p1"></span>
+                  <span class="map-pin p2 is-active"><span class="map-pulse"></span></span>
+                  <span class="map-pin p3"></span>
+                  <span class="map-you"></span>
+                </div>
+                <div class="app-sheet">
+                  <div class="sheet-handle"></div>
+                  <p class="sheet-kicker" data-i18n="mockup.zone">Stationnement permis</p>
+                  <h3 class="sheet-title" data-i18n="mockup.street">Rue Saint-Denis</h3>
+                  <div class="sheet-meta">
+                    <span data-i18n="mockup.time">2 h max</span>
+                    <span data-i18n="mockup.price">3,50 $ / h</span>
+                  </div>
+                  <a class="sheet-btn" href="liste-attente.html" data-i18n="mockup.go">Y aller</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <aside class="map-callout map-callout-yes">
+            <span class="callout-icon callout-icon-yes" aria-hidden="true">P</span>
+            <p data-i18n="hero.float2Sub">Les lignes vertes, tu peux te garer.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="coverage" id="couverture" aria-labelledby="coverage-title">
+      <div class="container">
+        <div class="coverage-head">
+          <p class="eyebrow" data-i18n="coverage.eyebrow">Couverture</p>
+          <h2 id="coverage-title" data-i18n="coverage.title">Ta rue est couverte?</h2>
+          <p class="section-lead" data-i18n="coverage.lead">Tape ton adresse. La carte te dit si le secteur est couvert au lancement : toute l'île de Montréal.</p>
+        </div>
+        <div class="coverage-stage">
+          <div id="coverage-map" class="coverage-map" role="region" data-i18n-aria="coverage.mapAlt" aria-label="Carte Google de la couverture P-SmartKing sur l'île de Montréal."></div>
+          <form class="coverage-search" data-coverage novalidate>
+            <div class="coverage-field">
+              <label class="sr-only" for="coverage-q" data-i18n="coverage.label">Adresse</label>
+              <input id="coverage-q" name="q" type="text" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="coverage-suggest" placeholder="Ex. 11922 Rue de Meulles, Saint-Laurent QC" data-i18n-placeholder="coverage.placeholder">
+              <ul id="coverage-suggest" class="coverage-suggest" role="listbox" hidden></ul>
+            </div>
+            <button class="btn btn-primary" type="submit" data-i18n="coverage.submit">Vérifier</button>
+          </form>
+          <p class="coverage-legend"><span class="legend-swatch" aria-hidden="true"></span><span data-i18n="coverage.legend">Zone couverte au lancement</span></p>
+          <p class="coverage-result" data-coverage-result hidden aria-live="polite"></p>
+        </div>
+        <p class="coverage-credit" data-i18n="coverage.credit">Données : Ville de Montréal</p>
+      </div>
+    </section>
+
+    <div class="street-marquee" aria-hidden="true">
+      <div class="street-track">
+        <span>LaSalle</span><span>Lachine</span><span>Kirkland</span><span>Beaconsfield</span><span>Dorval</span><span>Pointe-Claire</span><span>Dollard-des-Ormeaux</span><span>Pierrefonds</span><span>Verdun</span><span>Le Plateau</span><span>Rosemont</span><span>Hochelaga</span><span>Saint-Laurent</span><span>Côte-des-Neiges</span><span>NDG</span><span>Ahuntsic</span><span>Villeray</span><span>Outremont</span><span>Westmount</span><span>Ville-Marie</span><span>Anjou</span><span>Saint-Léonard</span><span>Montréal-Nord</span><span>Pointe-aux-Trembles</span><span>Île-Bizard</span><span>Côte-Saint-Luc</span>
+        <span>LaSalle</span><span>Lachine</span><span>Kirkland</span><span>Beaconsfield</span><span>Dorval</span><span>Pointe-Claire</span><span>Dollard-des-Ormeaux</span><span>Pierrefonds</span><span>Verdun</span><span>Le Plateau</span><span>Rosemont</span><span>Hochelaga</span><span>Saint-Laurent</span><span>Côte-des-Neiges</span><span>NDG</span><span>Ahuntsic</span><span>Villeray</span><span>Outremont</span><span>Westmount</span><span>Ville-Marie</span><span>Anjou</span><span>Saint-Léonard</span><span>Montréal-Nord</span><span>Pointe-aux-Trembles</span><span>Île-Bizard</span><span>Côte-Saint-Luc</span>
+      </div>
+    </div>
+
+    <section class="problem" aria-labelledby="problem-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-i18n="problem.eyebrow">Le constat</p>
+          <h2 id="problem-title" data-i18n="problem.title">Chercher une place à Montréal, c'est un sport olympique.</h2>
+          <p class="section-lead" data-i18n="problem.lead">Passer un été ici en voiture, c'est passer un été à tourner. On le sait. On l'a fait. Trop souvent.</p>
+        </div>
+        <div class="problem-grid">
+          <article class="problem-card reveal">
+            <span class="icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="18.5" cy="18" r="2"/></svg></span>
+            <h3 data-i18n="problem.c1t">Panneaux à étages</h3>
+            <p data-i18n="problem.c1p">Trois règles empilées, une flèche, un astérisque. Tu lis, tu relis, tu te gares… tu doutes encore.</p>
+          </article>
+          <article class="problem-card reveal">
+            <span class="icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10h16v10H4z"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+            <h3 data-i18n="problem.c2t">Zones résidents</h3>
+            <p data-i18n="problem.c2p">SRRR, vignette, « sauf résidents ». Une rue sur deux. L'amende, elle, ne fait pas d'exception.</p>
+          </article>
+          <article class="problem-card reveal">
+            <span class="icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v3M8 8l-2 8h12l-2-8H8Z"/><path d="M5 21h14"/></svg></span>
+            <h3 data-i18n="problem.c3t">Déneigement</h3>
+            <p data-i18n="problem.c3p">La rue était correcte à 22 h. À 7 h, c'est interdit. Et ton auto est déjà trop collée au banc de neige.</p>
+          </article>
+          <article class="problem-card reveal">
+            <span class="icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 8v5l3 2"/></svg></span>
+            <h3 data-i18n="problem.c4t">Horaires qui bougent</h3>
+            <p data-i18n="problem.c4p">Mardi 9 h–11 h. Sauf jours fériés. Sauf après 18 h. Tu perds plus de temps à décoder qu'à rouler.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="how" aria-labelledby="explore-title">
+      <div class="container">
+        <h2 id="explore-title" class="sr-only" data-i18n="explore.eyebrow">Explorer</h2>
+        <div class="explore-grid">
+          <a class="explore-card reveal" href="comment.html">
+            <strong data-i18n="nav.how">Comment ça marche</strong>
+            <span data-i18n="explore.how">Trois gestes. Une place. Zéro panneau illisible.</span>
+          </a>
+          <a class="explore-card reveal" href="fonctionnalites.html">
+            <strong data-i18n="nav.features">Fonctionnalités</strong>
+            <span data-i18n="explore.features">Règles, durée, prix, guidage et alertes.</span>
+          </a>
+          <a class="explore-card reveal" href="a-propos.html">
+            <strong data-i18n="nav.about">À propos</strong>
+            <span data-i18n="explore.about">Deux étudiants au cégep, à Montréal.</span>
+          </a>
+          <a class="explore-card reveal" href="faq.html">
+            <strong data-i18n="nav.faq">FAQ</strong>
+            <span data-i18n="explore.faq">Les questions qu'on se ferait poser dans le métro.</span>
+          </a>
+          <a class="explore-card reveal" href="liste-attente.html">
+            <strong data-i18n="nav.waitlist">Liste d'attente</strong>
+            <span data-i18n="explore.waitlist">Sois averti dès le lancement.</span>
+          </a>
+          <a class="explore-card reveal" href="contact.html">
+            <strong data-i18n="nav.contact">Contact</strong>
+            <span data-i18n="explore.contact">Questions, médias, partenariats.</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="index.html">
+          <span class="logo-mark" aria-hidden="true">
+            <img src="logo.png?v=6" alt="" width="40" height="40">
+          </span>
+          <span class="logo-text">P-SmartKing</span>
+        </a>
+        <p data-i18n="footer.tagline">Se garer à Montréal, sans y laisser ta soirée.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Pied de page">
+        <a href="index.html" data-i18n="nav.home">Accueil</a>
+        <a href="comment.html" data-i18n="nav.how">Comment ça marche</a>
+        <a href="fonctionnalites.html" data-i18n="nav.features">Fonctionnalités</a>
+        <a href="a-propos.html" data-i18n="nav.about">À propos</a>
+        <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+        <a href="liste-attente.html" data-i18n="nav.waitlist">Liste d'attente</a>
+        <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      </nav>
+      <div class="footer-contact">
+        <a href="contact.html">psmartking@dnkvision.com</a>
+        <div class="social-row">
+          <a class="social-link" href="https://www.facebook.com/share/1BtWMiGnzs/?mibextid=wwXIfr" rel="noopener noreferrer" target="_blank" aria-label="Facebook" data-i18n-aria="social.fb"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 8.2h2.8V5H14c-2.5 0-4.2 1.6-4.2 4.3V12H7v3.3h2.8V22h3.4v-6.7H16L16.6 12h-3.4V9.5c0-.8.4-1.3 1.3-1.3z"/></svg></a>
+          <a class="social-link" href="https://www.instagram.com/psmartking_dnk" rel="noopener noreferrer" target="_blank" aria-label="Instagram" data-i18n-aria="social.ig"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm10 1.8H7A2.2 2.2 0 0 0 4.8 7v10A2.2 2.2 0 0 0 7 19.2h10a2.2 2.2 0 0 0 2.2-2.2V7A2.2 2.2 0 0 0 17 4.8zm-5 2.9a4.3 4.3 0 1 1 0 8.6 4.3 4.3 0 0 1 0-8.6zm0 1.8a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm5.15-2.7a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg></a>
+          <a class="social-link" href="https://www.tiktok.com/@psmartking" rel="noopener noreferrer" target="_blank" aria-label="TikTok" data-i18n-aria="social.tt"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14.6 3c.25 2.15 1.55 3.7 3.7 4.05V10c-1.35-.05-2.6-.45-3.7-1.15v5.9A5.75 5.75 0 1 1 9 9.2v3.15a2.65 2.65 0 1 0 1.9 2.55V3h3.7z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p><span data-i18n="footer.legal">Un projet porté par</span> <strong>DnK Vision</strong> · © <span id="year"></span> P-SmartKing</p>
+    </div>
+  </footer>
+  <script src="coverage-zone.js"></script>
+  <script src="maps-config.js"></script>
+  <script>
+    (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.googleapis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Dropping:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+      key: window.PSMARTKING_GOOGLE_MAPS_API_KEY || "",
+      v: "weekly",
+      language: "fr",
+      region: "CA"
+    });
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
