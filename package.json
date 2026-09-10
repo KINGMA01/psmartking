@@ -1,0 +1,11 @@
+{
+  "name": "p-smartking-site",
+  "private": true,
+  "scripts": {
+    "dev": "serve -l 4180",
+    "start": "serve -l 4180"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

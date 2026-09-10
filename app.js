@@ -1,9 +1,9 @@
 const COPY = {
   fr: {
     meta: {
-      title: "P-SmartKing — Stationnement à Montréal, sans stress",
+      title: "P-SmartKing · Stationnement à Montréal, sans stress",
       description:
-        "Application gratuite pour savoir où se garer à Montréal : règles, durée, prix, et guidage jusqu'à la place. Rejoins la liste d'attente.",
+        "App 100 % gratuite pour se garer à Montréal : règles claires, durée, prix, guidage. Zéro paywall, zéro version Pro. Rejoins la liste d'attente.",
     },
     a11y: { skip: "Aller au contenu", menu: "Ouvrir le menu" },
     nav: {
@@ -22,18 +22,18 @@ const COPY = {
       storeGoogle: "Bientôt sur Google Play",
       pill: "Montréal · Lancement bientôt",
       how: "Voir comment ça marche",
-      fact1: "Gratuit, sans créer de compte",
+      fact1: "100 % gratuit · zéro paywall",
       fact2: "Toute l'île de Montréal",
-      fact3: "Règles à jour, pas un PDF de 2019",
-      title: "Se garer à Montréal sans y passer ta journée.",
-      sub: "P-SmartKing te dit où tu as le droit de te garer, combien de temps, combien ça coûte. Et t'amène jusqu'à la place.",
-      hint: "Pas encore sur les boutiques d'apps. Laisse-nous t'écrire le jour J.",
+      fact3: "Pas d'abonnement caché",
+      title: "Se garer à Montréal. Sans ticket. Sans paywall.",
+      sub: "P-SmartKing te dit où tu peux te garer, combien de temps, combien ça coûte, et t'y amène. L'app est entièrement gratuite. On ne te vendra jamais une version « Pro ».",
+      hint: "Beta privée bientôt. Inscris-toi à la liste d'attente.",
       download: "Télécharger gratuitement",
-      mockupAlt: "Aperçu de l'application P-SmartKing : carte de Montréal avec une place disponible.",
-      float1Title: "Panneau lu",
-      float1Sub: "Les lignes rouges, stationnement interdit.",
-      float2Title: "− 18 min",
-      float2Sub: "Les lignes vertes, tu peux te garer.",
+      mockupAlt: "Panneau de stationnement illustrant les règles de voirie à Montréal.",
+      sign1Rule: "Interdit de stationner",
+      sign1Detail: "lun à ven · 7 h à 9 h",
+      sign2Rule: "2 h max · 3,50 $ / h",
+      sign2Detail: "lun à sam · 9 h à 18 h",
     },
     mockup: {
       live: "Live",
@@ -48,7 +48,7 @@ const COPY = {
       emailLabel: "Adresse courriel",
       placeholder: "toi@courriel.com",
       submit: "Rejoindre la liste d'attente",
-      success: "Tu es sur la liste. On t'écrit au lancement.",
+      success: "Tu es sur la liste. On t'écrit pour la beta ou au lancement.",
       error: "Entre un courriel valide.",
     },
     problem: {
@@ -62,11 +62,12 @@ const COPY = {
       c3t: "Déneigement",
       c3p: "La rue était correcte à 22 h. À 7 h, c'est interdit. Et ton auto est déjà trop collée au banc de neige.",
       c4t: "Horaires qui bougent",
-      c4p: "Mardi 9 h–11 h. Sauf jours fériés. Sauf après 18 h. Tu perds plus de temps à décoder qu'à rouler.",
+      c4p: "Mardi 9 h à 11 h. Sauf jours fériés. Sauf après 18 h. Tu perds plus de temps à décoder qu'à rouler.",
     },
     how: {
       eyebrow: "Comment ça marche",
       title: "Trois gestes. Une place. Zéro panneau illisible.",
+      mockupAlt: "Aperçu de l'application P-SmartKing sur téléphone : carte de Montréal avec une place disponible.",
       s1t: "Ouvre l'app",
       s1p: "Tu arrives dans un quartier. P-SmartKing te montre tout de suite ce qui est permis autour de toi.",
       s2t: "Lis les vraies règles",
@@ -87,24 +88,30 @@ const COPY = {
       f4p: "Pas juste « c'est permis dans le secteur ». On t'amène au spot.",
       f5t: "Alertes en temps réel",
       f5p: "Déneigement, changement d'horaire, zone temporairement fermée : tu es prévenu, pas collé.",
-      f6t: "Gratuit. Point.",
-      f6p: "L'app est gratuite. Se garer à Montréal est déjà assez cher comme ça.",
+      f6t: "Gratuit. Vraiment.",
+      f6p: "Pas de version Pro. Pas d'abonnement. Pas de « débloque cette fonction ». Se garer coûte déjà assez cher. L'app, elle, ne te coûtera rien.",
     },
     about: {
       eyebrow: "À propos",
-      title: "Deux étudiants au cégep. Un été de trop à tourner.",
-      p1: "P-SmartKing est né d'un constat simple : à Montréal, on perd plus de temps à se garer qu'à rouler. Panneaux illisibles, zones réservées, déneigement, amendes qui piquent.",
-      p2: "On est deux, basés ici, passionnés de code. Pas une grosse boîte. Pas un discours corporate. Juste une app qui dit clairement où tu as le droit de te garer. Et qui t'y amène.",
-      note: "Porté par DnK Vision. Fait à Montréal, pour Montréal.",
-      f1t: "Le code",
-      f1p: "On construit l'app qu'on aurait voulu avoir dès le premier ticket.",
-      f2t: "La ville",
-      f2p: "On vit les mêmes rues, le même déneigement, les mêmes « c'était permis hier ».",
+      title: "Trois étudiants à Montréal. Une app qu'on bâtit entre les cours.",
+      p1: "Un projet qu'on a lancé parce qu'on en avait marre de tourner en rond. Panneaux illisibles, zones résidents, déneigement, amendes…",
+      p2: "On bâtit l'app qu'on voudrait utiliser : carte interactive, recherche d'adresse, segments de voirie, navigation vers la place.",
+      p3: "Et si tu te demandes si on va te charger un jour : non. Pas de version Pro. Pas de paywall. Pas de piège à abonnement. On ne te vend rien.",
+      note: "Données ouvertes : Ville de Montréal / Agence de mobilité durable",
+      f1n: "MA",
+      f1t: "Expo & React Native",
+      f1p: "TypeScript, carte interactive, recherche d'adresse, compte et places enregistrées. On teste sur de vrais appareils, pas juste dans Figma.",
+      f2n: "Adam",
+      f2t: "Données réelles",
+      f2p: "Notre pipeline intègre des milliers de places ouvertes de Montréal. Pas une carte fictive. Des vraies données.",
+      f3n: "Noella",
+      f3t: "Marketing",
+      f3p: "Réseaux sociaux, présentation du projet, liste d'attente.",
     },
     cta: {
       eyebrow: "Liste d'attente",
       title: "Sois là dès le jour 1.",
-      lead: "L'app n'est pas encore sur les stores. Laisse ton courriel. On t'écrit dès qu'elle est prête. Pas de spam, promis. On a des examens.",
+      lead: "L'app n'est pas encore sur les stores, et quand elle y sera, ce sera gratuit. Une beta privée arrive bientôt : laisse ton courriel pour la prochaine vague. Pas de spam. On a des examens.",
       social: "Suis le projet",
       mailLabel: "Questions, médias, partenariats :",
     },
@@ -116,9 +123,9 @@ const COPY = {
     faq: {
       title: "Les questions qu'on se ferait poser dans le métro.",
       q1: "Quand l'app sera-t-elle disponible ?",
-      a1: "Bientôt. Elle n'est pas encore sur l'App Store ni Google Play. Inscris-toi à la liste d'attente : tu seras parmi les premiers informés du lancement.",
+      a1: "Bientôt. L'app n'est pas encore sur l'App Store ni Google Play. Une beta privée est prévue pour bientôt : inscris-toi à la liste d'attente pour avoir une chance d'en faire partie.",
       q2: "Est-ce gratuit ?",
-      a2: "Oui. P-SmartKing est une application mobile gratuite. Se garer peut coûter cher ; l'app, non.",
+      a2: "Oui, et on insiste : c'est gratuit pour de vrai. Pas d'abonnement, pas de paywall, pas de version payante planifiée. Se garer à Montréal coûte déjà assez cher.",
       q3: "Dans quelles villes ça fonctionne ?",
       a3: "Montréal d'abord. C'est là qu'on vit le problème. D'autres villes plus tard, si ça tient la route ici.",
       q4: "Comment ça marche exactement ?",
@@ -126,20 +133,20 @@ const COPY = {
       q5: "iPhone et Android ?",
       a5: "Les deux, au lancement. Rejoins la liste d'attente pour être averti, peu importe ton téléphone.",
       q6: "Vous êtes qui, au juste ?",
-      a6: "Deux étudiants au cégep, à Montréal, qui en avaient assez de chercher une place. Le projet est porté par DnK Vision.",
+      a6: "On est trois à Montréal. L'app avance pour de vrai, et on lit nos courriels entre deux cours.",
     },
     footer: {
-      tagline: "Se garer à Montréal, sans y laisser ta soirée.",
-      legal: "Un projet porté par",
+      tagline: "100 % gratuit. Se garer à Montréal, sans y laisser ta soirée.",
+      legal: "tous droits réservés",
     },
     explore: {
       eyebrow: "Explorer",
       title: "Chaque lien mène à sa page.",
       how: "Trois gestes. Une place. Zéro panneau illisible.",
       features: "Règles, durée, prix, guidage et alertes.",
-      about: "Deux étudiants au cégep, à Montréal.",
+      about: "Trois étudiants montréalais, zéro paywall.",
       faq: "Les questions qu'on se ferait poser dans le métro.",
-      waitlist: "Sois averti dès le lancement.",
+      waitlist: "Beta privée bientôt : inscris-toi.",
       contact: "Questions, médias, partenariats.",
     },
     coverage: {
@@ -167,44 +174,44 @@ const COPY = {
       emailLabel: "Courriel officiel",
     },
     pageCta: {
-      title: "Prêt à être averti au lancement ?",
+      title: "Prêt pour la prochaine beta ?",
     },
     pages: {
       home: {
-        title: "P-SmartKing — Stationnement à Montréal, sans stress",
-        description: "Application gratuite pour savoir où se garer à Montréal : règles, durée, prix, et guidage jusqu'à la place. Rejoins la liste d'attente.",
+        title: "P-SmartKing · Stationnement à Montréal, sans stress",
+        description: "App 100 % gratuite pour se garer à Montréal : règles claires, durée, prix, guidage. Zéro paywall, zéro version Pro.",
       },
       how: {
-        title: "Comment ça marche — P-SmartKing",
+        title: "Comment ça marche · P-SmartKing",
         description: "Ouvre l'app, lis les règles, laisse-toi guider jusqu'à la place. Voici comment P-SmartKing fonctionne.",
       },
       features: {
-        title: "Fonctionnalités — P-SmartKing",
+        title: "Fonctionnalités · P-SmartKing",
         description: "Règles de stationnement claires, durée max, prix, guidage et alertes en temps réel. Gratuit.",
       },
       about: {
-        title: "À propos — P-SmartKing",
-        description: "P-SmartKing est créé par deux étudiants au cégep à Montréal. Un projet porté par DnK Vision.",
+        title: "À propos · P-SmartKing",
+        description: "Trois étudiants montréalais. App 100 % gratuite en développement actif.",
       },
       faq: {
-        title: "FAQ — P-SmartKing",
+        title: "FAQ · P-SmartKing",
         description: "Quand l'app sera-t-elle disponible ? Est-ce gratuit ? Dans quelles villes ? Réponses sur P-SmartKing.",
       },
       waitlist: {
-        title: "Liste d'attente — P-SmartKing",
-        description: "Rejoins la liste d'attente P-SmartKing pour être averti dès le lancement de l'app à Montréal.",
+        title: "Liste d'attente · P-SmartKing",
+        description: "Inscris-toi à la liste d'attente pour la prochaine beta privée et le lancement de P-SmartKing à Montréal.",
       },
       contact: {
-        title: "Contact — P-SmartKing",
-        description: "Questions, médias, partenariats : écris à psmartking@dnkvision.com. Un projet porté par DnK Vision.",
+        title: "Contact · P-SmartKing",
+        description: "Questions, médias, partenariats : écris à psmartking@dnkvision.com.",
       },
     },
   },
   en: {
     meta: {
-      title: "P-SmartKing — Parking in Montreal, without the stress",
+      title: "P-SmartKing · Parking in Montreal, without the stress",
       description:
-        "A free app that tells you where you can park in Montreal: rules, time limits, prices — and navigates you there. Join the waitlist.",
+        "100% free app for parking in Montreal: clear rules, time limits, prices, navigation. Zero paywall, zero Pro tier. Join the waitlist.",
     },
     a11y: { skip: "Skip to content", menu: "Open menu" },
     nav: {
@@ -223,18 +230,18 @@ const COPY = {
       storeGoogle: "Coming soon on Google Play",
       pill: "Montreal · Launching soon",
       how: "See how it works",
-      fact1: "Free, no account needed",
+      fact1: "100% free · zero paywall",
       fact2: "The whole island of Montreal",
-      fact3: "Rules kept current, not a 2019 PDF",
-      title: "Park in Montreal without losing your afternoon.",
-      sub: "P-SmartKing tells you where you're allowed to park, for how long, how much it costs. And takes you there.",
-      hint: "Not on the app stores yet. We'll write you on launch day.",
+      fact3: "No hidden subscription",
+      title: "Park in Montreal. No ticket. No paywall.",
+      sub: "P-SmartKing tells you where you can park, for how long, how much it costs, and takes you there. The app is completely free. We'll never sell you a \"Pro\" tier.",
+      hint: "Private beta coming soon. Join the waitlist.",
       download: "Download for free",
-      mockupAlt: "Preview of the P-SmartKing app: a Montreal map with an available parking spot.",
-      float1Title: "Sign decoded",
-      float1Sub: "Red lines mean parking is forbidden.",
-      float2Title: "− 18 min",
-      float2Sub: "Green lines mean you can park.",
+      mockupAlt: "Parking sign illustrating Montreal street parking rules.",
+      sign1Rule: "No parking",
+      sign1Detail: "Mon to Fri · 7 a.m. to 9 a.m.",
+      sign2Rule: "2 h max · $3.50 / h",
+      sign2Detail: "Mon to Sat · 9 a.m. to 6 p.m.",
     },
     mockup: {
       live: "Live",
@@ -249,7 +256,7 @@ const COPY = {
       emailLabel: "Email address",
       placeholder: "you@email.com",
       submit: "Join the waitlist",
-      success: "You're on the list. We'll email you at launch.",
+      success: "You're on the list. We'll email you for the beta or at launch.",
       error: "Enter a valid email.",
     },
     problem: {
@@ -263,11 +270,12 @@ const COPY = {
       c3t: "Snow clearing",
       c3p: "The street was fine at 10 p.m. By 7 a.m. it's banned. And your car is already glued to the snowbank.",
       c4t: "Hours that shift",
-      c4p: "Tuesday 9–11. Except holidays. Except after 6. You spend more time decoding than driving.",
+      c4p: "Tuesday 9 to 11. Except holidays. Except after 6. You spend more time decoding than driving.",
     },
     how: {
       eyebrow: "How it works",
       title: "Three moves. One spot. Zero unreadable signs.",
+      mockupAlt: "Preview of the P-SmartKing app on a phone: a Montreal map with an available parking spot.",
       s1t: "Open the app",
       s1p: "You roll into a neighbourhood. P-SmartKing shows what's allowed around you, right away.",
       s2t: "Read the real rules",
@@ -288,24 +296,30 @@ const COPY = {
       f4p: "Not just “allowed in the area.” We take you to the stall.",
       f5t: "Real-time alerts",
       f5p: "Snow clearing, hour changes, a zone temporarily closed: you're warned, not ticketed.",
-      f6t: "Free. Period.",
-      f6p: "The app is free. Parking in Montreal is already expensive enough.",
+      f6t: "Free. For real.",
+      f6p: "No Pro tier. No subscription. No \"unlock this feature.\" Parking already costs enough. The app won't cost you a cent.",
     },
     about: {
       eyebrow: "About",
-      title: "Two CEGEP students. One summer too many spent circling.",
-      p1: "P-SmartKing started from a simple observation: in Montreal, you lose more time parking than driving. Unreadable signs, reserved zones, snow clearing, salty tickets.",
-      p2: "We're two, based here, obsessed with code. Not a big company. Not a corporate pitch. Just an app that says clearly where you're allowed to park. And takes you there.",
-      note: "Backed by DnK Vision. Made in Montreal, for Montreal.",
-      f1t: "The code",
-      f1p: "We're building the app we wished we had after the first ticket.",
-      f2t: "The city",
-      f2p: "We live the same streets, the same snow clearing, the same “it was allowed yesterday.”",
+      title: "Three students in Montreal. An app we build between classes.",
+      p1: "A project we launched because we were tired of circling. Unreadable signs, resident zones, snow clearing, tickets…",
+      p2: "We're building the app we actually want to use: interactive map, address search, street segments, navigation to the spot.",
+      p3: "Wondering if we'll charge you someday? No. No Pro tier. No paywall. No subscription trap. We're not selling you anything.",
+      note: "Open data: City of Montreal / Agence de mobilité durable",
+      f1n: "MA",
+      f1t: "Expo & React Native",
+      f1p: "TypeScript, interactive map, address search, account and saved spots. We test on real devices, not just in Figma.",
+      f2n: "Adam",
+      f2t: "Real data",
+      f2p: "Our pipeline integrates thousands of open parking spots in Montreal. Not a fake map. Real data.",
+      f3n: "Noella",
+      f3t: "Marketing",
+      f3p: "Social media, project visibility, waitlist.",
     },
     cta: {
       eyebrow: "Waitlist",
       title: "Be there on day one.",
-      lead: "The app isn't on the stores yet. Leave your email. We'll write when it's ready. No spam, promised. We have exams.",
+      lead: "The app isn't on the stores yet, and when it is, it'll be free. A private beta is coming soon: leave your email for the next wave. No spam. We have exams.",
       social: "Follow the project",
       mailLabel: "Press, partnerships, questions:",
     },
@@ -317,9 +331,9 @@ const COPY = {
     faq: {
       title: "Questions we'd get asked on the metro.",
       q1: "When will the app be available?",
-      a1: "Soon. It's not on the App Store or Google Play yet. Join the waitlist and you'll be among the first to know at launch.",
+      a1: "Soon. The app isn't on the App Store or Google Play yet. A private beta is planned for soon: join the waitlist for a chance to be part of it.",
       q2: "Is it free?",
-      a2: "Yes. P-SmartKing is a free mobile app. Parking can be pricey; the app isn't.",
+      a2: "Yes, and we mean it: truly free. No subscription, no paywall, no paid tier planned. Parking in Montreal is already expensive enough.",
       q3: "Which cities does it work in?",
       a3: "Montreal first. That's where we live the problem. Other cities later, if it holds up here.",
       q4: "How does it actually work?",
@@ -327,20 +341,20 @@ const COPY = {
       q5: "iPhone and Android?",
       a5: "Both, at launch. Join the waitlist to get notified, whatever phone you use.",
       q6: "Who are you, exactly?",
-      a6: "Two CEGEP students in Montreal who were done hunting for parking. The project is backed by DnK Vision.",
+      a6: "MA, Adam, and Noella, three students in Montreal. We're actively building the app, between classes.",
     },
     footer: {
-      tagline: "Park in Montreal without losing your night.",
-      legal: "A project by",
+      tagline: "100% free. Park in Montreal without losing your night.",
+      legal: "All rights reserved",
     },
     explore: {
       eyebrow: "Explore",
       title: "Every link has its own page.",
       how: "Three moves. One spot. Zero unreadable signs.",
       features: "Rules, time limits, prices, navigation, and alerts.",
-      about: "Two CEGEP students in Montreal.",
+      about: "Three students in Montreal, zero paywall.",
       faq: "Questions we'd get asked on the metro.",
-      waitlist: "Get notified at launch.",
+      waitlist: "Private beta soon: sign up.",
       contact: "Press, partnerships, questions.",
     },
     coverage: {
@@ -368,36 +382,36 @@ const COPY = {
       emailLabel: "Official email",
     },
     pageCta: {
-      title: "Want a ping on launch day?",
+      title: "Ready for the next beta?",
     },
     pages: {
       home: {
-        title: "P-SmartKing — Parking in Montreal, without the stress",
-        description: "A free app that tells you where you can park in Montreal: rules, time limits, prices — and navigates you there. Join the waitlist.",
+        title: "P-SmartKing · Parking in Montreal, without the stress",
+        description: "100% free app for parking in Montreal: clear rules, time limits, prices, navigation. Zero paywall, zero Pro tier.",
       },
       how: {
-        title: "How it works — P-SmartKing",
+        title: "How it works · P-SmartKing",
         description: "Open the app, read the rules, get guided to the spot. Here's how P-SmartKing works.",
       },
       features: {
-        title: "Features — P-SmartKing",
+        title: "Features · P-SmartKing",
         description: "Clear parking rules, time limits, prices, navigation, and real-time alerts. Free.",
       },
       about: {
-        title: "About — P-SmartKing",
-        description: "P-SmartKing is built by two CEGEP students in Montreal. A project by DnK Vision.",
+        title: "About · P-SmartKing",
+        description: "Three students in Montreal. A 100% free app in active development.",
       },
       faq: {
-        title: "FAQ — P-SmartKing",
+        title: "FAQ · P-SmartKing",
         description: "When will the app be available? Is it free? Which cities? Answers about P-SmartKing.",
       },
       waitlist: {
-        title: "Waitlist — P-SmartKing",
-        description: "Join the P-SmartKing waitlist to be notified when the app launches in Montreal.",
+        title: "Waitlist · P-SmartKing",
+        description: "Join the waitlist for the next private beta and the P-SmartKing launch in Montreal.",
       },
       contact: {
-        title: "Contact — P-SmartKing",
-        description: "Press, partnerships, questions: write to psmartking@dnkvision.com. A project by DnK Vision.",
+        title: "Contact · P-SmartKing",
+        description: "Press, partnerships, questions: write to psmartking@dnkvision.com.",
       },
     },
   },
@@ -571,21 +585,6 @@ function initReveal() {
     { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
   );
   nodes.forEach((el) => io.observe(el));
-}
-
-function initPhoneTilt() {
-  const phone = document.querySelector(".phone-frame");
-  const stage = document.querySelector(".hero-stage");
-  if (!phone || !stage || window.matchMedia("(pointer: coarse), (max-width: 899px)").matches) return;
-  stage.addEventListener("pointermove", (event) => {
-    const box = stage.getBoundingClientRect();
-    const x = (event.clientX - box.left) / box.width - 0.5;
-    const y = (event.clientY - box.top) / box.height - 0.5;
-    phone.style.transform = `rotateY(${x * 16}deg) rotateX(${-y * 10}deg)`;
-  });
-  stage.addEventListener("pointerleave", () => {
-    phone.style.transform = "";
-  });
 }
 
 function initMagnetic() {
@@ -1269,19 +1268,27 @@ function refreshCoverageLang() {
   paintCoverageResult(result.dataset.status);
 }
 
-function currentFile() {
-  const parts = location.pathname.replace(/\\/g, "/").split("/");
-  const file = decodeURIComponent(parts.pop() || "");
-  return !file || file === "" ? "index.html" : file;
+function pageSlugFromPath(pathname) {
+  const parts = pathname.replace(/\\/g, "/").split("/").filter(Boolean);
+  let slug = decodeURIComponent(parts.pop() || "");
+  if (!slug) return "index";
+  return slug.replace(/\.html$/i, "").toLowerCase();
+}
+
+function pageSlugFromHref(href) {
+  if (!href || href.startsWith("http") || href.startsWith("mailto") || href.startsWith("#")) return null;
+  const clean = href.split("?")[0].split("#")[0];
+  let slug = decodeURIComponent(clean.split("/").pop() || "");
+  if (!slug) return "index";
+  return slug.replace(/\.html$/i, "").toLowerCase();
 }
 
 function initCurrentNav() {
-  const file = currentFile();
+  const current = pageSlugFromPath(location.pathname);
   document.querySelectorAll(".nav-desktop a, .nav-mobile a, .footer-nav a").forEach((a) => {
-    const href = a.getAttribute("href");
-    if (!href || href.startsWith("http") || href.startsWith("mailto") || href.startsWith("#")) return;
-    const target = href.split("/").pop();
-    const match = target === file || (file === "index.html" && (target === "" || target === "index.html"));
+    const target = pageSlugFromHref(a.getAttribute("href"));
+    if (target === null) return;
+    const match = target === current;
     a.classList.toggle("is-current", match);
     if (match) a.setAttribute("aria-current", "page");
     else a.removeAttribute("aria-current");
@@ -1297,5 +1304,4 @@ initWaitlist();
 initCoverage();
 initFaq();
 initReveal();
-initPhoneTilt();
 initMagnetic();
