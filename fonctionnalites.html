@@ -42,6 +42,7 @@
         <a href="index.html" data-i18n="nav.home">Accueil</a>
         <a href="comment.html" data-i18n="nav.how">Comment ça marche</a>
         <a href="fonctionnalites.html" data-i18n="nav.features">Fonctionnalités</a>
+        <a href="essayer.html" data-i18n="nav.demo">Essayer la carte</a>
         <a href="a-propos.html" data-i18n="nav.about">À propos</a>
         <a href="faq.html" data-i18n="nav.faq">FAQ</a>
         <a href="contact.html" data-i18n="nav.contact">Contact</a>
@@ -51,7 +52,7 @@
           <button type="button" class="lang-btn is-active" data-lang="fr" aria-pressed="true">FR</button>
           <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
         </div>
-        <a class="btn btn-download btn-sm" href="liste-attente.html" data-i18n="hero.download">Télécharger gratuitement</a>
+        <a class="btn btn-download btn-sm" href="liste-attente.html" data-i18n="nav.cta">Rejoindre la beta</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-mobile" data-i18n-aria="a11y.menu">
           <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
           <span class="sr-only" data-i18n="a11y.menu">Ouvrir le menu</span>
@@ -65,8 +66,7 @@
       <a href="a-propos.html" data-i18n="nav.about">À propos</a>
       <a href="faq.html" data-i18n="nav.faq">FAQ</a>
       <a href="contact.html" data-i18n="nav.contact">Contact</a>
-      <a class="btn btn-download" href="liste-attente.html" data-i18n="hero.download">Télécharger gratuitement</a>
-      <a class="btn btn-primary" href="liste-attente.html" data-i18n="nav.cta">Rejoindre la liste d'attente</a>
+      <a class="btn btn-download" href="liste-attente.html" data-i18n="nav.cta">Rejoindre la beta</a>
     </nav>
   </header>
 
@@ -77,7 +77,6 @@
       <span aria-current="page" data-i18n="nav.features">Fonctionnalités</span>
     </nav>
     <section class="page-hero">
-      <div class="hero-glow" aria-hidden="true"></div>
       <div class="container reveal">
         <p class="eyebrow" data-i18n="features.eyebrow">Fonctionnalités</p>
         <h1 data-i18n="features.title">Tout ce que le panneau oublie de te dire clairement.</h1>
@@ -86,10 +85,18 @@
     <section class="page-body features">
       <div class="container">
         <div class="bento">
-          <article class="bento-card bento-wide reveal">
-            <span class="icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z"/><circle cx="12" cy="10" r="2.2"/></svg></span>
-            <h2 data-i18n="features.f1t">Règles de stationnement, sans le charabia</h2>
-            <p data-i18n="features.f1p">Résidents, panneaux à étages, interdictions ponctuelles : on te dit si tu peux te garer. Oui ou non. Avec le pourquoi.</p>
+          <article class="bento-card bento-wide bento-featured reveal">
+            <div class="bento-featured-inner">
+              <div class="bento-featured-copy">
+                <span class="icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z"/><circle cx="12" cy="10" r="2.2"/></svg></span>
+                <h2 data-i18n="features.f1t">Règles de stationnement, sans le charabia</h2>
+                <p data-i18n="features.f1p">Résidents, panneaux à étages, interdictions ponctuelles : on te dit si tu peux te garer. Oui ou non. Avec le pourquoi.</p>
+              </div>
+              <figure class="bento-featured-media">
+                <img src="phone.png" alt="" width="768" height="768" loading="lazy" decoding="async" aria-labelledby="features-demo-caption">
+                <figcaption id="features-demo-caption" class="sr-only" data-i18n="preview.caption">Capture de l'application P-SmartKing : carte de Montréal avec une place disponible.</figcaption>
+              </figure>
+            </div>
           </article>
           <article class="bento-card reveal">
             <span class="icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span>
@@ -121,8 +128,8 @@
     </section>
     <section class="cta-band">
       <div class="container cta-inner reveal">
-        <h2 data-i18n="pageCta.title">Prêt à être averti au lancement ?</h2>
-        <a class="btn btn-primary" href="liste-attente.html" data-i18n="nav.cta">Rejoindre la liste d'attente</a>
+        <h2 data-i18n="pageCta.title">Prêt pour la prochaine beta ?</h2>
+        <a class="btn btn-primary" href="liste-attente.html" data-i18n="nav.cta">Rejoindre la beta</a>
       </div>
     </section>
   </main>
@@ -134,12 +141,13 @@
           <span class="logo-mark" aria-hidden="true"><img src="logo.png?v=6" alt="" width="40" height="40"></span>
           <span class="logo-text">P-SmartKing</span>
         </a>
-        <p data-i18n="footer.tagline">Se garer à Montréal, sans y laisser ta soirée.</p>
+        <p data-i18n="footer.tagline">100 % gratuit. Se garer à Montréal, sans y laisser ta soirée.</p>
       </div>
       <nav class="footer-nav" aria-label="Pied de page">
         <a href="index.html" data-i18n="nav.home">Accueil</a>
         <a href="comment.html" data-i18n="nav.how">Comment ça marche</a>
         <a href="fonctionnalites.html" data-i18n="nav.features">Fonctionnalités</a>
+        <a href="essayer.html" data-i18n="nav.demo">Essayer la carte</a>
         <a href="a-propos.html" data-i18n="nav.about">À propos</a>
         <a href="faq.html" data-i18n="nav.faq">FAQ</a>
         <a href="liste-attente.html" data-i18n="nav.waitlist">Liste d'attente</a>

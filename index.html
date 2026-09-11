@@ -15,7 +15,7 @@
   <link rel="apple-touch-icon" href="logo.png?v=6">
   <!-- Search Console : après l'hébergement, colle le code de validation dans content="" (Google Search Console → Paramètres → Vérification de la propriété → balise HTML). Un seul endroit : cette ligne. -->
   <meta name="google-site-verification" content="">
-  <!-- Google Maps : colle la clé dans maps-config.js (Maps JavaScript API + Places API New). -->
+  <!-- Google Maps : dev local → maps-config.js ; production → GOOGLE_MAPS_API_KEY sur Vercel (/api/config). -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="P-SmartKing">
   <meta property="og:locale" content="fr_CA">
@@ -66,7 +66,12 @@
         "applicationCategory": "NavigationApplication",
         "operatingSystem": "iOS, Android",
         "description": "Application mobile 100 % gratuite, sans paywall ni version Pro, qui indique où se garer à Montréal : règles, durée, prix, et guidage jusqu'à la place.",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD" },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "CAD",
+          "availability": "https://schema.org/PreOrder"
+        },
         "areaServed": { "@type": "City", "name": "Montreal" },
         "creator": { "@id": "https://psmartking.com/#organization" }
       }
@@ -88,6 +93,7 @@
         <a href="index.html" data-i18n="nav.home">Accueil</a>
         <a href="comment.html" data-i18n="nav.how">Comment ça marche</a>
         <a href="fonctionnalites.html" data-i18n="nav.features">Fonctionnalités</a>
+        <a href="essayer.html" data-i18n="nav.demo">Essayer la carte</a>
         <a href="a-propos.html" data-i18n="nav.about">À propos</a>
         <a href="faq.html" data-i18n="nav.faq">FAQ</a>
         <a href="contact.html" data-i18n="nav.contact">Contact</a>
@@ -97,7 +103,7 @@
           <button type="button" class="lang-btn is-active" data-lang="fr" aria-pressed="true">FR</button>
           <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
         </div>
-        <a class="btn btn-download btn-sm" href="liste-attente.html" data-i18n="hero.download">Télécharger gratuitement</a>
+        <a class="btn btn-download btn-sm" href="liste-attente.html" data-i18n="nav.cta">Rejoindre la beta</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-mobile" data-i18n-aria="a11y.menu">
           <span class="nav-toggle-bar"></span>
           <span class="nav-toggle-bar"></span>
@@ -112,8 +118,7 @@
       <a href="a-propos.html" data-i18n="nav.about">À propos</a>
       <a href="faq.html" data-i18n="nav.faq">FAQ</a>
       <a href="contact.html" data-i18n="nav.contact">Contact</a>
-      <a class="btn btn-download" href="liste-attente.html" data-i18n="hero.download">Télécharger gratuitement</a>
-      <a class="btn btn-primary" href="liste-attente.html" data-i18n="nav.cta">Rejoindre la liste d'attente</a>
+      <a class="btn btn-download" href="liste-attente.html" data-i18n="nav.cta">Rejoindre la beta</a>
     </nav>
   </header>
 
@@ -123,11 +128,12 @@
         <div class="hero-copy">
           <p class="hero-city">Montréal</p>
           <h1 id="hero-title" data-i18n="hero.title">Se garer à Montréal. Sans ticket. Sans paywall.</h1>
-          <p class="lead" data-i18n="hero.sub">P-SmartKing te dit où tu peux te garer, combien de temps, combien ça coûte, et t'y amène. L'app est entièrement gratuite. On ne te vendra jamais une version « Pro ».</p>
+          <p class="lead" data-i18n="hero.sub">P-SmartKing te dit où tu peux te garer, combien de temps, combien ça coûte, et t'y amène. L'app est entièrement gratuite.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="liste-attente.html" data-i18n="nav.cta">Rejoindre la liste d'attente</a>
+            <a class="btn btn-primary" href="liste-attente.html" data-i18n="nav.cta">Rejoindre la beta</a>
             <a class="btn btn-on-dark" href="comment.html" data-i18n="hero.how">Voir comment ça marche</a>
           </div>
+          <p class="hero-facts"><span data-i18n="hero.fact1">100 % gratuit</span><span class="hero-facts-sep" aria-hidden="true">·</span><span data-i18n="hero.fact2">Toute l'île de Montréal</span><span class="hero-facts-sep" aria-hidden="true">·</span><span data-i18n="hero.fact3">Beta privée bientôt</span></p>
         </div>
         <div class="hero-stage">
           <aside class="parking-sign parking-sign-a" data-tilt-callout aria-label="Règle de stationnement : interdit de stationner">
@@ -140,17 +146,7 @@
           <div class="mockup-viewport" data-tilt-scene>
             <div class="mockup-card" data-tilt="phone-wrapper">
               <div class="psk-3d-shadow" aria-hidden="true"></div>
-              <div class="psk-3d-flipper">
-                <div class="psk-3d-face psk-3d-face-front">
-                  <img src="panneau.png" alt="" class="mockup-image" aria-labelledby="mockup-caption" width="768" height="768" decoding="async">
-                </div>
-                <div class="psk-3d-face psk-3d-face-back" aria-hidden="true">
-                  <div class="psk-back-panel">
-                    <span class="psk-back-bracket psk-back-bracket-top"></span>
-                    <span class="psk-back-bracket psk-back-bracket-bottom"></span>
-                  </div>
-                </div>
-              </div>
+              <img src="panneau.png" alt="" class="mockup-image" aria-labelledby="mockup-caption" width="768" height="768" decoding="async">
               <div class="psk-3d-glare" aria-hidden="true"></div>
               <p id="mockup-caption" class="sr-only" data-i18n="hero.mockupAlt">Panneau de stationnement illustrant les règles de voirie à Montréal.</p>
             </div>
@@ -163,6 +159,21 @@
             </div>
           </aside>
         </div>
+      </div>
+    </section>
+
+    <section class="product-preview" aria-labelledby="preview-title">
+      <div class="container preview-grid reveal">
+        <div class="preview-copy">
+          <p class="eyebrow" data-i18n="preview.eyebrow">Aperçu</p>
+          <h2 id="preview-title" data-i18n="preview.title">L'app, en vrai</h2>
+          <p class="section-lead" data-i18n="preview.lead">Carte interactive, règles claires et guidage jusqu'à la place. Pas une maquette générique : c'est le produit qu'on développe.</p>
+          <a class="btn btn-primary" href="essayer.html" data-i18n="preview.cta">Essayer la carte</a>
+        </div>
+        <figure class="preview-device">
+          <img src="phone.png" alt="" width="768" height="768" loading="lazy" decoding="async" aria-labelledby="preview-caption">
+          <figcaption id="preview-caption" class="sr-only" data-i18n="preview.caption">Capture de l'application P-SmartKing : carte de Montréal avec une place disponible.</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -233,6 +244,10 @@
       <div class="container">
         <h2 id="explore-title" class="sr-only" data-i18n="explore.eyebrow">Explorer</h2>
         <div class="explore-grid">
+          <a class="explore-card reveal" href="essayer.html">
+            <strong data-i18n="nav.demo">Essayer la carte</strong>
+            <span data-i18n="explore.demo">Démo interactive : touche un tronçon, lis la règle.</span>
+          </a>
           <a class="explore-card reveal" href="comment.html">
             <strong data-i18n="nav.how">Comment ça marche</strong>
             <span data-i18n="explore.how">Trois gestes. Une place. Zéro panneau illisible.</span>
@@ -271,15 +286,19 @@
           </span>
           <span class="logo-text">P-SmartKing</span>
         </a>
-        <p data-i18n="footer.tagline">Se garer à Montréal, sans y laisser ta soirée.</p>
+        <p data-i18n="footer.tagline">100 % gratuit. Se garer à Montréal, sans y laisser ta soirée.</p>
       </div>
       <nav class="footer-nav" aria-label="Pied de page">
         <a href="index.html" data-i18n="nav.home">Accueil</a>
         <a href="comment.html" data-i18n="nav.how">Comment ça marche</a>
         <a href="fonctionnalites.html" data-i18n="nav.features">Fonctionnalités</a>
+        <a href="essayer.html" data-i18n="nav.demo">Essayer la carte</a>
         <a href="a-propos.html" data-i18n="nav.about">À propos</a>
         <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+        <a href="essayer.html" data-i18n="nav.demo">Essayer la carte</a>
         <a href="liste-attente.html" data-i18n="nav.waitlist">Liste d'attente</a>
+        <a href="confidentialite.html" data-i18n="nav.privacy">Confidentialité</a>
+        <a href="conditions.html" data-i18n="nav.terms">Conditions</a>
         <a href="contact.html" data-i18n="nav.contact">Contact</a>
       </nav>
       <div class="footer-contact">
@@ -295,15 +314,27 @@
       <p><a href="https://dnkvision.com" rel="noopener noreferrer" target="_blank"><strong>DnK Vision</strong></a> · P-SmartKing © <span id="year"></span> <span data-i18n="footer.legal">tous droits réservés</span></p>
     </div>
   </footer>
-  <script src="coverage-zone.js"></script>
   <script src="maps-config.js"></script>
+  <script src="site-config.js"></script>
+  <script src="coverage-zone.js"></script>
   <script>
-    (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.googleapis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Dropping:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
-      key: window.PSMARTKING_GOOGLE_MAPS_API_KEY || "",
-      v: "weekly",
-      language: "fr",
-      region: "CA"
-    });
+    (async () => {
+      if (!window.PSMARTKING_GOOGLE_MAPS_API_KEY) {
+        try {
+          const res = await fetch("/api/config");
+          if (res.ok) {
+            const data = await res.json();
+            if (data.mapsKey) window.PSMARTKING_GOOGLE_MAPS_API_KEY = data.mapsKey;
+          }
+        } catch (_) {}
+      }
+      (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.googleapis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Dropping:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+        key: window.PSMARTKING_GOOGLE_MAPS_API_KEY || "",
+        v: "weekly",
+        language: "fr",
+        region: "CA"
+      });
+    })();
   </script>
   <script src="psk-tilt.js"></script>
   <script src="app.js"></script>

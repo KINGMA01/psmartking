@@ -6,12 +6,12 @@
   "use strict";
 
   const CFG = {
-    maxTilt: 15,
-    scaleHover: 1.03,
+    maxTilt: 10,
+    scaleHover: 1.015,
     shadowZ: -32,
     glareMax: 0.22,
     calloutParallax: 16,
-    floatAmplitude: 5,
+    floatAmplitude: 3,
     floatDuration: 3400,
     floatRotateY: 4,
     resetMs: 550,

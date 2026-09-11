@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
+﻿<!DOCTYPE html>
+<html lang="fr" data-page="404">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -10,16 +10,88 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="logo.png?v=6" type="image/png">
   <link rel="apple-touch-icon" href="logo.png?v=6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="page-hero" id="contenu">
-    <div class="container">
-      <p class="eyebrow">404</p>
-      <h1>Cette page n'existe pas.</h1>
-      <p class="lead">Le lien est peut-être ancien, ou il y a une faute dans l'adresse.</p>
-      <p><a class="btn btn-primary" href="index.html">Retour à l'accueil</a></p>
+  <a class="skip-link" href="#contenu" data-i18n="a11y.skip">Aller au contenu</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html" aria-label="P-SmartKing, accueil">
+        <span class="logo-mark" aria-hidden="true"><img src="logo.png?v=6" alt="" width="40" height="40"></span>
+        <span class="logo-text">P-SmartKing</span>
+      </a>
+      <nav class="nav-desktop" aria-label="Navigation principale">
+        <a href="index.html" data-i18n="nav.home">Accueil</a>
+        <a href="comment.html" data-i18n="nav.how">Comment ça marche</a>
+        <a href="fonctionnalites.html" data-i18n="nav.features">Fonctionnalités</a>
+        <a href="a-propos.html" data-i18n="nav.about">À propos</a>
+        <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+        <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Langue">
+          <button type="button" class="lang-btn is-active" data-lang="fr" aria-pressed="true">FR</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="btn btn-download btn-sm" href="liste-attente.html" data-i18n="nav.cta">Rejoindre la beta</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-mobile" data-i18n-aria="a11y.menu">
+          <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
+          <span class="sr-only" data-i18n="a11y.menu">Ouvrir le menu</span>
+        </button>
+      </div>
     </div>
+    <nav class="nav-mobile" id="nav-mobile" hidden>
+      <a href="index.html" data-i18n="nav.home">Accueil</a>
+      <a href="comment.html" data-i18n="nav.how">Comment ça marche</a>
+      <a href="fonctionnalites.html" data-i18n="nav.features">Fonctionnalités</a>
+      <a href="a-propos.html" data-i18n="nav.about">À propos</a>
+      <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <a class="btn btn-download" href="liste-attente.html" data-i18n="nav.cta">Rejoindre la beta</a>
+    </nav>
+  </header>
+
+  <main id="contenu">
+    <section class="page-hero">
+      <div class="container reveal">
+        <p class="eyebrow" data-i18n="error404.eyebrow">404</p>
+        <h1 data-i18n="error404.title">Cette page n'existe pas.</h1>
+        <p class="lead" data-i18n="error404.lead">Le lien est peut-être ancien, ou il y a une faute dans l'adresse.</p>
+        <p><a class="btn btn-primary" href="index.html" data-i18n="error404.cta">Retour à l'accueil</a></p>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="index.html">
+          <span class="logo-mark" aria-hidden="true"><img src="logo.png?v=6" alt="" width="40" height="40"></span>
+          <span class="logo-text">P-SmartKing</span>
+        </a>
+        <p data-i18n="footer.tagline">100 % gratuit. Se garer à Montréal, sans y laisser ta soirée.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Pied de page">
+        <a href="index.html" data-i18n="nav.home">Accueil</a>
+        <a href="comment.html" data-i18n="nav.how">Comment ça marche</a>
+        <a href="fonctionnalites.html" data-i18n="nav.features">Fonctionnalités</a>
+        <a href="a-propos.html" data-i18n="nav.about">À propos</a>
+        <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+        <a href="liste-attente.html" data-i18n="nav.waitlist">Liste d'attente</a>
+        <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      </nav>
+      <div class="footer-contact">
+        <a href="contact.html">psmartking@dnkvision.com</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p><a href="https://dnkvision.com" rel="noopener noreferrer" target="_blank"><strong>DnK Vision</strong></a> · P-SmartKing © <span id="year"></span> <span data-i18n="footer.legal">tous droits réservés</span></p>
+    </div>
+  </footer>
+  <script src="site-config.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

@@ -14,42 +14,38 @@ const COPY = {
       faq: "FAQ",
       contact: "Contact",
       waitlist: "Liste d'attente",
-      cta: "Rejoindre la liste d'attente",
+      demo: "Essayer la carte",
+      privacy: "Confidentialité",
+      terms: "Conditions",
+      cta: "Rejoindre la beta",
     },
     hero: {
-      badge: "Bientôt sur iOS et Android",
-      storeApple: "Bientôt sur l'App Store",
-      storeGoogle: "Bientôt sur Google Play",
-      pill: "Montréal · Lancement bientôt",
       how: "Voir comment ça marche",
-      fact1: "100 % gratuit · zéro paywall",
+      fact1: "100 % gratuit",
       fact2: "Toute l'île de Montréal",
-      fact3: "Pas d'abonnement caché",
+      fact3: "Beta privée bientôt",
       title: "Se garer à Montréal. Sans ticket. Sans paywall.",
-      sub: "P-SmartKing te dit où tu peux te garer, combien de temps, combien ça coûte, et t'y amène. L'app est entièrement gratuite. On ne te vendra jamais une version « Pro ».",
-      hint: "Beta privée bientôt. Inscris-toi à la liste d'attente.",
-      download: "Télécharger gratuitement",
+      sub: "P-SmartKing te dit où tu peux te garer, combien de temps, combien ça coûte, et t'y amène. L'app est entièrement gratuite.",
       mockupAlt: "Panneau de stationnement illustrant les règles de voirie à Montréal.",
       sign1Rule: "Interdit de stationner",
       sign1Detail: "lun à ven · 7 h à 9 h",
       sign2Rule: "2 h max · 3,50 $ / h",
       sign2Detail: "lun à sam · 9 h à 18 h",
     },
-    mockup: {
-      live: "Live",
-      search: "Où veux-tu te garer ?",
-      zone: "Stationnement permis",
-      street: "Rue Saint-Denis",
-      time: "2 h max",
-      price: "3,50 $ / h",
-      go: "Y aller",
+    preview: {
+      eyebrow: "Aperçu",
+      title: "L'app, en vrai",
+      lead: "Carte interactive, règles claires et guidage jusqu'à la place. Pas une maquette générique : c'est le produit qu'on développe.",
+      cta: "Voir comment ça marche",
+      caption: "Capture de l'application P-SmartKing : carte de Montréal avec une place disponible.",
     },
     form: {
       emailLabel: "Adresse courriel",
       placeholder: "toi@courriel.com",
-      submit: "Rejoindre la liste d'attente",
+      submit: "Rejoindre la beta",
       success: "Tu es sur la liste. On t'écrit pour la beta ou au lancement.",
       error: "Entre un courriel valide.",
+      networkError: "Impossible d'enregistrer ton courriel pour le moment. Réessaie dans un instant.",
     },
     problem: {
       eyebrow: "Le constat",
@@ -118,7 +114,7 @@ const COPY = {
     social: {
       fb: "P-SmartKing sur Facebook",
       ig: "P-SmartKing sur Instagram",
-      tt: "P-SmartKing sur TikTok (lien à venir)",
+      tt: "P-SmartKing sur TikTok",
     },
     faq: {
       title: "Les questions qu'on se ferait poser dans le métro.",
@@ -142,6 +138,7 @@ const COPY = {
     explore: {
       eyebrow: "Explorer",
       title: "Chaque lien mène à sa page.",
+      demo: "Démo interactive : touche un tronçon, lis la règle.",
       how: "Trois gestes. Une place. Zéro panneau illisible.",
       features: "Règles, durée, prix, guidage et alertes.",
       about: "Trois étudiants montréalais, zéro paywall.",
@@ -173,8 +170,38 @@ const COPY = {
       lead: "Questions générales, médias, partenariats. Une seule adresse. On lit, promis, entre deux cours.",
       emailLabel: "Courriel officiel",
     },
+    demo: {
+      eyebrow: "Démo interactive",
+      title: "Touche la voirie. Lis la règle.",
+      lead: "Aperçu limité de l'app : carte, recherche d'adresse et détail des tronçons. Pas de compte — lecture seule.",
+      mapTitle: "Carte de démonstration",
+      badge: "Démo",
+      searchLabel: "Rechercher une adresse",
+      searchPlaceholder: "Ex. 1000 rue Sainte-Catherine, Montréal",
+      recenter: "Centre-ville",
+      legendOk: "Autorisé",
+      legendNo: "Interdit / payant",
+      legendMaybe: "À vérifier",
+      detailTitle: "Détail du tronçon",
+      disclaimer: "Les couleurs ne garantissent pas une place libre. Vérifie toujours les panneaux sur place.",
+      cta: "Rejoindre la beta complète",
+    },
+    legal: {
+      privacyEyebrow: "Vie privée",
+      privacyTitle: "Politique de confidentialité",
+      privacyLead: "Comment P-SmartKing traite tes renseignements sur le site et dans l'application.",
+      termsEyebrow: "Conditions",
+      termsTitle: "Conditions générales d'utilisation",
+      termsLead: "Les règles d'utilisation du site et de l'application P-SmartKing.",
+    },
     pageCta: {
       title: "Prêt pour la prochaine beta ?",
+    },
+    error404: {
+      eyebrow: "404",
+      title: "Cette page n'existe pas.",
+      lead: "Le lien est peut-être ancien, ou il y a une faute dans l'adresse.",
+      cta: "Retour à l'accueil",
     },
     pages: {
       home: {
@@ -205,6 +232,22 @@ const COPY = {
         title: "Contact · P-SmartKing",
         description: "Questions, médias, partenariats : écris à psmartking@dnkvision.com.",
       },
+      demo: {
+        title: "Essayer la carte · P-SmartKing",
+        description: "Démo interactive : touche un tronçon de voirie à Montréal et lis les règles de stationnement.",
+      },
+      privacy: {
+        title: "Politique de confidentialité · P-SmartKing",
+        description: "Politique de confidentialité de P-SmartKing — application et site web (DnK Vision, Montréal).",
+      },
+      terms: {
+        title: "Conditions d'utilisation · P-SmartKing",
+        description: "Conditions générales d'utilisation de P-SmartKing — application et site web.",
+      },
+      404: {
+        title: "Page introuvable · P-SmartKing",
+        description: "Cette page n'existe pas. Retourne à l'accueil P-SmartKing.",
+      },
     },
   },
   en: {
@@ -222,42 +265,62 @@ const COPY = {
       faq: "FAQ",
       contact: "Contact",
       waitlist: "Waitlist",
-      cta: "Join the waitlist",
+      demo: "Try the map",
+      privacy: "Privacy",
+      terms: "Terms",
+      cta: "Join the beta",
     },
     hero: {
-      badge: "Coming soon on iOS and Android",
-      storeApple: "Coming soon on the App Store",
-      storeGoogle: "Coming soon on Google Play",
-      pill: "Montreal · Launching soon",
       how: "See how it works",
-      fact1: "100% free · zero paywall",
+      fact1: "100% free",
       fact2: "The whole island of Montreal",
-      fact3: "No hidden subscription",
+      fact3: "Private beta soon",
       title: "Park in Montreal. No ticket. No paywall.",
-      sub: "P-SmartKing tells you where you can park, for how long, how much it costs, and takes you there. The app is completely free. We'll never sell you a \"Pro\" tier.",
-      hint: "Private beta coming soon. Join the waitlist.",
-      download: "Download for free",
+      sub: "P-SmartKing tells you where you can park, for how long, how much it costs, and takes you there. The app is completely free.",
       mockupAlt: "Parking sign illustrating Montreal street parking rules.",
       sign1Rule: "No parking",
       sign1Detail: "Mon to Fri · 7 a.m. to 9 a.m.",
       sign2Rule: "2 h max · $3.50 / h",
       sign2Detail: "Mon to Sat · 9 a.m. to 6 p.m.",
     },
-    mockup: {
-      live: "Live",
-      search: "Where do you want to park?",
-      zone: "Parking allowed",
-      street: "Saint-Denis Street",
-      time: "2 h max",
-      price: "$3.50 / h",
-      go: "Take me there",
+    demo: {
+      eyebrow: "Interactive demo",
+      title: "Tap the street. Read the rule.",
+      lead: "Limited app preview: map, address search, and segment details. No account — read-only.",
+      mapTitle: "Demo map",
+      badge: "Demo",
+      searchLabel: "Search an address",
+      searchPlaceholder: "E.g. 1000 Sainte-Catherine St, Montreal",
+      recenter: "Downtown",
+      legendOk: "Allowed",
+      legendNo: "Forbidden / paid",
+      legendMaybe: "Unclear",
+      detailTitle: "Segment details",
+      disclaimer: "Colors don't guarantee an open spot. Always verify signs on site.",
+      cta: "Join the full beta",
+    },
+    legal: {
+      privacyEyebrow: "Privacy",
+      privacyTitle: "Privacy policy",
+      privacyLead: "How P-SmartKing handles your information on the website and in the app.",
+      termsEyebrow: "Terms",
+      termsTitle: "Terms of use",
+      termsLead: "Rules for using the P-SmartKing website and mobile app.",
+    },
+    preview: {
+      eyebrow: "Preview",
+      title: "The app, for real",
+      lead: "Interactive map, clear rules, and navigation to the spot. Not a generic mockup: this is the product we're building.",
+      cta: "Try the map",
+      caption: "Screenshot of the P-SmartKing app: Montreal map with an available parking spot.",
     },
     form: {
       emailLabel: "Email address",
       placeholder: "you@email.com",
-      submit: "Join the waitlist",
+      submit: "Join the beta",
       success: "You're on the list. We'll email you for the beta or at launch.",
       error: "Enter a valid email.",
+      networkError: "We couldn't save your email right now. Please try again in a moment.",
     },
     problem: {
       eyebrow: "The problem",
@@ -326,7 +389,7 @@ const COPY = {
     social: {
       fb: "P-SmartKing on Facebook",
       ig: "P-SmartKing on Instagram",
-      tt: "P-SmartKing on TikTok (link coming soon)",
+      tt: "P-SmartKing on TikTok",
     },
     faq: {
       title: "Questions we'd get asked on the metro.",
@@ -341,7 +404,7 @@ const COPY = {
       q5: "iPhone and Android?",
       a5: "Both, at launch. Join the waitlist to get notified, whatever phone you use.",
       q6: "Who are you, exactly?",
-      a6: "MA, Adam, and Noella, three students in Montreal. We're actively building the app, between classes.",
+      a6: "We're three in Montreal. The app is moving for real, and we read our emails between classes.",
     },
     footer: {
       tagline: "100% free. Park in Montreal without losing your night.",
@@ -350,6 +413,7 @@ const COPY = {
     explore: {
       eyebrow: "Explore",
       title: "Every link has its own page.",
+      demo: "Interactive demo: tap a segment, read the rule.",
       how: "Three moves. One spot. Zero unreadable signs.",
       features: "Rules, time limits, prices, navigation, and alerts.",
       about: "Three students in Montreal, zero paywall.",
@@ -384,6 +448,12 @@ const COPY = {
     pageCta: {
       title: "Ready for the next beta?",
     },
+    error404: {
+      eyebrow: "404",
+      title: "This page doesn't exist.",
+      lead: "The link may be old, or there's a typo in the address.",
+      cta: "Back to home",
+    },
     pages: {
       home: {
         title: "P-SmartKing · Parking in Montreal, without the stress",
@@ -412,6 +482,22 @@ const COPY = {
       contact: {
         title: "Contact · P-SmartKing",
         description: "Press, partnerships, questions: write to psmartking@dnkvision.com.",
+      },
+      demo: {
+        title: "Try the map · P-SmartKing",
+        description: "Interactive demo: tap a street segment in Montreal and read parking rules.",
+      },
+      privacy: {
+        title: "Privacy policy · P-SmartKing",
+        description: "P-SmartKing privacy policy — website and mobile app (DnK Vision, Montreal).",
+      },
+      terms: {
+        title: "Terms of use · P-SmartKing",
+        description: "Terms of use for P-SmartKing — website and mobile app.",
+      },
+      404: {
+        title: "Page not found · P-SmartKing",
+        description: "This page doesn't exist. Go back to the P-SmartKing home page.",
       },
     },
   },
@@ -466,7 +552,19 @@ function setLanguage(lang) {
     btn.classList.toggle("is-active", active);
     btn.setAttribute("aria-pressed", String(active));
   });
+  syncLegalArticles(next);
   refreshCoverageLang();
+  if (typeof window.refreshDemoCopy === "function") window.refreshDemoCopy();
+}
+
+function syncLegalArticles(lang) {
+  const showEn = lang === "en";
+  document.querySelectorAll(".legal-fr").forEach((el) => {
+    el.hidden = showEn;
+  });
+  document.querySelectorAll(".legal-en").forEach((el) => {
+    el.hidden = !showEn;
+  });
 }
 
 function closeMobileNav() {
@@ -499,6 +597,7 @@ function initNav() {
   const header = document.querySelector(".site-header");
   const panel = document.getElementById("nav-mobile");
   const toggle = document.querySelector(".nav-toggle");
+  if (!header || !panel || !toggle) return;
 
   toggle.addEventListener("click", () => {
     const open = header.classList.toggle("is-open");
@@ -508,6 +607,12 @@ function initNav() {
 
   panel.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", closeMobileNav);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || panel.hidden) return;
+    closeMobileNav();
+    toggle.focus();
   });
 }
 
@@ -521,24 +626,97 @@ function markWaitlistDone() {
   });
 }
 
+function waitlistEndpoint() {
+  const cfg = window.PSMARTKING_SITE_CONFIG || {};
+  return (cfg.waitlistEndpoint || "").trim();
+}
+
+async function submitWaitlistEmail(email) {
+  const endpoint = waitlistEndpoint();
+  if (!endpoint) {
+    localStorage.setItem(WAITLIST_KEY, "1");
+    return;
+  }
+  const res = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({ email, source: "psmartking-waitlist" }),
+  });
+  if (!res.ok) throw new Error("waitlist");
+  localStorage.setItem(WAITLIST_KEY, "1");
+}
+
+function waitlistHintId(input, suffix) {
+  return input?.id ? `${input.id}-${suffix}` : `waitlist-${suffix}`;
+}
+
+function showWaitlistFieldError(form, input, key, attr) {
+  const success = form.nextElementSibling;
+  if (success && success.classList.contains("form-success")) success.hidden = true;
+  form.classList.add("form-error");
+  if (!input) return;
+  input.setAttribute("aria-invalid", "true");
+  const hintId = waitlistHintId(input, attr);
+  input.setAttribute("aria-describedby", hintId);
+  let hint = form.parentElement?.querySelector(`[data-waitlist-${attr}]`);
+  if (!hint) {
+    hint = document.createElement("p");
+    hint.className = "form-hint form-hint-error";
+    hint.setAttribute(`data-waitlist-${attr}`, "");
+    hint.id = hintId;
+    form.insertAdjacentElement("afterend", hint);
+  }
+  hint.textContent = lookup(currentLang(), key) || "";
+  hint.hidden = false;
+}
+
+function clearWaitlistFieldErrors(form) {
+  form.classList.remove("form-error");
+  form.parentElement?.querySelectorAll("[data-waitlist-error], [data-waitlist-validation]").forEach((el) => {
+    el.remove();
+  });
+  const input = form.querySelector('input[type="email"]');
+  if (input) {
+    input.removeAttribute("aria-invalid");
+    input.removeAttribute("aria-describedby");
+  }
+}
+
+function showWaitlistNetworkError(form) {
+  const input = form.querySelector('input[type="email"]');
+  form.querySelector("[data-waitlist-validation]")?.remove();
+  showWaitlistFieldError(form, input, "form.networkError", "error");
+}
+
 function initWaitlist() {
   if (localStorage.getItem(WAITLIST_KEY) === "1") {
     markWaitlistDone();
   }
 
   document.querySelectorAll("[data-waitlist]").forEach((form) => {
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const input = form.querySelector('input[type="email"]');
-      const valid = EMAIL_RE.test((input.value || "").trim());
-      form.classList.toggle("form-error", !valid);
-      input.setAttribute("aria-invalid", String(!valid));
+      const email = (input.value || "").trim();
+      const valid = EMAIL_RE.test(email);
       if (!valid) {
+        showWaitlistFieldError(form, input, "form.error", "validation");
         input.focus();
         return;
       }
-      localStorage.setItem(WAITLIST_KEY, "1");
-      markWaitlistDone();
+      clearWaitlistFieldErrors(form);
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      try {
+        await submitWaitlistEmail(email);
+        clearWaitlistFieldErrors(form);
+        markWaitlistDone();
+      } catch {
+        showWaitlistNetworkError(form);
+        input.focus();
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
     });
   });
 }
@@ -585,21 +763,6 @@ function initReveal() {
     { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
   );
   nodes.forEach((el) => io.observe(el));
-}
-
-function initMagnetic() {
-  if (window.matchMedia("(pointer: coarse), (prefers-reduced-motion: reduce)").matches) return;
-  document.querySelectorAll(".btn-primary").forEach((btn) => {
-    btn.addEventListener("pointermove", (event) => {
-      const box = btn.getBoundingClientRect();
-      const x = event.clientX - box.left - box.width / 2;
-      const y = event.clientY - box.top - box.height / 2;
-      btn.style.transform = `translate(${x * 0.18}px, ${y * 0.22}px)`;
-    });
-    btn.addEventListener("pointerleave", () => {
-      btn.style.transform = "";
-    });
-  });
 }
 
 function currentLang() {
@@ -1295,13 +1458,20 @@ function initCurrentNav() {
   });
 }
 
+function initHeaderCta() {
+  if (document.documentElement.dataset.page !== "waitlist") return;
+  document.querySelectorAll(".header-actions .btn-download, .nav-mobile .btn-download").forEach((el) => {
+    el.hidden = true;
+  });
+}
+
 document.getElementById("year").textContent = String(new Date().getFullYear());
 initLang();
 initNav();
 initHeaderScroll();
 initCurrentNav();
+initHeaderCta();
 initWaitlist();
 initCoverage();
 initFaq();
 initReveal();
-initMagnetic();

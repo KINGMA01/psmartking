@@ -1,4 +1,6 @@
-/* Clé locale uniquement. En production, définis GOOGLE_MAPS_API_KEY sur Vercel (voir /api/config). */
+/* Copie en maps-config.js pour le dev local.
+   Production : définis GOOGLE_MAPS_API_KEY dans les variables Vercel (servie via /api/config).
+   Restreins la clé par domaine dans Google Cloud. */
 window.PSMARTKING_GOOGLE_MAPS_API_KEY = "";
 
 window.gm_authFailure = function () {

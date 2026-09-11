@@ -11,3 +11,6 @@ _*.html
 _*.py
 _*.png
 _*.js
+
+.vercel
+.env*
