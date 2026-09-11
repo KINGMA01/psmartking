@@ -184,7 +184,6 @@ const COPY = {
       legendMaybe: "À vérifier",
       detailTitle: "Détail du tronçon",
       disclaimer: "Les couleurs ne garantissent pas une place libre. Vérifie toujours les panneaux sur place.",
-      cta: "Rejoindre la beta complète",
     },
     legal: {
       privacyEyebrow: "Vie privée",
@@ -297,7 +296,6 @@ const COPY = {
       legendMaybe: "Unclear",
       detailTitle: "Segment details",
       disclaimer: "Colors don't guarantee an open spot. Always verify signs on site.",
-      cta: "Join the full beta",
     },
     legal: {
       privacyEyebrow: "Privacy",

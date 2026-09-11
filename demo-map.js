@@ -38,8 +38,6 @@ function demoCopy(key) {
       schedule: "Horaires",
       reason: "Motif",
       nextChange: "Prochain changement",
-      disclaimer:
-        "Aperçu limité · Montréal · Données ouvertes Ville de MTL · Vérifie toujours sur place.",
       searchEmpty: "Entre une adresse à Montréal.",
       searchNotFound: "Adresse introuvable. Vérifie l'orthographe.",
     },
@@ -56,8 +54,6 @@ function demoCopy(key) {
       schedule: "Schedule",
       reason: "Reason",
       nextChange: "Next change",
-      disclaimer:
-        "Limited preview · Montreal · City of MTL open data · Always verify on site.",
       searchEmpty: "Enter a Montreal address.",
       searchNotFound: "Address not found. Check spelling.",
     },
@@ -90,6 +86,45 @@ function escapeHtml(value) {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+function demoLocale() {
+  return demoLang() === "en" ? "en-CA" : "fr-CA";
+}
+
+function formatSlotTime(value) {
+  const str = String(value || "").trim();
+  if (!str) return "";
+  if (/^\d{4}-\d{2}-\d{2}T/.test(str)) {
+    const d = new Date(str);
+    if (!Number.isNaN(d.getTime())) {
+      return d.toLocaleTimeString(demoLocale(), {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: demoLang() === "en",
+      });
+    }
+  }
+  return str;
+}
+
+function formatDateTime(value) {
+  const str = String(value || "").trim();
+  if (!str) return "";
+  if (/^\d{4}-\d{2}-\d{2}T/.test(str)) {
+    const d = new Date(str);
+    if (!Number.isNaN(d.getTime())) {
+      return d.toLocaleString(demoLocale(), {
+        weekday: "short",
+        day: "numeric",
+        month: "short",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: demoLang() === "en",
+      });
+    }
+  }
+  return str;
 }
 
 function setDemoStatus(text, kind) {
@@ -151,9 +186,11 @@ function formatSchedule(slots) {
   if (!list.length) return "";
   const rows = list
     .map((slot) => {
-      const time = `${escapeHtml(slot.start)}–${escapeHtml(slot.end)}`;
+      const start = formatSlotTime(slot.start);
+      const end = formatSlotTime(slot.end);
+      const time = end ? `${escapeHtml(start)} – ${escapeHtml(end)}` : escapeHtml(start);
       const label = escapeHtml(slot.label_fr || slot.status || "");
-      return `<li><span class="demo-schedule-time">${time}</span> <span class="demo-schedule-label">${label}</span></li>`;
+      return `<li><span class="demo-schedule-time">${time}</span><span class="demo-schedule-label">${label}</span></li>`;
     })
     .join("");
   return `<div class="demo-schedule"><p class="demo-schedule-title">${demoCopy("schedule")}</p><ul>${rows}</ul></div>`;
@@ -168,7 +205,7 @@ function formatForbiddenReason(reason) {
 function nextChangeLine(d) {
   const at = d.next_can_park_at || d.next_cannot_park_at || d.next_change_at;
   if (!at) return "";
-  return `<p class="demo-detail-meta"><strong>${demoCopy("nextChange")}:</strong> ${escapeHtml(at)}</p>`;
+  return `<p class="demo-detail-meta"><strong>${demoCopy("nextChange")}:</strong> ${escapeHtml(formatDateTime(at))}</p>`;
 }
 
 async function showDemoDetail(item) {
@@ -203,7 +240,6 @@ async function showDemoDetail(item) {
       ${nextChangeLine(d)}
       ${confidence}
       ${formatSchedule(d.schedule)}
-      <p class="demo-detail-note">${demoCopy("disclaimer")}</p>
     `);
   } catch {
     setDemoDetail(`<p class="demo-detail-error">${demoCopy("error")}</p>`);
