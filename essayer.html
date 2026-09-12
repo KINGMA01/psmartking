@@ -65,17 +65,18 @@
 
   <main id="contenu" class="demo-main">
     <section class="demo-scene" aria-labelledby="demo-map-title">
-      <div class="demo-scene-copy">
+      <header class="demo-scene-copy">
         <p class="eyebrow" data-i18n="demo.eyebrow">Démo</p>
         <h1 id="demo-map-title" data-i18n="demo.title">Touche la voirie. Lis la règle.</h1>
         <p class="demo-scene-lead" data-i18n="demo.lead">Aperçu limité au centre-ville. Touche un tronçon coloré sur la carte.</p>
-      </div>
+      </header>
 
       <div class="demo-phone-wrap">
         <div class="demo-phone" data-demo-phone>
           <div class="demo-phone-frame">
             <div class="demo-phone-notch" aria-hidden="true"></div>
             <div class="demo-phone-screen">
+              <div class="demo-phone-statusbar" aria-hidden="true"></div>
               <header class="demo-phone-bar">
                 <div class="demo-phone-brand">
                   <img src="logo.png?v=6" alt="" width="22" height="22" class="demo-phone-logo">
@@ -109,6 +110,12 @@
           </div>
         </div>
       </div>
+
+      <ul class="demo-legend demo-legend-inline" aria-label="Légende">
+        <li><span class="demo-swatch demo-swatch-ok"></span><span data-i18n="demo.legendOk">Autorisé</span></li>
+        <li><span class="demo-swatch demo-swatch-no"></span><span data-i18n="demo.legendNo">Interdit / payant</span></li>
+        <li><span class="demo-swatch demo-swatch-maybe"></span><span data-i18n="demo.legendMaybe">À vérifier</span></li>
+      </ul>
     </section>
   </main>
 

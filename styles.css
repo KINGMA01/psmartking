@@ -2799,12 +2799,18 @@ html[data-page="demo"] body {
   height: 100dvh;
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(238, 243, 255, 0.96) 100%),
-    var(--bg-grid, #eef3ff);
+    radial-gradient(ellipse 80% 60% at 50% 38%, rgba(65, 105, 225, 0.1) 0%, transparent 68%),
+    linear-gradient(180deg, #f8faff 0%, #eef3ff 100%);
 }
 
 html[data-page="demo"] .site-header {
+  position: fixed;
   flex-shrink: 0;
+  background: var(--royal);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom-color: transparent;
+  box-shadow: 0 8px 28px rgba(42, 71, 201, 0.22);
 }
 
 html[data-page="demo"] .demo-main {
@@ -2814,87 +2820,114 @@ html[data-page="demo"] .demo-main {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: clamp(0.35rem, 1.5vw, 0.75rem) clamp(0.75rem, 3vw, 1.5rem);
+  padding:
+    calc(var(--header-offset) + 0.35rem)
+    clamp(0.75rem, 3vw, 1.25rem)
+    clamp(0.5rem, 2vh, 0.85rem);
 }
 
 .demo-scene {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(1rem, 3vw, 2.5rem);
-  width: min(1100px, 100%);
-  max-height: 100%;
+  gap: clamp(0.45rem, 1.6vh, 0.85rem);
+  width: min(420px, 100%);
+  height: 100%;
+  min-height: 0;
 }
 
 .demo-scene-copy {
-  max-width: 22rem;
+  flex-shrink: 0;
+  max-width: 24rem;
+  text-align: center;
 }
 
 .demo-scene-copy .eyebrow {
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.2rem;
+  color: var(--royal);
 }
 
 .demo-scene-copy h1 {
-  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
-  margin: 0 0 0.5rem;
+  font-size: clamp(1.15rem, 3.2vw, 1.55rem);
+  margin: 0 0 0.25rem;
   line-height: 1.15;
+  color: var(--ink);
 }
 
 .demo-scene-lead {
   margin: 0;
   color: var(--muted);
-  font-size: 0.9375rem;
-  line-height: 1.5;
+  font-size: clamp(0.78rem, 2vw, 0.875rem);
+  line-height: 1.45;
 }
 
 .demo-phone-wrap {
+  flex: 1;
+  min-height: 0;
+  max-height: calc(100dvh - var(--header-offset) - 8.5rem);
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 0;
+  width: 100%;
+  padding: 0.15rem 0;
 }
 
 .demo-phone {
-  filter: drop-shadow(0 28px 48px rgba(12, 27, 77, 0.22));
+  filter: drop-shadow(0 24px 44px rgba(12, 27, 77, 0.24));
+  max-height: 100%;
 }
 
 .demo-phone-frame {
   position: relative;
-  padding: 10px;
-  border-radius: 44px;
-  background: linear-gradient(145deg, #2a2a2e 0%, #0f0f12 55%, #1c1c22 100%);
+  padding: 11px;
+  border-radius: 46px;
+  max-height: 100%;
+  background: linear-gradient(155deg, #3a3a40 0%, #121216 48%, #1e1e24 100%);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 0 0 1px rgba(0, 0, 0, 0.35);
 }
 
 .demo-phone-notch {
   position: absolute;
-  top: 14px;
+  top: 16px;
   left: 50%;
   transform: translateX(-50%);
-  width: 96px;
-  height: 24px;
+  width: 88px;
+  height: 22px;
   border-radius: 999px;
-  background: #0a0a0c;
+  background: #050507;
   z-index: 6;
   pointer-events: none;
 }
 
 .demo-phone-screen {
+  --demo-phone-h: min(calc(100dvh - var(--header-offset) - 9.5rem), 600px);
   position: relative;
-  width: clamp(240px, 34vw, 320px);
-  aspect-ratio: 9 / 19.5;
-  max-height: min(calc(100dvh - 7.5rem), 680px);
+  height: var(--demo-phone-h);
+  width: min(300px, 90vw, calc(var(--demo-phone-h) * 9 / 19.5));
+  max-height: 100%;
   border-radius: 34px;
   overflow: hidden;
   background: #101318;
 }
 
-.demo-phone-bar {
+.demo-phone-statusbar {
   position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  height: 28px;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(65, 105, 225, 0.98) 0%, rgba(65, 105, 225, 0.92) 100%);
+}
+
+.demo-phone-bar {
+  position: absolute;
+  top: 28px;
   left: 0;
   right: 0;
   z-index: 5;
@@ -2902,8 +2935,8 @@ html[data-page="demo"] .demo-main {
   align-items: center;
   justify-content: space-between;
   gap: 0.35rem;
-  min-height: 44px;
-  padding: 0.35rem 0.55rem 0.35rem 0.65rem;
+  min-height: 40px;
+  padding: 0.3rem 0.55rem 0.3rem 0.65rem;
   background: rgba(65, 105, 225, 0.96);
   color: #fff;
   backdrop-filter: blur(8px);
@@ -2956,8 +2989,18 @@ html[data-page="demo"] .demo-main {
 .demo-phone-map-stage {
   position: absolute;
   inset: 0;
-  top: 44px;
+  top: 68px;
   background: #dce6f2;
+}
+
+.demo-phone-map-stage .gm-bundled-control {
+  transform: scale(0.82);
+  transform-origin: bottom right;
+}
+
+.demo-phone-map-stage .gm-style-cc {
+  opacity: 0.65;
+  font-size: 8px !important;
 }
 
 .demo-phone-map-stage .demo-map {
@@ -3113,40 +3156,49 @@ html[data-page="demo"] .demo-main {
   background: rgba(255, 255, 255, 0.35);
 }
 
+.demo-legend-inline {
+  flex-shrink: 0;
+  justify-content: center;
+  gap: 0.65rem 1rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(65, 105, 225, 0.12);
+  box-shadow: 0 6px 18px rgba(12, 27, 77, 0.06);
+}
+
 @media (max-width: 900px) {
-  .demo-scene {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-    justify-items: center;
-    text-align: center;
-    gap: 0.65rem;
-  }
-
-  .demo-scene-copy {
-    max-width: 28rem;
-  }
-
   .demo-scene-copy h1 {
-    font-size: clamp(1.1rem, 4.5vw, 1.45rem);
-  }
-
-  .demo-scene-lead {
-    font-size: 0.8125rem;
-  }
-
-  .demo-phone-screen {
-    width: clamp(220px, 72vw, 300px);
-    max-height: min(calc(100dvh - 11rem), 620px);
+    font-size: clamp(1.05rem, 4.5vw, 1.35rem);
   }
 }
 
-@media (max-height: 700px) {
+@media (max-height: 740px) {
   .demo-scene-lead {
     display: none;
   }
 
   .demo-phone-screen {
-    max-height: min(calc(100dvh - 6.5rem), 560px);
+    --demo-phone-h: min(calc(100dvh - var(--header-offset) - 7rem), 540px);
+  }
+
+  .demo-legend-inline {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-height: 620px) {
+  .demo-scene-copy .eyebrow {
+    display: none;
+  }
+
+  .demo-scene-copy h1 {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+
+  .demo-phone-screen {
+    --demo-phone-h: min(calc(100dvh - var(--header-offset) - 5.5rem), 480px);
   }
 }
 

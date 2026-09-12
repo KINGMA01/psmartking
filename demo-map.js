@@ -395,6 +395,8 @@ async function initDemoMap() {
 
   closeDemoSheet();
   triggerDemoMapResize();
+  window.setTimeout(triggerDemoMapResize, 280);
+  window.setTimeout(triggerDemoMapResize, 700);
   await reloadDemoPolylines();
 }
 
