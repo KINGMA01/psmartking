@@ -35,15 +35,22 @@ const COPY = {
     preview: {
       eyebrow: "Aperçu",
       title: "L'app, en vrai",
-      lead: "Capture réelle de l'app en développement — pas une maquette générique.",
-      f1: "Recherche une adresse directement sur la carte.",
-      f2: "Tronçons colorés : vert (autorisé), rouge (interdit), bleu (payant).",
-      f3: "Fiche tronçon avec la règle, l'amende possible et les prochains créneaux.",
-      f4: "Photos des panneaux sur place et calendrier sur 7 jours (app complète).",
-      f5: "Données ouvertes Ville de Montréal, mises à jour en continu.",
-      note: "Essaie la carte interactive sur le centre-ville — version web simplifiée de l'app.",
+      lead: "Voici ce qu'on code pour se garer à Montréal.",
+      ctx1: "Beta privée",
+      ctx2: "Toute l'île au lancement",
+      f1t: "Carte",
+      f1: "Tape ton adresse, la carte se centre dessus.",
+      f2t: "Couleurs",
+      f2: "Vert = autorisé, rouge = interdit, bleu = payant.",
+      f3t: "Fiche tronçon",
+      f3: "Règle en cours, amende possible, prochain créneau.",
+      f4t: "App complète",
+      f4: "Photos des panneaux sur place + calendrier 7 jours.",
+      f5t: "Données Ville",
+      f5: "Open data Montréal, mises à jour en continu.",
+      note: "Sur le site : démo interactive au centre-ville, plus simple que l'app.",
       cta: "Voir comment ça marche",
-      caption: "Capture réelle de l'application P-SmartKing : carte et détail d'un tronçon à Montréal.",
+      caption: "Capture de l'application P-SmartKing : carte et fiche tronçon à Montréal.",
     },
     form: {
       emailLabel: "Adresse courriel",
@@ -323,15 +330,22 @@ const COPY = {
     preview: {
       eyebrow: "Preview",
       title: "The app, for real",
-      lead: "A real screenshot of the app in development — not a generic mockup.",
-      f1: "Search an address directly on the map.",
-      f2: "Color-coded segments: green (allowed), red (forbidden), blue (paid).",
-      f3: "Segment sheet with the rule, possible fine, and upcoming time slots.",
-      f4: "On-site sign photos and 7-day calendar (full app).",
-      f5: "Open City of Montreal data, updated continuously.",
-      note: "Try the interactive map downtown — a simplified web version of the app.",
+      lead: "Here's what we're building to help you park in Montreal.",
+      ctx1: "Private beta",
+      ctx2: "Full island at launch",
+      f1t: "Map",
+      f1: "Enter an address and the map centers on it.",
+      f2t: "Colors",
+      f2: "Green = allowed, red = forbidden, blue = paid.",
+      f3t: "Segment sheet",
+      f3: "Current rule, possible fine, next time slot.",
+      f4t: "Full app",
+      f4: "On-site sign photos + 7-day calendar.",
+      f5t: "City data",
+      f5: "Open Montreal data, updated continuously.",
+      note: "On the site: interactive downtown demo, simpler than the app.",
       cta: "Try the map",
-      caption: "Real screenshot of the P-SmartKing app: map and street segment details in Montreal.",
+      caption: "P-SmartKing app screenshot: map and street segment sheet in Montreal.",
     },
     form: {
       emailLabel: "Email address",
@@ -1338,11 +1352,13 @@ async function runCoverageSearch(query, presetHit) {
 }
 
 async function loadCoverageGeo() {
-  // La zone est livrée par coverage-zone.js. Pas de fetch file://.
-  if (window.PSMARTKING_COVERAGE_ZONE) return window.PSMARTKING_COVERAGE_ZONE;
-  const res = await fetch("data/ile-montreal.geojson");
-  if (!res.ok) throw new Error("geojson");
-  return res.json();
+  try {
+    const res = await fetch("data/ile-montreal.geojson");
+    if (res.ok) return res.json();
+  } catch {
+    /* file:// ou réseau indisponible */
+  }
+  throw new Error("geojson");
 }
 
 async function reverseGeocodePoint(lat, lng) {

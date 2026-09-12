@@ -3,7 +3,7 @@
  */
 
 const DEMO_CENTER = { lat: 45.5019, lng: -73.5674 };
-const DEMO_RADIUS_KM = 0.5;
+const DEMO_RADIUS_KM = 0.25;
 const DEMO_LIMIT = 100;
 const DEMO_DEBOUNCE_MS = 450;
 
@@ -323,7 +323,7 @@ async function initDemoMap() {
     fullscreenControl: false,
     zoomControl: true,
     restriction: {
-      latLngBounds: { north: 45.52, south: 45.49, east: -73.53, west: -73.59 },
+      latLngBounds: { north: 45.507, south: 45.497, east: -73.551, west: -73.571 },
       strictBounds: false,
     },
   });
