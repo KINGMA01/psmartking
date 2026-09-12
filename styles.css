@@ -3386,13 +3386,22 @@ html[data-page="demo"] .demo-main {
     width: 100%;
     max-height: none;
     margin: 0.15rem 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .demo-phone,
+  .demo-phone-frame {
+    max-height: none;
   }
 
   .demo-phone-screen {
+    --phone-max-h: min(58dvh, 560px);
     --demo-phone-h: auto;
-    width: min(268px, calc(100vw - 2rem));
-    height: min(calc(min(268px, 100vw - 2rem) * 19.5 / 9), 52dvh);
-    max-height: 52dvh;
+    width: min(242px, calc(100vw - 2rem), calc(var(--phone-max-h) * 9 / 19.5));
+    height: auto;
+    aspect-ratio: 9 / 19.5;
+    max-height: none;
   }
 
   .demo-legend-side {

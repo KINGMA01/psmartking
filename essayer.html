@@ -121,25 +121,31 @@
   <script src="map-zone.js"></script>
   <script src="demo-map.js"></script>
   <script>
+    window.__pskMapsBootDone = false;
     (async () => {
-      if (!window.PSMARTKING_GOOGLE_MAPS_API_KEY) {
-        try {
-          const res = await fetch("/api/config");
-          if (res.ok) {
-            const data = await res.json();
-            if (data.mapsKey) window.PSMARTKING_GOOGLE_MAPS_API_KEY = data.mapsKey;
-          }
-        } catch (_) {}
+      try {
+        if (!window.PSMARTKING_GOOGLE_MAPS_API_KEY) {
+          try {
+            const res = await fetch("/api/config");
+            if (res.ok) {
+              const data = await res.json();
+              if (data.mapsKey) window.PSMARTKING_GOOGLE_MAPS_API_KEY = data.mapsKey;
+            }
+          } catch (_) {}
+        }
+        const lang = document.documentElement.lang === "en" ? "en" : "fr";
+        (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.googleapis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Dropping:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+          key: window.PSMARTKING_GOOGLE_MAPS_API_KEY || "",
+          v: "weekly",
+          language: lang,
+          region: "CA"
+        });
+        await google.maps.importLibrary("maps");
+        if (window.initDemoMap) window.initDemoMap();
+      } finally {
+        window.__pskMapsBootDone = true;
+        window.dispatchEvent(new Event("psk-maps-ready"));
       }
-      const lang = document.documentElement.lang === "en" ? "en" : "fr";
-      (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.googleapis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Dropping:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
-        key: window.PSMARTKING_GOOGLE_MAPS_API_KEY || "",
-        v: "weekly",
-        language: lang,
-        region: "CA"
-      });
-      await google.maps.importLibrary("maps");
-      if (window.initDemoMap) window.initDemoMap();
     })();
   </script>
   <script src="app.js"></script>

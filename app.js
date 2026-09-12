@@ -954,7 +954,12 @@ function cityIsOutside(value) {
   return OUTSIDE_CITIES.some((place) => t === tokenizePlace(place));
 }
 
-const MTL_BIAS = { radius: 42000, center: { lat: 45.508, lng: -73.668 } };
+const MTL_BIAS = {
+  circle: {
+    center: { lat: 45.508, lng: -73.668 },
+    radius: 42000,
+  },
+};
 
 const COVERAGE_MAP_STYLE = [
   { elementType: "geometry", stylers: [{ color: "#e7edf6" }] },
@@ -1043,16 +1048,40 @@ function resetCoverageSession(PlacesLib) {
 async function placePredictionToHit(prediction) {
   const place = typeof prediction.toPlace === "function" ? prediction.toPlace() : prediction;
   await place.fetchFields({ fields: ["formattedAddress", "location", "addressComponents"] });
-  await loadPlacesLibrary().then(resetCoverageSession);
+  const Places = await loadPlacesLibrary();
+  resetCoverageSession(Places);
   return placeToHit(place);
+}
+
+async function geocodeAddressFallback(query) {
+  const lib = await google.maps.importLibrary("geocoding");
+  const Geocoder = (lib && lib.Geocoder) || google.maps.Geocoder;
+  if (!Geocoder) return null;
+  const { results } = await new Geocoder().geocode({
+    address: query,
+    componentRestrictions: { country: "CA" },
+    region: "CA",
+  });
+  const first = results && results[0];
+  if (!first) return null;
+  return placeToHit({
+    location: first.geometry && first.geometry.location,
+    formattedAddress: first.formatted_address,
+    addressComponents: first.address_components,
+  });
 }
 
 async function googleSuggestAddresses(query) {
   const Places = await loadPlacesLibrary();
+  const AutocompleteSuggestion =
+    Places.AutocompleteSuggestion || google.maps.places?.AutocompleteSuggestion;
+  if (!AutocompleteSuggestion?.fetchAutocompleteSuggestions) {
+    throw new Error("places autocomplete unavailable");
+  }
   if (!coverageSessionToken && Places.AutocompleteSessionToken) {
     coverageSessionToken = new Places.AutocompleteSessionToken();
   }
-  const { suggestions } = await Places.AutocompleteSuggestion.fetchAutocompleteSuggestions({
+  const { suggestions } = await AutocompleteSuggestion.fetchAutocompleteSuggestions({
     input: query,
     includedRegionCodes: ["ca"],
     locationBias: MTL_BIAS,
@@ -1064,10 +1093,14 @@ async function googleSuggestAddresses(query) {
 }
 
 async function googleGeocodeAddress(query) {
-  const suggestions = await googleSuggestAddresses(query);
-  const prediction = suggestions[0] && suggestions[0].placePrediction;
-  if (!prediction) return null;
-  return placePredictionToHit(prediction);
+  try {
+    const suggestions = await googleSuggestAddresses(query);
+    const prediction = suggestions[0] && suggestions[0].placePrediction;
+    if (prediction) return placePredictionToHit(prediction);
+  } catch {
+    /* fallback geocoder */
+  }
+  return geocodeAddressFallback(query);
 }
 
 function formatCanadianAddress(hit) {
@@ -1407,36 +1440,63 @@ function showCoverageMapFallback(holder) {
     "</p>";
 }
 
-function fitCoverageBounds(geo) {
-  if (window.pskZone?.fitMapToZone) {
-    window.pskZone.fitMapToZone(coverageMap, geo, 36);
+function extendCoverageBounds(bounds, geom) {
+  if (!geom) return;
+  if (geom.type === "Polygon") {
+    (geom.coordinates[0] || []).forEach((coord) => bounds.extend({ lat: coord[1], lng: coord[0] }));
     return;
   }
-  const bounds = new google.maps.LatLngBounds();
-  (geo.features || []).forEach((feat) => {
-    const geom = feat.geometry;
-    if (!geom) return;
-    const polys = geom.type === "Polygon" ? [geom.coordinates] : geom.coordinates || [];
-    polys.forEach((poly) => {
+  if (geom.type === "MultiPolygon") {
+    geom.coordinates.forEach((poly) => {
       (poly[0] || []).forEach((coord) => bounds.extend({ lat: coord[1], lng: coord[0] }));
     });
-  });
+  }
+}
+
+function fitCoverageBounds(geo) {
+  const bounds = new google.maps.LatLngBounds();
+  (geo.features || []).forEach((feat) => extendCoverageBounds(bounds, feat.geometry));
   if (!bounds.isEmpty()) coverageMap.fitBounds(bounds, 36);
 }
 
+function waitForMapsBootstrap(ms) {
+  return new Promise((resolve) => {
+    if (window.__pskMapsBootDone) {
+      resolve();
+      return;
+    }
+    const onReady = () => resolve();
+    window.addEventListener("psk-maps-ready", onReady, { once: true });
+    window.setTimeout(() => {
+      window.removeEventListener("psk-maps-ready", onReady);
+      resolve();
+    }, ms);
+  });
+}
+
 async function ensureGoogleMapsReady() {
-  for (let i = 0; i < 80; i += 1) {
-    if (googleMapsKey()) break;
+  await waitForMapsBootstrap(12000);
+
+  if (!googleMapsKey()) {
+    try {
+      const res = await fetch("/api/config");
+      if (res.ok) {
+        const data = await res.json();
+        if (data.mapsKey) window.PSMARTKING_GOOGLE_MAPS_API_KEY = data.mapsKey;
+      }
+    } catch {
+      /* hors ligne */
+    }
+  }
+
+  for (let i = 0; i < 120; i += 1) {
+    if (googleMapsKey() && window.google?.maps?.importLibrary) break;
     await new Promise((resolve) => window.setTimeout(resolve, 100));
   }
   if (!googleMapsKey()) throw new Error("no key");
-
-  for (let i = 0; i < 80; i += 1) {
-    if (window.google?.maps?.importLibrary) break;
-    await new Promise((resolve) => window.setTimeout(resolve, 100));
-  }
   if (!window.google?.maps?.importLibrary) throw new Error("maps loader");
   await google.maps.importLibrary("maps");
+  await loadPlacesLibrary().catch(() => {});
 }
 
 async function setupGoogleCoverageMap(holder) {
@@ -1468,7 +1528,6 @@ async function setupGoogleCoverageMap(holder) {
     mapOptions.zoomControlOptions = { position: google.maps.ControlPosition.RIGHT_TOP };
   }
   coverageMap = new MapCtor(holder, mapOptions);
-  loadPlacesLibrary().catch(() => {});
 
   try {
     const geo = await loadCoverageGeo();
