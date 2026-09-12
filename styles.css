@@ -3510,6 +3510,13 @@ html[data-page="demo"] .demo-main {
   color: var(--ink);
 }
 
+.legal-card h3 {
+  font-family: Sora, system-ui, sans-serif;
+  font-size: 1rem;
+  margin: 1.15rem 0 0.4rem;
+  color: var(--ink);
+}
+
 .legal-card ul {
   padding-left: 1.25rem;
 }

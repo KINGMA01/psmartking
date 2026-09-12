@@ -79,123 +79,156 @@
               <li><a href="#p-resp">Responsable</a></li>
               <li><a href="#p-data">Données collectées</a></li>
               <li><a href="#p-purpose">Finalités</a></li>
-              <li><a href="#p-legal">Base légale</a></li>
+              <li><a href="#p-consent">Consentement et témoins</a></li>
+              <li><a href="#p-share">Tiers et hébergement</a></li>
               <li><a href="#p-retention">Conservation</a></li>
-              <li><a href="#p-share">Partage</a></li>
               <li><a href="#p-rights">Tes droits</a></li>
               <li><a href="#p-security">Sécurité</a></li>
-              <li><a href="#p-cookies">Site web &amp; cookies</a></li>
+              <li><a href="#p-photos">Photographies</a></li>
               <li><a href="#p-minors">Mineurs</a></li>
+              <li><a href="#p-incident">Incident de confidentialité</a></li>
+              <li><a href="#p-changes">Modifications</a></li>
             </ol>
           </nav>
 
-          <p>P-SmartKing (site <a href="https://psmartking.com">psmartking.com</a> et application mobile <strong>P_SmartKing</strong>) est édité par <strong>DnK Vision</strong>. Cette politique décrit les renseignements personnels et identifiants que nous traitons lorsque tu utilises nos services.</p>
+          <p>P-SmartKing (site <a href="https://psmartking.com">psmartking.com</a> et application mobile) est édité par <strong>DnK Vision</strong>. Cette politique décrit les renseignements personnels que nous traitons conformément à la Loi sur la protection des renseignements personnels dans le secteur privé («&nbsp;Loi&nbsp;25&nbsp;»). Elle est distincte des <a href="conditions.html">Conditions générales d'utilisation</a>, qui y font référence.</p>
 
-          <h2 id="p-resp">1. Responsable du traitement</h2>
-          <p><strong>DnK Vision</strong> — courriel vie privée : <a href="mailto:psmartking@dnkvision.com">psmartking@dnkvision.com</a></p>
+          <h2 id="p-resp">1. Responsable de la protection des renseignements personnels</h2>
+          <p><strong>DnK Vision</strong> a désigné un responsable de la protection des renseignements personnels conformément à la Loi&nbsp;25. Contact : <a href="mailto:psmartking@dnkvision.com">psmartking@dnkvision.com</a></p>
           <p>Zone de service principale : agglomération de Montréal (données de stationnement sur voirie).</p>
 
-          <h2 id="p-data">2. Données collectées</h2>
+          <h2 id="p-data">2. Renseignements personnels collectés</h2>
           <ul>
             <li><strong>Site — liste d'attente :</strong> adresse courriel, horodatage d'inscription, source (formulaire web).</li>
-            <li><strong>Compte application :</strong> courriel, nom affiché, mot de passe (stocké sous forme de hash, jamais en clair), langue, type de vignette, préférences.</li>
+            <li><strong>Compte :</strong> nom affiché, adresse courriel, mot de passe (hashé via Supabase Auth — jamais en clair), langue, préférences.</li>
             <li><strong>OAuth (optionnel) :</strong> identifiants Google ou Apple via Supabase — courriel et identifiant fournisseur.</li>
             <li><strong>Appareil :</strong> jeton anonyme (<code>device_token</code>) pour minuteur, notifications locales et signalements sans compte.</li>
-            <li><strong>Localisation :</strong> coordonnées GPS lorsque tu l'autorises — pour afficher la carte et les règles à proximité. Nous ne vendons pas ta position.</li>
+            <li><strong>Géolocalisation :</strong> position approximative ou précise, selon la permission accordée, pour afficher la carte et les règles à proximité. Nous ne vendons pas ta position.</li>
             <li><strong>Véhicules (optionnel) :</strong> plaque, marque, modèle, couleur — uniquement si tu les ajoutes au profil.</li>
-            <li><strong>Contributions :</strong> signalements sur les tronçons de voirie, rapports de bug (texte et captures d'écran optionnelles, max 3).</li>
+            <li><strong>Contenu contribué :</strong> signalements, commentaires, photographies téléversées (pouvant contenir incidemment des plaques d'immatriculation ou des visages).</li>
             <li><strong>Sessions de stationnement :</strong> horodatage, identifiant de place ou tronçon, lien optionnel au compte.</li>
-            <li><strong>Démo web (« Essayer la carte ») :</strong> pas de compte requis ; requêtes carte anonymisées côté serveur (adresse IP pour limitation de débit).</li>
+            <li><strong>Données techniques :</strong> type d'appareil, système d'exploitation, identifiants techniques, journaux d'utilisation.</li>
+            <li><strong>Données de navigation (site web) :</strong> témoins (cookies) et technologies similaires — voir section&nbsp;4.</li>
+            <li><strong>Démo web :</strong> pas de compte requis ; adresse IP pour limitation de débit uniquement.</li>
           </ul>
 
-          <h2 id="p-purpose">3. Finalités</h2>
+          <h2 id="p-purpose">3. Finalités de la collecte</h2>
           <ul>
-            <li>Fournir le service (carte, règles, guidage, minuteur).</li>
+            <li>Fournir et améliorer la fonctionnalité principale du Service (affichage des règles de stationnement, carte, guidage, minuteur).</li>
+            <li>Permettre la création et la gestion d'un compte utilisateur.</li>
             <li>Gérer la liste d'attente et la beta privée.</li>
-            <li>Améliorer la qualité des données (signalements agrégés, corrections).</li>
-            <li>Support utilisateur et sécurité (authentification, rate-limiting).</li>
+            <li>Améliorer la fiabilité des données grâce aux contributions (algorithme et zones grises).</li>
+            <li>Communiquer avec toi (avis de modification des CGU, sécurité du compte).</li>
+            <li>Support utilisateur, prévention des abus et sécurité du Service.</li>
+            <li>Le cas échéant, personnaliser et mesurer la publicité (uniquement avec ton consentement — voir section&nbsp;4).</li>
           </ul>
 
-          <h2 id="p-legal">4. Base légale (Québec / Canada)</h2>
-          <ul>
-            <li><strong>Exécution du contrat</strong> — utilisation de l'app avec compte.</li>
-            <li><strong>Consentement</strong> — localisation, notifications push, inscription liste d'attente.</li>
-            <li><strong>Intérêt légitime</strong> — statistiques agrégées, prévention des abus, sécurité du service.</li>
-          </ul>
+          <h2 id="p-consent">4. Consentement et témoins (cookies)</h2>
+          <p>Conformément à la Loi&nbsp;25, les paramètres de confidentialité les plus protecteurs sont activés par défaut. Les témoins et technologies de suivi non essentiels (notamment ceux liés à la publicité ou à la mesure d'audience) ne sont activés qu'après un consentement libre, éclairé et donné pour chaque finalité (opt-in). Tu peux retirer ce consentement en tout temps depuis les paramètres de l'application ou du site.</p>
+          <p>Le site utilise le stockage local du navigateur pour la langue (FR/EN). Google Maps peut déposer des témoins techniques nécessaires à l'affichage de la carte.</p>
+          <p>La géolocalisation précise nécessite ton autorisation explicite au niveau du système d'exploitation ; tu peux la révoquer en tout temps, ce qui limitera certaines fonctionnalités du Service.</p>
 
-          <h2 id="p-retention">5. Durée de conservation</h2>
-          <ul>
-            <li>Données de compte : jusqu'à suppression via <strong>Profil → Supprimer le compte</strong> dans l'app.</li>
-            <li>Liste d'attente : jusqu'au lancement ou demande de retrait par courriel.</li>
-            <li>Signalements anonymisés : peuvent être conservés sous forme agrégée pour la qualité des données.</li>
-          </ul>
-
-          <h2 id="p-share">6. Sous-traitants et partage</h2>
-          <p>Nous ne vendons pas tes données. Elles peuvent transiter par :</p>
+          <h2 id="p-share">5. Communication à des tiers et hébergement</h2>
+          <p>Tes renseignements sont hébergés par nos fournisseurs infonuagiques (notamment <strong>MongoDB Atlas</strong> et <strong>Supabase</strong>), qui peuvent conserver des données à l'extérieur du Québec. Conformément à la Loi&nbsp;25, une évaluation des facteurs relatifs à la vie privée est réalisée avant tout transfert hors du Québec, afin de nous assurer que les renseignements bénéficient d'une protection équivalente à celle prévue au Québec.</p>
+          <p>Nous ne vendons pas tes renseignements personnels. Ils peuvent être communiqués à nos sous-traitants technologiques strictement aux fins d'exploitation du Service, sous contrat prévoyant des mesures de protection adéquates, notamment :</p>
           <ul>
             <li><strong>Vercel</strong> — hébergement du site et proxy démo.</li>
             <li><strong>MongoDB Atlas</strong> — base de données backend.</li>
             <li><strong>Google Maps / Geocoding</strong> — carte et recherche d'adresse.</li>
-            <li><strong>Supabase</strong> — OAuth Google/Apple (si activé).</li>
+            <li><strong>Supabase</strong> — authentification et OAuth Google/Apple (si activé).</li>
             <li><strong>Resend</strong> ou webhook — notification d'inscription liste d'attente (si configuré).</li>
+          </ul>
+          <p>Ils peuvent aussi être communiqués si la loi l'exige.</p>
+
+          <h2 id="p-retention">6. Conservation et destruction</h2>
+          <ul>
+            <li>Tes renseignements sont conservés pour la durée nécessaire aux fins décrites ci-dessus, puis anonymisés ou détruits de façon sécuritaire.</li>
+            <li>La suppression de ton compte (<strong>Profil → Supprimer le compte</strong>) entraîne l'effacement de tes renseignements personnels identifiables dans un délai raisonnable, sous réserve des obligations légales de conservation.</li>
+            <li>Liste d'attente : jusqu'au lancement ou demande de retrait par courriel.</li>
+            <li>Signalements anonymisés : peuvent être conservés sous forme agrégée pour la qualité des données.</li>
           </ul>
 
           <h2 id="p-rights">7. Tes droits</h2>
-          <p>Conformément à la Loi 25 (Québec) et aux principes de la LPRPDE, tu peux demander l'accès, la rectification ou la suppression de tes renseignements en écrivant à <a href="mailto:psmartking@dnkvision.com">psmartking@dnkvision.com</a>. La suppression du compte in-app efface les données personnelles associées.</p>
+          <p>Tu disposes, sous réserve des exceptions prévues par la loi, des droits suivants :</p>
+          <ul>
+            <li>Accès à tes renseignements personnels et obtention d'une copie (délai de traitement : 30&nbsp;jours) ;</li>
+            <li>Rectification de renseignements inexacts, incomplets ou équivoques ;</li>
+            <li>Retrait du consentement en tout temps, pour l'avenir ;</li>
+            <li>Suppression / droit à l'oubli, dans les limites prévues par la loi ;</li>
+            <li>Portabilité des renseignements informatisés que tu as fournis.</li>
+          </ul>
+          <p>Pour exercer ces droits : <a href="mailto:psmartking@dnkvision.com">psmartking@dnkvision.com</a></p>
 
           <h2 id="p-security">8. Sécurité</h2>
+          <p>Des mesures de sécurité techniques et organisationnelles raisonnables sont mises en place afin de protéger tes renseignements contre la perte, le vol et l'accès non autorisé, notamment :</p>
           <ul>
-            <li>HTTPS en production.</li>
-            <li>Mots de passe hashés (PBKDF2-SHA256).</li>
-            <li>Jetons d'accès à durée limitée + renouvellement.</li>
+            <li>HTTPS en production et chiffrement en transit ;</li>
+            <li>Authentification via Supabase Auth, mots de passe hashés ;</li>
+            <li>Jetons d'accès à durée limitée et gestion des accès ;</li>
             <li>Suppression multi-collections à la demande (compte, véhicules, signalements liés).</li>
           </ul>
 
-          <h2 id="p-cookies">9. Site web &amp; cookies</h2>
-          <p>Le site utilise le stockage local du navigateur pour la langue (FR/EN). Google Maps peut déposer des cookies techniques nécessaires à l'affichage de la carte. Nous n'utilisons pas de publicité ciblée ni de revente de données.</p>
+          <h2 id="p-photos">9. Photographies et renseignements incidents</h2>
+          <p>Les photographies téléversées peuvent contenir des renseignements personnels de tiers (plaques d'immatriculation, visages). Dans la mesure du possible, un floutage automatique est appliqué avant publication. Ces renseignements sont traités selon les mêmes principes de finalité, de conservation limitée et de sécurité que les autres renseignements personnels décrits aux présentes.</p>
 
           <h2 id="p-minors">10. Mineurs</h2>
-          <p>Le service n'est pas destiné aux personnes de moins de 13 ans.</p>
+          <p>Le Service est destiné aux personnes de <strong>16 ans ou plus</strong> (voir CGU, section&nbsp;2). Conformément à la Loi&nbsp;25, l'utilisation de renseignements personnels concernant une personne mineure de moins de 14&nbsp;ans requiert le consentement parental ; DnK Vision ne sollicite ni ne traite sciemment de tels renseignements.</p>
 
-          <p class="legal-note"><em>Document informatif — relecture par un conseiller juridique recommandée avant toute publication définitive.</em></p>
+          <h2 id="p-incident">11. Incident de confidentialité</h2>
+          <p>En cas d'incident de confidentialité présentant un risque sérieux de préjudice, DnK Vision en avisera la Commission d'accès à l'information du Québec ainsi que les personnes concernées, conformément à la Loi&nbsp;25.</p>
+
+          <h2 id="p-changes">12. Modifications de la présente politique</h2>
+          <p>La présente politique peut être mise à jour. Toute modification substantielle te sera communiquée par courriel, selon les mêmes modalités de préavis que celles prévues aux CGU (section&nbsp;12).</p>
+
+          <h2 id="p-contact">13. Contact</h2>
+          <p>Pour toute question relative à la présente politique ou pour exercer tes droits : <a href="mailto:psmartking@dnkvision.com">psmartking@dnkvision.com</a></p>
+
+          <p class="legal-note"><em>Document soumis à relecture juridique avant publication définitive.</em></p>
         </article>
 
         <article class="legal-card legal-en" hidden>
           <p class="legal-updated">Last updated: September 2026 · <strong>DnK Vision</strong> · <a href="mailto:psmartking@dnkvision.com">psmartking@dnkvision.com</a></p>
+          <p>This Privacy Policy describes how DnK Vision processes personal information under Quebec's Law 25. The French version is authoritative.</p>
 
-          <h2>1. Data controller</h2>
-          <p><strong>DnK Vision</strong> — privacy contact: <a href="mailto:psmartking@dnkvision.com">psmartking@dnkvision.com</a></p>
+          <h2>1. Privacy officer</h2>
+          <p><strong>DnK Vision</strong> has designated a privacy officer under Law 25. Contact: <a href="mailto:psmartking@dnkvision.com">psmartking@dnkvision.com</a></p>
 
-          <h2>2. Data we collect</h2>
-          <ul>
-            <li><strong>Waitlist:</strong> email address.</li>
-            <li><strong>App account:</strong> email, display name, hashed password, language, preferences.</li>
-            <li><strong>OAuth:</strong> Google/Apple identifiers via Supabase (optional).</li>
-            <li><strong>Device token:</strong> anonymous ID for timer and guest reports.</li>
-            <li><strong>Location:</strong> GPS when you allow it — for map and nearby rules.</li>
-            <li><strong>Contributions:</strong> segment reports, bug reports (optional screenshots).</li>
-            <li><strong>Web demo:</strong> no account; IP used for rate limiting only.</li>
-          </ul>
+          <h2>2. Data collected</h2>
+          <p>Account info, optional OAuth, device token, location (with permission), contributions including photos, technical logs, cookies on the website, waitlist email, and IP for demo rate limiting.</p>
 
           <h2>3. Purposes</h2>
-          <p>Provide the service, manage beta waitlist, improve data quality, support and security.</p>
+          <p>Provide and improve the Service, manage accounts and waitlist, improve data quality, communicate about security or Terms changes, and advertising measurement only with consent.</p>
 
-          <h2>4. Retention</h2>
-          <p>Account data until you delete your account in-app. Waitlist until launch or opt-out email.</p>
+          <h2>4. Consent &amp; cookies</h2>
+          <p>Most protective settings by default. Non-essential cookies and ad tracking require opt-in consent. Precise location requires OS-level permission.</p>
 
-          <h2>5. Processors</h2>
-          <p>Vercel, MongoDB Atlas, Google Maps, Supabase (optional), Resend/webhook (optional). We do not sell personal data.</p>
+          <h2>5. Processors &amp; hosting</h2>
+          <p>Data may be hosted outside Quebec (MongoDB Atlas, Supabase, Vercel, Google Maps). Privacy impact assessments are conducted before transfers. We do not sell personal data.</p>
 
-          <h2>6. Your rights</h2>
-          <p>Access, correction, deletion — contact <a href="mailto:psmartking@dnkvision.com">psmartking@dnkvision.com</a>.</p>
+          <h2>6. Retention</h2>
+          <p>Data kept as long as needed, then anonymized or securely deleted. Account deletion triggers erasure within a reasonable time.</p>
 
-          <h2>7. Security</h2>
-          <p>HTTPS, hashed passwords, limited JWT lifetime, account deletion purges linked data.</p>
+          <h2>7. Your rights</h2>
+          <p>Access, correction, consent withdrawal, deletion, and portability — contact <a href="mailto:psmartking@dnkvision.com">psmartking@dnkvision.com</a> (30-day response target for access requests).</p>
 
-          <h2>8. Minors</h2>
-          <p>Not intended for users under 13.</p>
+          <h2>8. Security</h2>
+          <p>HTTPS, Supabase Auth, access controls, and secure deletion on account removal.</p>
 
-          <p class="legal-note"><em>Informational document — legal review recommended.</em></p>
+          <h2>9. Photos</h2>
+          <p>Uploaded photos may incidentally contain third-party personal data; automatic blurring is applied when possible.</p>
+
+          <h2>10. Minors</h2>
+          <p>Service for users aged 16+. We do not knowingly process data from children under 14 without parental consent.</p>
+
+          <h2>11. Privacy incidents</h2>
+          <p>Serious incidents will be reported to the CAI and affected individuals as required by Law 25.</p>
+
+          <h2>12. Changes</h2>
+          <p>Material updates will be emailed with the same notice periods as the Terms of Use.</p>
+
+          <h2>13. Contact</h2>
+          <p><a href="mailto:psmartking@dnkvision.com">psmartking@dnkvision.com</a></p>
+          <p class="legal-note"><em>French version prevails. Legal review recommended before final publication.</em></p>
         </article>
       </div>
     </section>
