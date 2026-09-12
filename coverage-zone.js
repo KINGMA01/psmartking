@@ -1,25 +1,25 @@
 /* Zones géographiques P-SmartKing */
 
-/** Zone démo : centre-ville de Montréal (contour simplifié). */
+/** Zone démo : cœur du centre-ville (~50 % de la zone précédente). */
 window.PSMARTKING_DEMO_ZONE = {
   type: "FeatureCollection",
   features: [
     {
       type: "Feature",
-      properties: { name: "Centre-ville de Montréal" },
+      properties: { name: "Cœur du centre-ville" },
       geometry: {
         type: "Polygon",
         coordinates: [
           [
-            [-73.592, 45.5145],
-            [-73.568, 45.5175],
-            [-73.542, 45.514],
-            [-73.528, 45.504],
-            [-73.532, 45.492],
-            [-73.552, 45.487],
-            [-73.572, 45.488],
-            [-73.59, 45.496],
-            [-73.592, 45.5145],
+            [-73.576, 45.508],
+            [-73.564, 45.510],
+            [-73.551, 45.509],
+            [-73.544, 45.503],
+            [-73.546, 45.497],
+            [-73.558, 45.494],
+            [-73.570, 45.495],
+            [-73.576, 45.501],
+            [-73.576, 45.508],
           ],
         ],
       },

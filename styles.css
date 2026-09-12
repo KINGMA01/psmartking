@@ -3020,7 +3020,7 @@ html[data-page="demo"] .demo-main {
   z-index: 8;
   display: flex;
   flex-direction: column;
-  max-height: 62%;
+  max-height: 46%;
   background: #fff;
   border-radius: 18px 18px 0 0;
   box-shadow: 0 -10px 36px rgba(8, 18, 60, 0.18);

@@ -3,8 +3,8 @@
  */
 
 const DEMO_CENTER = { lat: 45.5019, lng: -73.5674 };
-const DEMO_RADIUS_KM = 1;
-const DEMO_LIMIT = 180;
+const DEMO_RADIUS_KM = 0.5;
+const DEMO_LIMIT = 100;
 const DEMO_DEBOUNCE_MS = 450;
 
 let demoMap = null;
@@ -219,31 +219,14 @@ function drawDemoPolylines(items) {
   });
 }
 
-function formatSchedule(slots) {
-  const list = Array.isArray(slots) ? slots.slice(0, 4) : [];
-  if (!list.length) return "";
-  const rows = list
-    .map((slot) => {
-      const start = formatSlotTime(slot.start);
-      const end = formatSlotTime(slot.end);
-      const time = end ? `${escapeHtml(start)} – ${escapeHtml(end)}` : escapeHtml(start);
-      const label = escapeHtml(slot.label_fr || slot.status || "");
-      return `<li><span class="demo-schedule-time">${time}</span><span class="demo-schedule-label">${label}</span></li>`;
-    })
-    .join("");
-  return `<div class="demo-schedule"><p class="demo-schedule-title">${demoCopy("schedule")}</p><ul>${rows}</ul></div>`;
-}
-
-function formatForbiddenReason(reason) {
-  if (!reason || !reason.label) return "";
-  const sub = reason.sublabel ? `<span class="demo-reason-sub">${escapeHtml(reason.sublabel)}</span>` : "";
-  return `<p class="demo-reason"><strong>${demoCopy("reason")}:</strong> ${escapeHtml(reason.label)} ${sub}</p>`;
-}
-
-function nextChangeLine(d) {
-  const at = d.next_can_park_at || d.next_cannot_park_at || d.next_change_at;
-  if (!at) return "";
-  return `<p class="demo-detail-meta"><strong>${demoCopy("nextChange")}:</strong> ${escapeHtml(formatDateTime(at))}</p>`;
+function formatScheduleBrief(slots) {
+  const slot = Array.isArray(slots) ? slots[0] : null;
+  if (!slot) return "";
+  const start = formatSlotTime(slot.start);
+  const end = formatSlotTime(slot.end);
+  const time = end ? `${escapeHtml(start)} – ${escapeHtml(end)}` : escapeHtml(start);
+  const label = escapeHtml(slot.label_fr || slot.status || "");
+  return `<p class="demo-detail-slot">${time} · ${label}</p>`;
 }
 
 async function showDemoDetail(item) {
@@ -266,19 +249,12 @@ async function showDemoDetail(item) {
     const label = d.status_label_fr || item.status_label_fr || item.status || "";
     const verdict = d.can_park ? demoCopy("canPark") : demoCopy("cannotPark");
     const badgeClass = d.can_park ? "is-ok" : "is-no";
-    const confidence =
-      d.confidence_label && d.confidence > 0
-        ? `<p class="demo-detail-meta"><strong>${demoCopy("confidence")}:</strong> ${escapeHtml(d.confidence_label)} (${d.confidence}%)</p>`
-        : "";
     setDemoDetail(`
       <p class="demo-detail-street">${escapeHtml(d.street_name || item.street_name || "")}</p>
       <p class="demo-detail-side">${sideLabel(d.side || item.side)}</p>
       <p class="demo-verdict-badge ${badgeClass}">${escapeHtml(verdict)}</p>
       <p class="demo-detail-status" style="color:${escapeHtml(d.color || item.color || "#64748b")}">${escapeHtml(label)}</p>
-      ${formatForbiddenReason(d.forbidden_reason)}
-      ${nextChangeLine(d)}
-      ${confidence}
-      ${formatSchedule(d.schedule)}
+      ${formatScheduleBrief(d.schedule)}
     `);
   } catch {
     setDemoDetail(`<p class="demo-detail-error">${demoCopy("error")}</p>`);
@@ -338,7 +314,7 @@ async function initDemoMap() {
   const { Map } = await google.maps.importLibrary("maps");
   demoMap = new Map(mount, {
     center: DEMO_CENTER,
-    zoom: 15,
+    zoom: 16,
     disableDefaultUI: true,
     gestureHandling: "greedy",
     clickableIcons: false,
@@ -347,7 +323,7 @@ async function initDemoMap() {
     fullscreenControl: false,
     zoomControl: true,
     restriction: {
-      latLngBounds: { north: 45.65, south: 45.45, east: -73.5, west: -73.78 },
+      latLngBounds: { north: 45.52, south: 45.49, east: -73.53, west: -73.59 },
       strictBounds: false,
     },
   });
