@@ -2467,8 +2467,10 @@ body:has(.breadcrumb) main {
   color: var(--muted);
 }
 
-.demo-status[data-kind="error"] {
-  color: var(--coral);
+.demo-status[data-kind="error"],
+.demo-status[data-kind="outside"] {
+  color: #b45309;
+  font-weight: 500;
 }
 
 .demo-legend {
@@ -2672,6 +2674,117 @@ body:has(.breadcrumb) main {
   .app-web-foot {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+/* Page démo : tout tient dans le viewport, sans scroll de page */
+html[data-page="demo"] {
+  height: 100%;
+  overflow: hidden;
+}
+
+html[data-page="demo"] body {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+html[data-page="demo"] .site-header {
+  flex-shrink: 0;
+}
+
+html[data-page="demo"] main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+html[data-page="demo"] .page-hero-compact {
+  flex-shrink: 0;
+  padding: 0.35rem 0 0.5rem;
+}
+
+html[data-page="demo"] .page-hero-compact h1 {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  margin-bottom: 0;
+}
+
+html[data-page="demo"] .page-hero-compact .eyebrow {
+  margin-bottom: 0.15rem;
+}
+
+html[data-page="demo"] .demo-section {
+  flex: 1;
+  min-height: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+html[data-page="demo"] .demo-section > .container {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.5rem;
+  max-width: 100%;
+}
+
+html[data-page="demo"] .app-web-shell {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  max-width: min(1100px, 100%);
+  margin: 0 auto;
+  width: 100%;
+}
+
+html[data-page="demo"] .app-web-bar,
+html[data-page="demo"] .app-web-foot {
+  flex-shrink: 0;
+}
+
+html[data-page="demo"] .app-web-stage {
+  flex: 1;
+  min-height: 0;
+  max-height: none;
+}
+
+html[data-page="demo"] .app-web-map,
+html[data-page="demo"] .demo-map {
+  min-height: 0;
+}
+
+html[data-page="demo"] .app-web-sheet {
+  max-height: none;
+  min-height: 0;
+}
+
+html[data-page="demo"] .site-footer {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  html[data-page="demo"] .app-web-stage {
+    grid-template-rows: minmax(0, 1fr) minmax(100px, 34%);
+    min-height: 0;
+  }
+
+  html[data-page="demo"] .app-web-detail-scroll {
+    max-height: none;
+    min-height: 0;
+    overflow: auto;
+  }
+
+  html[data-page="demo"] .app-web-sheet {
+    max-height: none;
+    min-height: 0;
   }
 }
 

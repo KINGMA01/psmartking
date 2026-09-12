@@ -14,7 +14,7 @@ const COPY = {
       faq: "FAQ",
       contact: "Contact",
       waitlist: "Liste d'attente",
-      demo: "Essayer la carte",
+      demo: "Démo",
       privacy: "Confidentialité",
       terms: "Conditions",
       cta: "Rejoindre la beta",
@@ -149,20 +149,20 @@ const COPY = {
     coverage: {
       eyebrow: "Couverture",
       title: "Ta rue est couverte?",
-      lead: "Tape ton adresse. La carte te dit si le secteur est couvert au lancement : toute l'île de Montréal.",
+      lead: "Tape ton adresse. La zone bleue montre le centre-ville couvert par la démo interactive.",
       label: "Adresse",
-      placeholder: "Ex. 11922 Rue de Meulles, Saint-Laurent QC",
+      placeholder: "Ex. 1000 rue Sainte-Catherine, Montréal QC",
       submit: "Vérifier",
-      covered: "Cette adresse est couverte au lancement.",
-      outside: "Pour l'instant, cette zone n'est pas prise en compte.",
+      covered: "Cette adresse est dans la zone démo (centre-ville).",
+      outside: "Hors de la zone démo (centre-ville). Au lancement, toute l'île de Montréal sera couverte.",
       empty: "Entre une adresse complète, un quartier ou un code postal.",
       searching: "On cherche sur la carte…",
       notfound: "On n'a pas trouvé cette adresse. Vérifie le numéro et le nom de la rue.",
-      legend: "Zone couverte au lancement",
+      legend: "Zone démo — centre-ville",
       credit: "Données : Ville de Montréal",
       missingKey: "La carte Google n'a pas pu se charger.",
       blockedKey: "Ta clé Google n'autorise pas Maps JavaScript API. Dans Google Cloud : Identifiants → ta clé → Restrictions d'API → ajoute Maps JavaScript API et Places API (New). Active aussi ces APIs dans la bibliothèque, puis recharge la page.",
-      mapAlt: "Carte Google de la couverture P-SmartKing sur l'île de Montréal.",
+      mapAlt: "Carte Google de la zone démo P-SmartKing au centre-ville de Montréal.",
     },
     contact: {
       eyebrow: "Contact",
@@ -171,9 +171,9 @@ const COPY = {
       emailLabel: "Courriel officiel",
     },
     demo: {
-      eyebrow: "Démo interactive",
+      eyebrow: "Démo",
       title: "Touche la voirie. Lis la règle.",
-      lead: "Aperçu limité de l'app : carte, recherche d'adresse et détail des tronçons. Pas de compte — lecture seule.",
+      lead: "Aperçu limité au centre-ville : carte et détail des tronçons. Pas de compte — lecture seule.",
       mapTitle: "Carte de démonstration",
       badge: "Démo",
       searchLabel: "Rechercher une adresse",
@@ -232,8 +232,8 @@ const COPY = {
         description: "Questions, médias, partenariats : écris à psmartking@dnkvision.com.",
       },
       demo: {
-        title: "Essayer la carte · P-SmartKing",
-        description: "Démo interactive : touche un tronçon de voirie à Montréal et lis les règles de stationnement.",
+        title: "Démo · P-SmartKing",
+        description: "Démo interactive : touche un tronçon de voirie au centre-ville de Montréal et lis les règles de stationnement.",
       },
       privacy: {
         title: "Politique de confidentialité · P-SmartKing",
@@ -264,7 +264,7 @@ const COPY = {
       faq: "FAQ",
       contact: "Contact",
       waitlist: "Waitlist",
-      demo: "Try the map",
+      demo: "Demo",
       privacy: "Privacy",
       terms: "Terms",
       cta: "Join the beta",
@@ -283,9 +283,9 @@ const COPY = {
       sign2Detail: "Mon to Sat · 9 a.m. to 6 p.m.",
     },
     demo: {
-      eyebrow: "Interactive demo",
+      eyebrow: "Demo",
       title: "Tap the street. Read the rule.",
-      lead: "Limited app preview: map, address search, and segment details. No account — read-only.",
+      lead: "Limited to downtown: map and segment details. No account — read-only.",
       mapTitle: "Demo map",
       badge: "Demo",
       searchLabel: "Search an address",
@@ -422,20 +422,20 @@ const COPY = {
     coverage: {
       eyebrow: "Coverage",
       title: "Is your street covered?",
-      lead: "Type your address. The map tells you if the area is covered at launch: the entire Island of Montreal.",
+      lead: "Type your address. The blue zone shows downtown covered by the interactive demo.",
       label: "Address",
-      placeholder: "Ex. 11922 Rue de Meulles, Saint-Laurent QC",
+      placeholder: "E.g. 1000 Sainte-Catherine St, Montreal QC",
       submit: "Check",
-      covered: "This address is covered at launch.",
-      outside: "This area isn't covered yet.",
+      covered: "This address is in the demo zone (downtown).",
+      outside: "Outside the demo zone (downtown). At launch, the entire Island of Montreal will be covered.",
       empty: "Enter a full address, a neighbourhood, or a postal code.",
       searching: "Looking it up on the map…",
       notfound: "We couldn't find that address. Check the street number and name.",
-      legend: "Covered at launch",
+      legend: "Demo zone — downtown",
       credit: "Data: City of Montreal",
       missingKey: "Google Maps could not load.",
       blockedKey: "This Google key doesn't allow the Maps JavaScript API. In Google Cloud: Credentials → your key → API restrictions → add Maps JavaScript API and Places API (New). Enable those APIs in the library, then reload.",
-      mapAlt: "Google map of P-SmartKing coverage on the Island of Montreal.",
+      mapAlt: "Google map of the P-SmartKing demo zone in downtown Montreal.",
     },
     contact: {
       eyebrow: "Contact",
@@ -482,8 +482,8 @@ const COPY = {
         description: "Press, partnerships, questions: write to psmartking@dnkvision.com.",
       },
       demo: {
-        title: "Try the map · P-SmartKing",
-        description: "Interactive demo: tap a street segment in Montreal and read parking rules.",
+        title: "Demo · P-SmartKing",
+        description: "Interactive demo: tap a street segment in downtown Montreal and read parking rules.",
       },
       privacy: {
         title: "Privacy policy · P-SmartKing",
@@ -1050,9 +1050,12 @@ let coveragePickedHit = null;
 let coverageSessionToken = null;
 
 function hitIsCovered(hit, lat, lng) {
-  const pip = lat != null && lng != null ? pointInCoverageGeo(lat, lng) : null;
-  if (pip === true) return true;
-  if (pip === false) return false;
+  if (lat != null && lng != null && !Number.isNaN(lat) && !Number.isNaN(lng)) {
+    const pip = pointInCoverageGeo(lat, lng);
+    if (pip !== null) return pip;
+    const zonePip = window.pskZone?.pointInActiveZone(lat, lng);
+    if (zonePip !== null) return zonePip;
+  }
   const places = hitLocalities(hit);
   if (places.some((place) => cityIsOutside(place) && !placeMatchesCovered(place))) return false;
   return places.some((place) => placeMatchesCovered(place));
@@ -1242,9 +1245,8 @@ async function runCoverageSearch(query, presetHit) {
 }
 
 async function loadCoverageGeo() {
-  // La zone est livrée par coverage-zone.js. On ne dépend pas de fetch(),
-  // qui échoue dès que la page est ouverte en local (file://) : la carte
-  // répondait alors « hors zone » à chaque clic.
+  // Zone démo centre-ville (coverage-zone.js). Pas de fetch file://.
+  if (window.PSMARTKING_DEMO_ZONE) return window.PSMARTKING_DEMO_ZONE;
   if (window.PSMARTKING_COVERAGE_ZONE) return window.PSMARTKING_COVERAGE_ZONE;
   const res = await fetch("data/ile-montreal.geojson");
   if (!res.ok) throw new Error("geojson");
@@ -1298,6 +1300,10 @@ function showCoverageMapFallback(holder) {
 }
 
 function fitCoverageBounds(geo) {
+  if (window.pskZone?.fitMapToZone) {
+    window.pskZone.fitMapToZone(coverageMap, geo, 36);
+    return;
+  }
   const bounds = new google.maps.LatLngBounds();
   (geo.features || []).forEach((feat) => {
     const geom = feat.geometry;
@@ -1308,6 +1314,29 @@ function fitCoverageBounds(geo) {
     });
   });
   if (!bounds.isEmpty()) coverageMap.fitBounds(bounds, 36);
+}
+
+function checkCoverageMapView() {
+  if (!coverageMap || !coverageGeojson) return;
+  const center = coverageMap.getCenter();
+  if (!center) return;
+  const inside = pointInCoverageGeo(center.lat(), center.lng());
+  if (inside === false) paintCoverageResult("outside");
+}
+
+async function ensureGoogleMapsReady() {
+  for (let i = 0; i < 80; i += 1) {
+    if (googleMapsKey()) break;
+    await new Promise((resolve) => window.setTimeout(resolve, 100));
+  }
+  if (!googleMapsKey()) throw new Error("no key");
+
+  for (let i = 0; i < 80; i += 1) {
+    if (window.google?.maps?.importLibrary) break;
+    await new Promise((resolve) => window.setTimeout(resolve, 100));
+  }
+  if (!window.google?.maps?.importLibrary) throw new Error("maps loader");
+  await google.maps.importLibrary("maps");
 }
 
 async function setupGoogleCoverageMap(holder) {
@@ -1344,14 +1373,18 @@ async function setupGoogleCoverageMap(holder) {
   try {
     const geo = await loadCoverageGeo();
     coverageGeojson = geo;
-    coverageMap.data.addGeoJson(geo);
-    coverageMap.data.setStyle({
-      fillColor: "#4169E1",
-      fillOpacity: 0.28,
-      strokeColor: "#2a47c9",
-      strokeWeight: 2,
-      clickable: false,
-    });
+    if (window.pskZone?.applyZoneOverlay) {
+      window.pskZone.applyZoneOverlay(coverageMap, geo);
+    } else {
+      coverageMap.data.addGeoJson(geo);
+      coverageMap.data.setStyle({
+        fillColor: "#4169E1",
+        fillOpacity: 0.28,
+        strokeColor: "#2a47c9",
+        strokeWeight: 2,
+        clickable: false,
+      });
+    }
     fitCoverageBounds(geo);
   } catch {
     coverageGeojson = null;
@@ -1361,6 +1394,7 @@ async function setupGoogleCoverageMap(holder) {
     if (!event.latLng) return;
     handleCoverageMapClick(event.latLng.lat(), event.latLng.lng());
   });
+  coverageMap.addListener("idle", checkCoverageMapView);
 }
 
 function initCoverage() {
@@ -1370,7 +1404,9 @@ function initCoverage() {
   const list = document.getElementById("coverage-suggest");
 
   if (holder) {
-    setupGoogleCoverageMap(holder).catch(() => showCoverageMapFallback(holder));
+    ensureGoogleMapsReady()
+      .then(() => setupGoogleCoverageMap(holder))
+      .catch(() => showCoverageMapFallback(holder));
   }
 
   if (!form || !input) return;

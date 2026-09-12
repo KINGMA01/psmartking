@@ -14,8 +14,7 @@
   <link rel="icon" href="logo.png?v=6" type="image/png">
   <link rel="apple-touch-icon" href="logo.png?v=6">
   <!-- Search Console : après l'hébergement, colle le code de validation dans content="" (Google Search Console → Paramètres → Vérification de la propriété → balise HTML). Un seul endroit : cette ligne. -->
-  <meta name="google-site-verification" content="">
-  <!-- Google Maps : dev local → maps-config.js ; production → GOOGLE_MAPS_API_KEY sur Vercel (/api/config). -->
+  <meta name="google-site-verification" content="t4BRbPWX_HAsKdYs4QjIqcrcsAn7VQ1_DtL3eXbaoPU" />  <!-- Google Maps : dev local → maps-config.js ; production → GOOGLE_MAPS_API_KEY sur Vercel (/api/config). -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="P-SmartKing">
   <meta property="og:locale" content="fr_CA">
@@ -168,7 +167,7 @@
           <p class="eyebrow" data-i18n="preview.eyebrow">Aperçu</p>
           <h2 id="preview-title" data-i18n="preview.title">L'app, en vrai</h2>
           <p class="section-lead" data-i18n="preview.lead">Carte interactive, règles claires et guidage jusqu'à la place. Pas une maquette générique : c'est le produit qu'on développe.</p>
-          <a class="btn btn-primary" href="essayer.html" data-i18n="preview.cta">Essayer la carte</a>
+          <a class="btn btn-primary" href="essayer.html" data-i18n="nav.demo">Démo</a>
         </div>
         <figure class="preview-device">
           <img src="phone.png" alt="" width="768" height="768" loading="lazy" decoding="async" aria-labelledby="preview-caption">
@@ -317,6 +316,7 @@
   <script src="maps-config.js"></script>
   <script src="site-config.js"></script>
   <script src="coverage-zone.js"></script>
+  <script src="map-zone.js"></script>
   <script>
     (async () => {
       if (!window.PSMARTKING_GOOGLE_MAPS_API_KEY) {

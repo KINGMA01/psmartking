@@ -1,4 +1,33 @@
-/* Zone couverte au lancement : île de Montréal (contour simplifié). */
+/* Zones géographiques P-SmartKing */
+
+/** Zone démo : centre-ville de Montréal (contour simplifié). */
+window.PSMARTKING_DEMO_ZONE = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: { name: "Centre-ville de Montréal" },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [-73.592, 45.5145],
+            [-73.568, 45.5175],
+            [-73.542, 45.514],
+            [-73.528, 45.504],
+            [-73.532, 45.492],
+            [-73.552, 45.487],
+            [-73.572, 45.488],
+            [-73.59, 45.496],
+            [-73.592, 45.5145],
+          ],
+        ],
+      },
+    },
+  ],
+};
+
+/** Zone couverte au lancement : île de Montréal (contour simplifié). */
 window.PSMARTKING_COVERAGE_ZONE = {
   type: "FeatureCollection",
   features: [

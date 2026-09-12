@@ -1,23 +1,17 @@
 /**
  * Démo carte interactive — segments ParkSmart via /api/demo (proxy Vercel).
- * Coque « app web » : recherche d'adresse, carte, panneau détail enrichi.
+ * Zone limitée au centre-ville : masque gris à l'extérieur, pas de recherche (accueil).
  */
 
 const DEMO_CENTER = { lat: 45.5019, lng: -73.5674 };
 const DEMO_RADIUS_KM = 1;
 const DEMO_LIMIT = 180;
 const DEMO_DEBOUNCE_MS = 450;
-const DEMO_MTL_BIAS = { radius: 42000, center: { lat: 45.508, lng: -73.668 } };
 
 let demoMap = null;
 let demoPolylines = [];
 let demoLoadTimer = 0;
 let demoBusy = false;
-let demoSessionToken = null;
-let demoSearchMarker = null;
-let demoSuggestTimer = 0;
-let demoSuggestActive = -1;
-let demoSuggestItems = [];
 
 function demoLang() {
   return document.documentElement.lang === "en" ? "en" : "fr";
@@ -30,6 +24,8 @@ function demoCopy(key) {
       error: "Démo indisponible pour le moment. Reviens plus tard ou rejoins la liste d'attente.",
       empty: "Aucun tronçon dans cette zone. Déplace la carte vers le centre-ville.",
       pick: "Touche un tronçon coloré pour voir les règles.",
+      outsideZone:
+        "Hors de la zone démo (centre-ville). Recherche une adresse sur l'accueil ou reviens au centre-ville.",
       sideLeft: "côté gauche",
       sideRight: "côté droit",
       canPark: "Stationnement autorisé",
@@ -38,14 +34,14 @@ function demoCopy(key) {
       schedule: "Horaires",
       reason: "Motif",
       nextChange: "Prochain changement",
-      searchEmpty: "Entre une adresse à Montréal.",
-      searchNotFound: "Adresse introuvable. Vérifie l'orthographe.",
     },
     en: {
       loading: "Loading street segments…",
       error: "Demo unavailable right now. Try again later or join the waitlist.",
       empty: "No segments in this view. Pan toward downtown Montreal.",
       pick: "Tap a colored street segment to see the rules.",
+      outsideZone:
+        "Outside the demo zone (downtown). Search an address on the home page or return to downtown.",
       sideLeft: "left side",
       sideRight: "right side",
       canPark: "Parking allowed",
@@ -54,8 +50,6 @@ function demoCopy(key) {
       schedule: "Schedule",
       reason: "Reason",
       nextChange: "Next change",
-      searchEmpty: "Enter a Montreal address.",
-      searchNotFound: "Address not found. Check spelling.",
     },
   };
   return (table[demoLang()] || table.fr)[key] || key;
@@ -127,6 +121,11 @@ function formatDateTime(value) {
   return str;
 }
 
+function isInDemoZone(lat, lng) {
+  const pip = window.pskZone?.pointInActiveZone(lat, lng);
+  return pip !== false;
+}
+
 function setDemoStatus(text, kind) {
   const el = document.querySelector("[data-demo-status]");
   if (!el) return;
@@ -139,6 +138,12 @@ function setDemoDetail(html) {
   if (!el) return;
   el.innerHTML = html || `<p class="demo-detail-placeholder">${demoCopy("pick")}</p>`;
   document.querySelector("[data-demo-sheet]")?.classList.toggle("has-detail", Boolean(html));
+}
+
+function showOutsideZone() {
+  clearDemoPolylines();
+  setDemoStatus(demoCopy("outsideZone"), "outside");
+  setDemoDetail(`<p class="demo-detail-placeholder">${escapeHtml(demoCopy("outsideZone"))}</p>`);
 }
 
 function clearDemoPolylines() {
@@ -248,11 +253,17 @@ async function showDemoDetail(item) {
 
 async function reloadDemoPolylines() {
   if (!demoMap || demoBusy) return;
+  const center = demoMap.getCenter();
+  const lat = center.lat();
+  const lng = center.lng();
+  if (!isInDemoZone(lat, lng)) {
+    showOutsideZone();
+    return;
+  }
   demoBusy = true;
   setDemoStatus(demoCopy("loading"), "loading");
   try {
-    const center = demoMap.getCenter();
-    const items = await fetchDemoPolylines({ lat: center.lat(), lng: center.lng() });
+    const items = await fetchDemoPolylines({ lat, lng });
     drawDemoPolylines(items);
     if (!items.length) setDemoStatus(demoCopy("empty"), "empty");
     else setDemoStatus("", "");
@@ -269,167 +280,13 @@ function scheduleDemoReload() {
   demoLoadTimer = window.setTimeout(() => void reloadDemoPolylines(), DEMO_DEBOUNCE_MS);
 }
 
-function demoPlacesLang() {
-  return demoLang() === "en" ? "en-CA" : "fr-CA";
-}
-
-async function demoLoadPlaces() {
-  if (!window.google?.maps?.importLibrary) throw new Error("maps");
-  return google.maps.importLibrary("places");
-}
-
-function demoResetSession(Places) {
-  if (Places?.AutocompleteSessionToken) {
-    demoSessionToken = new Places.AutocompleteSessionToken();
+function checkDemoMapView() {
+  if (!demoMap) return;
+  const center = demoMap.getCenter();
+  if (!center) return;
+  if (!isInDemoZone(center.lat(), center.lng())) {
+    showOutsideZone();
   }
-}
-
-async function demoSuggestAddresses(query) {
-  const Places = await demoLoadPlaces();
-  if (!demoSessionToken && Places.AutocompleteSessionToken) {
-    demoSessionToken = new Places.AutocompleteSessionToken();
-  }
-  const { suggestions } = await Places.AutocompleteSuggestion.fetchAutocompleteSuggestions({
-    input: query,
-    includedRegionCodes: ["ca"],
-    locationBias: DEMO_MTL_BIAS,
-    language: demoPlacesLang(),
-    region: "ca",
-    sessionToken: demoSessionToken,
-  });
-  return Array.isArray(suggestions) ? suggestions : [];
-}
-
-function demoPredictionLabel(prediction) {
-  const text = prediction?.text;
-  const raw = text && typeof text === "object" && text.text ? text.text : String(text || "");
-  return raw.replace(/, Canada$/i, "").trim();
-}
-
-async function demoPlaceToCoords(prediction) {
-  const place = typeof prediction.toPlace === "function" ? prediction.toPlace() : prediction;
-  await place.fetchFields({ fields: ["location", "formattedAddress"] });
-  await demoLoadPlaces().then(demoResetSession);
-  const loc = place.location;
-  const lat = typeof loc.lat === "function" ? loc.lat() : loc?.lat;
-  const lng = typeof loc.lng === "function" ? loc.lng() : loc?.lng;
-  return {
-    lat,
-    lng,
-    label: String(place.formattedAddress || "").replace(/, Canada$/i, "").trim(),
-  };
-}
-
-function hideDemoSuggest() {
-  const list = document.querySelector("[data-demo-suggest]");
-  if (list) list.hidden = true;
-  demoSuggestActive = -1;
-  demoSuggestItems = [];
-}
-
-function showDemoSuggest(items) {
-  const list = document.querySelector("[data-demo-suggest]");
-  if (!list) return;
-  demoSuggestItems = items;
-  demoSuggestActive = -1;
-  if (!items.length) {
-    list.hidden = true;
-    return;
-  }
-  list.innerHTML = items
-    .map((item, i) => {
-      const pred = item.placePrediction;
-      const label = demoPredictionLabel(pred);
-      return `<li><button type="button" class="coverage-suggest-item" data-demo-suggest-idx="${i}" role="option">${escapeHtml(label)}</button></li>`;
-    })
-    .join("");
-  list.hidden = false;
-}
-
-async function demoGoToAddress(query) {
-  const q = String(query || "").trim();
-  if (!q) {
-    setDemoStatus(demoCopy("searchEmpty"), "empty");
-    return;
-  }
-  setDemoStatus(demoCopy("loading"), "loading");
-  try {
-    const suggestions = await demoSuggestAddresses(q);
-    const pred = suggestions[0]?.placePrediction;
-    if (!pred) {
-      setDemoStatus(demoCopy("searchNotFound"), "error");
-      return;
-    }
-    const hit = await demoPlaceToCoords(pred);
-    if (hit.lat == null || hit.lng == null) throw new Error("coords");
-    const input = document.querySelector("[data-demo-search-input]");
-    if (input) input.value = hit.label || q;
-    hideDemoSuggest();
-    demoMap.panTo({ lat: hit.lat, lng: hit.lng });
-    demoMap.setZoom(16);
-    if (demoSearchMarker) demoSearchMarker.setMap(null);
-    demoSearchMarker = new google.maps.Marker({
-      map: demoMap,
-      position: { lat: hit.lat, lng: hit.lng },
-      title: hit.label,
-    });
-    await reloadDemoPolylines();
-  } catch {
-    setDemoStatus(demoCopy("searchNotFound"), "error");
-  }
-}
-
-function initDemoSearch() {
-  const form = document.querySelector("[data-demo-search]");
-  const input = document.querySelector("[data-demo-search-input]");
-  const list = document.querySelector("[data-demo-suggest]");
-  if (!form || !input || !list) return;
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    void demoGoToAddress(input.value);
-  });
-
-  input.addEventListener("input", () => {
-    window.clearTimeout(demoSuggestTimer);
-    const q = input.value.trim();
-    if (q.length < 3) {
-      hideDemoSuggest();
-      return;
-    }
-    demoSuggestTimer = window.setTimeout(async () => {
-      try {
-        const suggestions = await demoSuggestAddresses(q);
-        showDemoSuggest(suggestions.slice(0, 5));
-      } catch {
-        hideDemoSuggest();
-      }
-    }, 220);
-  });
-
-  list.addEventListener("click", (event) => {
-    const btn = event.target.closest("[data-demo-suggest-idx]");
-    if (!btn) return;
-    const idx = Number(btn.dataset.demoSuggestIdx);
-    const pred = demoSuggestItems[idx]?.placePrediction;
-    if (!pred) return;
-    void demoPlaceToCoords(pred).then((hit) => {
-      input.value = hit.label || demoPredictionLabel(pred);
-      hideDemoSuggest();
-      demoMap.panTo({ lat: hit.lat, lng: hit.lng });
-      demoMap.setZoom(16);
-      if (demoSearchMarker) demoSearchMarker.setMap(null);
-      demoSearchMarker = new google.maps.Marker({
-        map: demoMap,
-        position: { lat: hit.lat, lng: hit.lng },
-      });
-      void reloadDemoPolylines();
-    });
-  });
-
-  document.addEventListener("click", (event) => {
-    if (!form.contains(event.target)) hideDemoSuggest();
-  });
 }
 
 async function initDemoMap() {
@@ -446,18 +303,37 @@ async function initDemoMap() {
     mapTypeControl: false,
     streetViewControl: false,
     fullscreenControl: true,
+    restriction: {
+      latLngBounds: { north: 45.65, south: 45.45, east: -73.5, west: -73.78 },
+      strictBounds: false,
+    },
   });
 
-  demoMap.addListener("idle", scheduleDemoReload);
+  const geo = window.pskZone?.activeZoneGeo?.();
+  if (geo && window.pskZone?.applyZoneOverlay) {
+    window.pskZone.applyZoneOverlay(demoMap, geo);
+  }
+
+  demoMap.addListener("idle", () => {
+    scheduleDemoReload();
+    checkDemoMapView();
+  });
+
+  demoMap.addListener("click", (event) => {
+    if (!event.latLng) return;
+    const lat = event.latLng.lat();
+    const lng = event.latLng.lng();
+    if (!isInDemoZone(lat, lng)) showOutsideZone();
+  });
 
   document.querySelector("[data-demo-recenter]")?.addEventListener("click", () => {
     demoMap.panTo(DEMO_CENTER);
     demoMap.setZoom(15);
+    setDemoDetail("");
     scheduleDemoReload();
   });
 
   setDemoDetail("");
-  initDemoSearch();
   await reloadDemoPolylines();
 }
 
@@ -465,6 +341,8 @@ function refreshDemoCopy() {
   const detail = document.querySelector("[data-demo-detail]");
   const placeholder = detail?.querySelector(".demo-detail-placeholder");
   if (placeholder) placeholder.textContent = demoCopy("pick");
+  const status = document.querySelector("[data-demo-status]");
+  if (status?.dataset.kind === "outside") status.textContent = demoCopy("outsideZone");
 }
 
 window.initDemoMap = initDemoMap;

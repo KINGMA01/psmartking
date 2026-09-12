@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#4169E1">
-  <title>Essayer la carte · P-SmartKing</title>
-  <meta name="description" content="Démo interactive : touche un tronçon de voirie à Montréal et lis les règles de stationnement. Aperçu limité de l'app P-SmartKing.">
+  <title>Démo · P-SmartKing</title>
+  <meta name="description" content="Démo interactive au centre-ville : touche un tronçon de voirie et lis les règles de stationnement. Aperçu limité de l'app P-SmartKing.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://psmartking.com/essayer.html">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -14,7 +14,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="P-SmartKing">
   <meta property="og:url" content="https://psmartking.com/essayer.html">
-  <meta property="og:title" content="Essayer la carte · P-SmartKing">
+  <meta property="og:title" content="Démo · P-SmartKing">
   <meta property="og:description" content="Démo interactive des règles de stationnement à Montréal.">
   <meta property="og:image" content="https://psmartking.com/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +34,7 @@
         <a href="index.html" data-i18n="nav.home">Accueil</a>
         <a href="comment.html" data-i18n="nav.how">Comment ça marche</a>
         <a href="fonctionnalites.html" data-i18n="nav.features">Fonctionnalités</a>
-        <a href="essayer.html" data-i18n="nav.demo">Essayer la carte</a>
+        <a href="essayer.html" data-i18n="nav.demo">Démo</a>
         <a href="a-propos.html" data-i18n="nav.about">À propos</a>
         <a href="faq.html" data-i18n="nav.faq">FAQ</a>
         <a href="contact.html" data-i18n="nav.contact">Contact</a>
@@ -64,17 +64,10 @@
   </header>
 
   <main id="contenu">
-    <nav class="breadcrumb container" aria-label="Fil d'Ariane">
-      <a href="index.html" data-i18n="nav.home">Accueil</a>
-      <span aria-hidden="true">/</span>
-      <span aria-current="page" data-i18n="nav.demo">Essayer la carte</span>
-    </nav>
-
     <section class="page-hero page-hero-compact">
       <div class="container reveal">
-        <p class="eyebrow" data-i18n="demo.eyebrow">Démo interactive</p>
+        <p class="eyebrow" data-i18n="demo.eyebrow">Démo</p>
         <h1 data-i18n="demo.title">Touche la voirie. Lis la règle.</h1>
-        <p class="lead" data-i18n="demo.lead">Aperçu limité de l'app : carte, recherche d'adresse et détail des tronçons. Pas de compte — lecture seule.</p>
       </div>
     </section>
 
@@ -89,20 +82,6 @@
             </div>
             <button type="button" class="btn btn-on-dark btn-sm app-web-recenter" data-demo-recenter data-i18n="demo.recenter">Centre-ville</button>
           </header>
-
-          <form class="app-web-search" data-demo-search autocomplete="off">
-            <label class="sr-only" for="demo-search-input" data-i18n="demo.searchLabel">Rechercher une adresse</label>
-            <input
-              id="demo-search-input"
-              type="search"
-              class="app-web-search-input"
-              data-demo-search-input
-              data-i18n-placeholder="demo.searchPlaceholder"
-              placeholder="Ex. 1000 rue Sainte-Catherine, Montréal"
-              enterkeyhint="search"
-            >
-            <ul class="coverage-suggest app-web-suggest" data-demo-suggest hidden role="listbox" aria-label="Suggestions"></ul>
-          </form>
 
           <div class="app-web-stage">
             <h2 id="demo-map-title" class="sr-only" data-i18n="demo.mapTitle">Carte de démonstration</h2>
@@ -144,7 +123,7 @@
       </div>
       <nav class="footer-nav" aria-label="Pied de page">
         <a href="index.html" data-i18n="nav.home">Accueil</a>
-        <a href="essayer.html" data-i18n="nav.demo">Essayer la carte</a>
+        <a href="essayer.html" data-i18n="nav.demo">Démo</a>
         <a href="liste-attente.html" data-i18n="nav.waitlist">Liste d'attente</a>
         <a href="confidentialite.html" data-i18n="nav.privacy">Confidentialité</a>
         <a href="conditions.html" data-i18n="nav.terms">Conditions</a>
@@ -161,6 +140,8 @@
 
   <script src="maps-config.js"></script>
   <script src="site-config.js"></script>
+  <script src="coverage-zone.js"></script>
+  <script src="map-zone.js"></script>
   <script src="demo-map.js"></script>
   <script>
     (async () => {
