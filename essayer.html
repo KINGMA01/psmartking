@@ -65,27 +65,19 @@
 
   <main id="contenu" class="demo-main">
     <section class="demo-scene" aria-labelledby="demo-map-title">
-      <header class="demo-scene-copy">
-        <p class="eyebrow" data-i18n="demo.eyebrow">Démo</p>
-        <h1 id="demo-map-title" data-i18n="demo.title">Touche la voirie. Lis la règle.</h1>
-        <p class="demo-scene-lead" data-i18n="demo.lead">Aperçu limité au centre-ville. Touche un tronçon coloré sur la carte.</p>
-      </header>
+      <p class="demo-scene-kicker" data-i18n="demo.eyebrow">Démo</p>
 
-      <div class="demo-phone-wrap">
+      <div class="demo-scene-stage">
+        <header class="demo-scene-copy">
+          <h1 id="demo-map-title" data-i18n="demo.title">Touche la voirie. Lis la règle.</h1>
+          <p class="demo-scene-lead" data-i18n="demo.lead">Aperçu limité au centre-ville. Touche un tronçon coloré sur la carte.</p>
+        </header>
+
+        <div class="demo-phone-wrap">
         <div class="demo-phone" data-demo-phone>
           <div class="demo-phone-frame">
             <div class="demo-phone-notch" aria-hidden="true"></div>
             <div class="demo-phone-screen">
-              <div class="demo-phone-statusbar" aria-hidden="true"></div>
-              <header class="demo-phone-bar">
-                <div class="demo-phone-brand">
-                  <img src="logo.png?v=6" alt="" width="22" height="22" class="demo-phone-logo">
-                  <span>P-SmartKing</span>
-                  <span class="demo-phone-badge" data-i18n="demo.badge">Démo</span>
-                </div>
-                <button type="button" class="demo-phone-recenter" data-demo-recenter data-i18n="demo.recenter">Centre-ville</button>
-              </header>
-
               <div class="demo-phone-map-stage">
                 <div id="demo-map" class="demo-map" role="application" aria-label="Carte interactive P-SmartKing"></div>
 
@@ -111,11 +103,12 @@
         </div>
       </div>
 
-      <ul class="demo-legend demo-legend-inline" aria-label="Légende">
-        <li><span class="demo-swatch demo-swatch-ok"></span><span data-i18n="demo.legendOk">Autorisé</span></li>
-        <li><span class="demo-swatch demo-swatch-no"></span><span data-i18n="demo.legendNo">Interdit / payant</span></li>
-        <li><span class="demo-swatch demo-swatch-maybe"></span><span data-i18n="demo.legendMaybe">À vérifier</span></li>
-      </ul>
+        <ul class="demo-legend demo-legend-side" aria-label="Légende">
+          <li><span class="demo-swatch demo-swatch-ok"></span><span data-i18n="demo.legendOk">Autorisé</span></li>
+          <li><span class="demo-swatch demo-swatch-no"></span><span data-i18n="demo.legendNo">Interdit / payant</span></li>
+          <li><span class="demo-swatch demo-swatch-maybe"></span><span data-i18n="demo.legendMaybe">À vérifier</span></li>
+        </ul>
+      </div>
     </section>
   </main>
 

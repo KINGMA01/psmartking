@@ -374,14 +374,6 @@ async function initDemoMap() {
     setDemoStatus("", "");
   });
 
-  document.querySelector("[data-demo-recenter]")?.addEventListener("click", () => {
-    demoMap.panTo(DEMO_CENTER);
-    demoMap.setZoom(15);
-    closeDemoSheet();
-    setDemoStatus("", "");
-    scheduleDemoReload();
-  });
-
   document.querySelector("[data-demo-close]")?.addEventListener("click", () => {
     closeDemoSheet();
     setDemoStatus("", "");
