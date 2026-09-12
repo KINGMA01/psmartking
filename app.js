@@ -43,6 +43,7 @@ const COPY = {
       emailLabel: "Adresse courriel",
       placeholder: "toi@courriel.com",
       submit: "Rejoindre la beta",
+      successTitle: "Tu es inscrit·e !",
       success: "Tu es sur la liste. On t'écrit pour la beta ou au lancement.",
       error: "Entre un courriel valide.",
       networkError: "Impossible d'enregistrer ton courriel pour le moment. Réessaie dans un instant.",
@@ -149,20 +150,20 @@ const COPY = {
     coverage: {
       eyebrow: "Couverture",
       title: "Ta rue est couverte?",
-      lead: "Tape ton adresse. La zone bleue montre le centre-ville couvert par la démo interactive.",
+      lead: "Tape ton adresse. La carte te dit si le secteur est couvert au lancement : toute l'île de Montréal.",
       label: "Adresse",
-      placeholder: "Ex. 1000 rue Sainte-Catherine, Montréal QC",
+      placeholder: "Ex. 11922 Rue de Meulles, Saint-Laurent QC",
       submit: "Vérifier",
-      covered: "Cette adresse est dans la zone démo (centre-ville).",
-      outside: "Hors de la zone démo (centre-ville). Au lancement, toute l'île de Montréal sera couverte.",
+      covered: "Cette adresse est couverte au lancement.",
+      outside: "Pour l'instant, cette zone n'est pas prise en compte.",
       empty: "Entre une adresse complète, un quartier ou un code postal.",
       searching: "On cherche sur la carte…",
       notfound: "On n'a pas trouvé cette adresse. Vérifie le numéro et le nom de la rue.",
-      legend: "Zone démo — centre-ville",
+      legend: "Zone couverte au lancement",
       credit: "Données : Ville de Montréal",
       missingKey: "La carte Google n'a pas pu se charger.",
       blockedKey: "Ta clé Google n'autorise pas Maps JavaScript API. Dans Google Cloud : Identifiants → ta clé → Restrictions d'API → ajoute Maps JavaScript API et Places API (New). Active aussi ces APIs dans la bibliothèque, puis recharge la page.",
-      mapAlt: "Carte Google de la zone démo P-SmartKing au centre-ville de Montréal.",
+      mapAlt: "Carte Google de la couverture P-SmartKing sur l'île de Montréal.",
     },
     contact: {
       eyebrow: "Contact",
@@ -173,12 +174,13 @@ const COPY = {
     demo: {
       eyebrow: "Démo",
       title: "Touche la voirie. Lis la règle.",
-      lead: "Aperçu limité au centre-ville : carte et détail des tronçons. Pas de compte — lecture seule.",
+      lead: "Aperçu limité au centre-ville. Touche un tronçon coloré sur la carte.",
       mapTitle: "Carte de démonstration",
       badge: "Démo",
       searchLabel: "Rechercher une adresse",
       searchPlaceholder: "Ex. 1000 rue Sainte-Catherine, Montréal",
       recenter: "Centre-ville",
+      pickHint: "Touche un tronçon coloré pour voir les règles.",
       legendOk: "Autorisé",
       legendNo: "Interdit / payant",
       legendMaybe: "À vérifier",
@@ -285,12 +287,13 @@ const COPY = {
     demo: {
       eyebrow: "Demo",
       title: "Tap the street. Read the rule.",
-      lead: "Limited to downtown: map and segment details. No account — read-only.",
+      lead: "Limited to downtown. Tap a colored segment on the map.",
       mapTitle: "Demo map",
       badge: "Demo",
       searchLabel: "Search an address",
       searchPlaceholder: "E.g. 1000 Sainte-Catherine St, Montreal",
       recenter: "Downtown",
+      pickHint: "Tap a colored street segment to see the rules.",
       legendOk: "Allowed",
       legendNo: "Forbidden / paid",
       legendMaybe: "Unclear",
@@ -316,7 +319,8 @@ const COPY = {
       emailLabel: "Email address",
       placeholder: "you@email.com",
       submit: "Join the beta",
-      success: "You're on the list. We'll email you for the beta or at launch.",
+      successTitle: "You're on the list!",
+      success: "We'll email you for the beta or at launch.",
       error: "Enter a valid email.",
       networkError: "We couldn't save your email right now. Please try again in a moment.",
     },
@@ -614,13 +618,84 @@ function initNav() {
   });
 }
 
-function markWaitlistDone() {
+function isWaitlistSuccessNode(node) {
+  return (
+    node &&
+    (node.classList.contains("form-success") || node.classList.contains("form-success-wrap"))
+  );
+}
+
+function showWaitlistSuccess(success, celebrate) {
+  if (!isWaitlistSuccessNode(success)) return;
+  success.hidden = false;
+  window.requestAnimationFrame(() => {
+    success.classList.add("is-visible");
+    if (celebrate) launchWaitlistConfetti(success);
+  });
+}
+
+function launchWaitlistConfetti(anchor) {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const rect = anchor.getBoundingClientRect();
+  const canvas = document.createElement("canvas");
+  canvas.className = "waitlist-confetti";
+  canvas.setAttribute("aria-hidden", "true");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  canvas.style.cssText = "position:fixed;inset:0;pointer-events:none;z-index:9999";
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    canvas.remove();
+    return;
+  }
+  const colors = ["#4169E1", "#FFD700", "#22c55e", "#ffffff", "#7c3aed", "#f97316"];
+  const originX = rect.left + rect.width / 2;
+  const originY = rect.top + rect.height * 0.35;
+  const pieces = Array.from({ length: 72 }, () => ({
+    x: originX,
+    y: originY,
+    vx: (Math.random() - 0.5) * 9,
+    vy: Math.random() * -11 - 4,
+    w: Math.random() * 7 + 4,
+    h: Math.random() * 5 + 3,
+    rot: Math.random() * Math.PI,
+    vr: (Math.random() - 0.5) * 0.35,
+    color: colors[Math.floor(Math.random() * colors.length)],
+    life: 1,
+  }));
+  let frame = 0;
+  const tick = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    pieces.forEach((p) => {
+      if (p.life <= 0) return;
+      alive = true;
+      p.vy += 0.22;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.vr;
+      p.life -= 0.012;
+      ctx.save();
+      ctx.globalAlpha = Math.max(p.life, 0);
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+    });
+    frame += 1;
+    if (alive && frame < 180) window.requestAnimationFrame(tick);
+    else canvas.remove();
+  };
+  window.requestAnimationFrame(tick);
+}
+
+function markWaitlistDone(options) {
+  const celebrate = options?.celebrate === true;
   document.querySelectorAll("[data-waitlist]").forEach((form) => {
     form.classList.add("is-done");
-    const success = form.nextElementSibling;
-    if (success && success.classList.contains("form-success")) {
-      success.hidden = false;
-    }
+    showWaitlistSuccess(form.nextElementSibling, celebrate);
   });
 }
 
@@ -650,7 +725,10 @@ function waitlistHintId(input, suffix) {
 
 function showWaitlistFieldError(form, input, key, attr) {
   const success = form.nextElementSibling;
-  if (success && success.classList.contains("form-success")) success.hidden = true;
+  if (isWaitlistSuccessNode(success)) {
+    success.hidden = true;
+    success.classList.remove("is-visible");
+  }
   form.classList.add("form-error");
   if (!input) return;
   input.setAttribute("aria-invalid", "true");
@@ -688,7 +766,7 @@ function showWaitlistNetworkError(form) {
 
 function initWaitlist() {
   if (localStorage.getItem(WAITLIST_KEY) === "1") {
-    markWaitlistDone();
+    markWaitlistDone({ celebrate: false });
   }
 
   document.querySelectorAll("[data-waitlist]").forEach((form) => {
@@ -708,7 +786,7 @@ function initWaitlist() {
       try {
         await submitWaitlistEmail(email);
         clearWaitlistFieldErrors(form);
-        markWaitlistDone();
+        markWaitlistDone({ celebrate: true });
       } catch {
         showWaitlistNetworkError(form);
         input.focus();
@@ -1050,12 +1128,9 @@ let coveragePickedHit = null;
 let coverageSessionToken = null;
 
 function hitIsCovered(hit, lat, lng) {
-  if (lat != null && lng != null && !Number.isNaN(lat) && !Number.isNaN(lng)) {
-    const pip = pointInCoverageGeo(lat, lng);
-    if (pip !== null) return pip;
-    const zonePip = window.pskZone?.pointInActiveZone(lat, lng);
-    if (zonePip !== null) return zonePip;
-  }
+  const pip = lat != null && lng != null ? pointInCoverageGeo(lat, lng) : null;
+  if (pip === true) return true;
+  if (pip === false) return false;
   const places = hitLocalities(hit);
   if (places.some((place) => cityIsOutside(place) && !placeMatchesCovered(place))) return false;
   return places.some((place) => placeMatchesCovered(place));
@@ -1245,8 +1320,7 @@ async function runCoverageSearch(query, presetHit) {
 }
 
 async function loadCoverageGeo() {
-  // Zone démo centre-ville (coverage-zone.js). Pas de fetch file://.
-  if (window.PSMARTKING_DEMO_ZONE) return window.PSMARTKING_DEMO_ZONE;
+  // La zone est livrée par coverage-zone.js. Pas de fetch file://.
   if (window.PSMARTKING_COVERAGE_ZONE) return window.PSMARTKING_COVERAGE_ZONE;
   const res = await fetch("data/ile-montreal.geojson");
   if (!res.ok) throw new Error("geojson");
@@ -1316,14 +1390,6 @@ function fitCoverageBounds(geo) {
   if (!bounds.isEmpty()) coverageMap.fitBounds(bounds, 36);
 }
 
-function checkCoverageMapView() {
-  if (!coverageMap || !coverageGeojson) return;
-  const center = coverageMap.getCenter();
-  if (!center) return;
-  const inside = pointInCoverageGeo(center.lat(), center.lng());
-  if (inside === false) paintCoverageResult("outside");
-}
-
 async function ensureGoogleMapsReady() {
   for (let i = 0; i < 80; i += 1) {
     if (googleMapsKey()) break;
@@ -1373,18 +1439,14 @@ async function setupGoogleCoverageMap(holder) {
   try {
     const geo = await loadCoverageGeo();
     coverageGeojson = geo;
-    if (window.pskZone?.applyZoneOverlay) {
-      window.pskZone.applyZoneOverlay(coverageMap, geo);
-    } else {
-      coverageMap.data.addGeoJson(geo);
-      coverageMap.data.setStyle({
-        fillColor: "#4169E1",
-        fillOpacity: 0.28,
-        strokeColor: "#2a47c9",
-        strokeWeight: 2,
-        clickable: false,
-      });
-    }
+    coverageMap.data.addGeoJson(geo);
+    coverageMap.data.setStyle({
+      fillColor: "#4169E1",
+      fillOpacity: 0.28,
+      strokeColor: "#2a47c9",
+      strokeWeight: 2,
+      clickable: false,
+    });
     fitCoverageBounds(geo);
   } catch {
     coverageGeojson = null;
@@ -1394,7 +1456,6 @@ async function setupGoogleCoverageMap(holder) {
     if (!event.latLng) return;
     handleCoverageMapClick(event.latLng.lat(), event.latLng.lng());
   });
-  coverageMap.addListener("idle", checkCoverageMapView);
 }
 
 function initCoverage() {

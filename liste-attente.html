@@ -87,7 +87,13 @@
           <input id="email-cta" name="email" type="email" autocomplete="email" required placeholder="toi@courriel.com" data-i18n-placeholder="form.placeholder">
           <button class="btn btn-primary" type="submit" data-i18n="form.submit">Rejoindre la beta</button>
         </form>
-        <p class="form-success" hidden aria-live="polite" data-i18n="form.success">Tu es sur la liste. On t'écrit pour la beta ou au lancement.</p>
+        <div class="form-success-wrap" hidden aria-live="polite" role="status">
+          <div class="form-success-card">
+            <span class="form-success-icon" aria-hidden="true">🎉</span>
+            <p class="form-success-title" data-i18n="form.successTitle">Tu es inscrit·e !</p>
+            <p class="form-success-text" data-i18n="form.success">Tu es sur la liste. On t'écrit pour la beta ou au lancement.</p>
+          </div>
+        </div>
         <div class="cta-social">
           <p data-i18n="cta.social">Suis le projet</p>
           <div class="social-row">

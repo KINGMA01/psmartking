@@ -46,12 +46,12 @@
     return false;
   }
 
-  function activeZoneGeo() {
-    return global.PSMARTKING_DEMO_ZONE || global.PSMARTKING_COVERAGE_ZONE || null;
+  function demoZoneGeo() {
+    return global.PSMARTKING_DEMO_ZONE || null;
   }
 
-  function pointInActiveZone(lat, lng) {
-    const geo = activeZoneGeo();
+  function pointInDemoZone(lat, lng) {
+    const geo = demoZoneGeo();
     if (!geo) return null;
     return pointInGeo(geo, lat, lng);
   }
@@ -69,7 +69,7 @@
   function applyZoneOverlay(map, geojson) {
     if (!map || !global.google?.maps) return;
     clearZoneOverlay(map);
-    const ring = ringFromGeo(geojson || activeZoneGeo());
+    const ring = ringFromGeo(geojson || demoZoneGeo());
     if (!ring.length) return;
 
     const inner = latLngRing(ring);
@@ -106,7 +106,7 @@
   }
 
   function fitMapToZone(map, geojson, padding) {
-    const ring = ringFromGeo(geojson || activeZoneGeo());
+    const ring = ringFromGeo(geojson || demoZoneGeo());
     if (!ring.length || !map) return;
     const bounds = new google.maps.LatLngBounds();
     ring.forEach(([lng, lat]) => bounds.extend({ lat, lng }));
@@ -114,8 +114,8 @@
   }
 
   global.pskZone = {
-    activeZoneGeo,
-    pointInActiveZone,
+    demoZoneGeo,
+    pointInDemoZone,
     pointInGeo,
     applyZoneOverlay,
     clearZoneOverlay,

@@ -55,7 +55,7 @@
       <a href="index.html" data-i18n="nav.home">Accueil</a>
       <a href="comment.html" data-i18n="nav.how">Comment ça marche</a>
       <a href="fonctionnalites.html" data-i18n="nav.features">Fonctionnalités</a>
-      <a href="essayer.html" data-i18n="nav.demo">Essayer la carte</a>
+      <a href="essayer.html" data-i18n="nav.demo">Démo</a>
       <a href="a-propos.html" data-i18n="nav.about">À propos</a>
       <a href="faq.html" data-i18n="nav.faq">FAQ</a>
       <a href="contact.html" data-i18n="nav.contact">Contact</a>
@@ -63,80 +63,54 @@
     </nav>
   </header>
 
-  <main id="contenu">
-    <section class="page-hero page-hero-compact">
-      <div class="container reveal">
+  <main id="contenu" class="demo-main">
+    <section class="demo-scene" aria-labelledby="demo-map-title">
+      <div class="demo-scene-copy">
         <p class="eyebrow" data-i18n="demo.eyebrow">Démo</p>
-        <h1 data-i18n="demo.title">Touche la voirie. Lis la règle.</h1>
+        <h1 id="demo-map-title" data-i18n="demo.title">Touche la voirie. Lis la règle.</h1>
+        <p class="demo-scene-lead" data-i18n="demo.lead">Aperçu limité au centre-ville. Touche un tronçon coloré sur la carte.</p>
       </div>
-    </section>
 
-    <section class="demo-section" aria-labelledby="demo-map-title">
-      <div class="container">
-        <div class="app-web-shell">
-          <header class="app-web-bar">
-            <div class="app-web-brand">
-              <img src="logo.png?v=6" alt="" width="28" height="28" class="app-web-logo">
-              <span class="app-web-name">P-SmartKing</span>
-              <span class="app-web-badge" data-i18n="demo.badge">Démo</span>
+      <div class="demo-phone-wrap">
+        <div class="demo-phone" data-demo-phone>
+          <div class="demo-phone-frame">
+            <div class="demo-phone-notch" aria-hidden="true"></div>
+            <div class="demo-phone-screen">
+              <header class="demo-phone-bar">
+                <div class="demo-phone-brand">
+                  <img src="logo.png?v=6" alt="" width="22" height="22" class="demo-phone-logo">
+                  <span>P-SmartKing</span>
+                  <span class="demo-phone-badge" data-i18n="demo.badge">Démo</span>
+                </div>
+                <button type="button" class="demo-phone-recenter" data-demo-recenter data-i18n="demo.recenter">Centre-ville</button>
+              </header>
+
+              <div class="demo-phone-map-stage">
+                <div id="demo-map" class="demo-map" role="application" aria-label="Carte interactive P-SmartKing"></div>
+
+                <p class="demo-phone-toast" data-demo-status aria-live="polite"></p>
+
+                <p class="demo-phone-prompt" data-demo-prompt data-i18n="demo.pickHint">Touche un tronçon coloré pour voir les règles.</p>
+
+                <div class="demo-phone-sheet" data-demo-sheet aria-labelledby="demo-detail-title" aria-hidden="true">
+                  <div class="demo-phone-sheet-handle" aria-hidden="true"></div>
+                  <div class="demo-phone-sheet-head">
+                    <h2 id="demo-detail-title" class="demo-phone-sheet-title" data-i18n="demo.detailTitle">Détail du tronçon</h2>
+                    <button type="button" class="demo-phone-sheet-close" data-demo-close aria-label="Fermer">×</button>
+                  </div>
+                  <div class="demo-phone-sheet-body">
+                    <div class="demo-detail" data-demo-detail></div>
+                    <p class="demo-disclaimer" data-i18n="demo.disclaimer">Les couleurs ne garantissent pas une place libre. Vérifie toujours les panneaux sur place.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <button type="button" class="btn btn-on-dark btn-sm app-web-recenter" data-demo-recenter data-i18n="demo.recenter">Centre-ville</button>
-          </header>
-
-          <div class="app-web-stage">
-            <h2 id="demo-map-title" class="sr-only" data-i18n="demo.mapTitle">Carte de démonstration</h2>
-            <div id="demo-map" class="demo-map app-web-map" role="application" aria-label="Carte interactive P-SmartKing"></div>
-
-            <aside class="app-web-sheet" data-demo-sheet aria-labelledby="demo-detail-title">
-              <div class="app-web-sheet-handle" aria-hidden="true"></div>
-              <h3 id="demo-detail-title" class="app-web-sheet-title" data-i18n="demo.detailTitle">Détail du tronçon</h3>
-              <div class="app-web-detail-scroll">
-                <div class="demo-detail app-web-detail" data-demo-detail></div>
-              </div>
-              <div class="app-web-sheet-foot">
-                <p class="demo-disclaimer" data-i18n="demo.disclaimer">Les couleurs ne garantissent pas une place libre. Vérifie toujours les panneaux sur place.</p>
-              </div>
-            </aside>
+            <div class="demo-phone-home" aria-hidden="true"></div>
           </div>
-
-          <footer class="app-web-foot">
-            <p class="demo-status" data-demo-status aria-live="polite"></p>
-            <ul class="demo-legend" aria-label="Légende">
-              <li><span class="demo-swatch demo-swatch-ok"></span><span data-i18n="demo.legendOk">Autorisé</span></li>
-              <li><span class="demo-swatch demo-swatch-no"></span><span data-i18n="demo.legendNo">Interdit / payant</span></li>
-              <li><span class="demo-swatch demo-swatch-maybe"></span><span data-i18n="demo.legendMaybe">À vérifier</span></li>
-            </ul>
-          </footer>
         </div>
       </div>
     </section>
   </main>
-
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <a class="logo" href="index.html">
-          <span class="logo-mark" aria-hidden="true"><img src="logo.png?v=6" alt="" width="40" height="40"></span>
-          <span class="logo-text">P-SmartKing</span>
-        </a>
-        <p data-i18n="footer.tagline">100 % gratuit. Se garer à Montréal, sans y laisser ta soirée.</p>
-      </div>
-      <nav class="footer-nav" aria-label="Pied de page">
-        <a href="index.html" data-i18n="nav.home">Accueil</a>
-        <a href="essayer.html" data-i18n="nav.demo">Démo</a>
-        <a href="liste-attente.html" data-i18n="nav.waitlist">Liste d'attente</a>
-        <a href="confidentialite.html" data-i18n="nav.privacy">Confidentialité</a>
-        <a href="conditions.html" data-i18n="nav.terms">Conditions</a>
-        <a href="contact.html" data-i18n="nav.contact">Contact</a>
-      </nav>
-      <div class="footer-contact">
-        <a href="contact.html">psmartking@dnkvision.com</a>
-      </div>
-    </div>
-    <div class="container footer-bottom">
-      <p><a href="https://dnkvision.com" rel="noopener noreferrer" target="_blank"><strong>DnK Vision</strong></a> · P-SmartKing © <span id="year"></span> <span data-i18n="footer.legal">tous droits réservés</span></p>
-    </div>
-  </footer>
 
   <script src="maps-config.js"></script>
   <script src="site-config.js"></script>

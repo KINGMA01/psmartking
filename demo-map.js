@@ -1,6 +1,5 @@
 /**
- * Démo carte interactive — segments ParkSmart via /api/demo (proxy Vercel).
- * Zone limitée au centre-ville : masque gris à l'extérieur, pas de recherche (accueil).
+ * Démo carte interactive — mockup iPhone, zone centre-ville uniquement.
  */
 
 const DEMO_CENTER = { lat: 45.5019, lng: -73.5674 };
@@ -12,6 +11,7 @@ let demoMap = null;
 let demoPolylines = [];
 let demoLoadTimer = 0;
 let demoBusy = false;
+let demoResizeTimer = 0;
 
 function demoLang() {
   return document.documentElement.lang === "en" ? "en" : "fr";
@@ -22,10 +22,10 @@ function demoCopy(key) {
     fr: {
       loading: "Chargement de la voirie…",
       error: "Démo indisponible pour le moment. Reviens plus tard ou rejoins la liste d'attente.",
-      empty: "Aucun tronçon dans cette zone. Déplace la carte vers le centre-ville.",
+      empty: "Aucun tronçon ici. Déplace la carte vers le centre-ville.",
       pick: "Touche un tronçon coloré pour voir les règles.",
-      outsideZone:
-        "Hors de la zone démo (centre-ville). Recherche une adresse sur l'accueil ou reviens au centre-ville.",
+      pickHint: "Touche un tronçon coloré pour voir les règles.",
+      outsideZone: "Hors zone démo. Reviens au centre-ville ou cherche une adresse sur l'accueil.",
       sideLeft: "côté gauche",
       sideRight: "côté droit",
       canPark: "Stationnement autorisé",
@@ -34,14 +34,15 @@ function demoCopy(key) {
       schedule: "Horaires",
       reason: "Motif",
       nextChange: "Prochain changement",
+      close: "Fermer",
     },
     en: {
       loading: "Loading street segments…",
       error: "Demo unavailable right now. Try again later or join the waitlist.",
-      empty: "No segments in this view. Pan toward downtown Montreal.",
+      empty: "No segments here. Pan toward downtown Montreal.",
       pick: "Tap a colored street segment to see the rules.",
-      outsideZone:
-        "Outside the demo zone (downtown). Search an address on the home page or return to downtown.",
+      pickHint: "Tap a colored street segment to see the rules.",
+      outsideZone: "Outside the demo zone. Return downtown or search on the home page.",
       sideLeft: "left side",
       sideRight: "right side",
       canPark: "Parking allowed",
@@ -50,6 +51,7 @@ function demoCopy(key) {
       schedule: "Schedule",
       reason: "Reason",
       nextChange: "Next change",
+      close: "Close",
     },
   };
   return (table[demoLang()] || table.fr)[key] || key;
@@ -122,7 +124,7 @@ function formatDateTime(value) {
 }
 
 function isInDemoZone(lat, lng) {
-  const pip = window.pskZone?.pointInActiveZone(lat, lng);
+  const pip = window.pskZone?.pointInDemoZone(lat, lng);
   return pip !== false;
 }
 
@@ -131,19 +133,47 @@ function setDemoStatus(text, kind) {
   if (!el) return;
   el.textContent = text || "";
   el.dataset.kind = kind || "";
+  el.hidden = !text;
 }
 
-function setDemoDetail(html) {
+function openDemoSheet() {
+  const sheet = document.querySelector("[data-demo-sheet]");
+  const prompt = document.querySelector("[data-demo-prompt]");
+  if (sheet) {
+    sheet.classList.add("is-open");
+    sheet.setAttribute("aria-hidden", "false");
+  }
+  prompt?.classList.add("is-hidden");
+}
+
+function closeDemoSheet() {
+  const sheet = document.querySelector("[data-demo-sheet]");
+  const prompt = document.querySelector("[data-demo-prompt]");
+  const detail = document.querySelector("[data-demo-detail]");
+  if (sheet) {
+    sheet.classList.remove("is-open");
+    sheet.setAttribute("aria-hidden", "true");
+  }
+  if (detail) detail.innerHTML = "";
+  prompt?.classList.remove("is-hidden");
+}
+
+function setDemoDetail(html, options) {
   const el = document.querySelector("[data-demo-detail]");
   if (!el) return;
-  el.innerHTML = html || `<p class="demo-detail-placeholder">${demoCopy("pick")}</p>`;
-  document.querySelector("[data-demo-sheet]")?.classList.toggle("has-detail", Boolean(html));
+  const open = options?.open !== false;
+  if (html) {
+    el.innerHTML = html;
+    if (open) openDemoSheet();
+  } else {
+    closeDemoSheet();
+  }
 }
 
 function showOutsideZone() {
   clearDemoPolylines();
   setDemoStatus(demoCopy("outsideZone"), "outside");
-  setDemoDetail(`<p class="demo-detail-placeholder">${escapeHtml(demoCopy("outsideZone"))}</p>`);
+  setDemoDetail(`<p class="demo-detail-outside">${escapeHtml(demoCopy("outsideZone"))}</p>`);
 }
 
 function clearDemoPolylines() {
@@ -175,13 +205,16 @@ function drawDemoPolylines(items) {
     const line = new maps.Polyline({
       path,
       strokeColor: item.color || "#64748b",
-      strokeWeight: 6,
+      strokeWeight: 5,
       strokeOpacity: 0.92,
       clickable: true,
       map: demoMap,
       zIndex: item.can_park ? 2 : 4,
     });
-    line.addListener("click", () => void showDemoDetail(item));
+    line.addListener("click", (event) => {
+      if (event?.stop) event.stop();
+      void showDemoDetail(item);
+    });
     demoPolylines.push(line);
   });
 }
@@ -214,6 +247,7 @@ function nextChangeLine(d) {
 }
 
 async function showDemoDetail(item) {
+  setDemoStatus("", "");
   setDemoDetail(`<p class="demo-detail-loading">${demoCopy("loading")}</p>`);
   const segmentId = segmentIdFromItem(item);
   const tStart = item.t_start != null ? item.t_start : 0;
@@ -261,7 +295,6 @@ async function reloadDemoPolylines() {
     return;
   }
   demoBusy = true;
-  setDemoStatus(demoCopy("loading"), "loading");
   try {
     const items = await fetchDemoPolylines({ lat, lng });
     drawDemoPolylines(items);
@@ -284,9 +317,18 @@ function checkDemoMapView() {
   if (!demoMap) return;
   const center = demoMap.getCenter();
   if (!center) return;
-  if (!isInDemoZone(center.lat(), center.lng())) {
-    showOutsideZone();
-  }
+  if (!isInDemoZone(center.lat(), center.lng())) showOutsideZone();
+}
+
+function triggerDemoMapResize() {
+  if (!demoMap || !window.google?.maps?.event) return;
+  window.google.maps.event.trigger(demoMap, "resize");
+  demoMap.setCenter(demoMap.getCenter() || DEMO_CENTER);
+}
+
+function scheduleDemoMapResize() {
+  window.clearTimeout(demoResizeTimer);
+  demoResizeTimer = window.setTimeout(triggerDemoMapResize, 120);
 }
 
 async function initDemoMap() {
@@ -297,19 +339,20 @@ async function initDemoMap() {
   demoMap = new Map(mount, {
     center: DEMO_CENTER,
     zoom: 15,
-    disableDefaultUI: false,
+    disableDefaultUI: true,
     gestureHandling: "greedy",
     clickableIcons: false,
     mapTypeControl: false,
     streetViewControl: false,
-    fullscreenControl: true,
+    fullscreenControl: false,
+    zoomControl: true,
     restriction: {
       latLngBounds: { north: 45.65, south: 45.45, east: -73.5, west: -73.78 },
       strictBounds: false,
     },
   });
 
-  const geo = window.pskZone?.activeZoneGeo?.();
+  const geo = window.pskZone?.demoZoneGeo?.();
   if (geo && window.pskZone?.applyZoneOverlay) {
     window.pskZone.applyZoneOverlay(demoMap, geo);
   }
@@ -323,24 +366,43 @@ async function initDemoMap() {
     if (!event.latLng) return;
     const lat = event.latLng.lat();
     const lng = event.latLng.lng();
-    if (!isInDemoZone(lat, lng)) showOutsideZone();
+    if (!isInDemoZone(lat, lng)) {
+      showOutsideZone();
+      return;
+    }
+    closeDemoSheet();
+    setDemoStatus("", "");
   });
 
   document.querySelector("[data-demo-recenter]")?.addEventListener("click", () => {
     demoMap.panTo(DEMO_CENTER);
     demoMap.setZoom(15);
-    setDemoDetail("");
+    closeDemoSheet();
+    setDemoStatus("", "");
     scheduleDemoReload();
   });
 
-  setDemoDetail("");
+  document.querySelector("[data-demo-close]")?.addEventListener("click", () => {
+    closeDemoSheet();
+    setDemoStatus("", "");
+  });
+
+  window.addEventListener("resize", scheduleDemoMapResize);
+  if (window.ResizeObserver) {
+    const stage = document.querySelector(".demo-phone-map-stage");
+    if (stage) new ResizeObserver(scheduleDemoMapResize).observe(stage);
+  }
+
+  closeDemoSheet();
+  triggerDemoMapResize();
   await reloadDemoPolylines();
 }
 
 function refreshDemoCopy() {
-  const detail = document.querySelector("[data-demo-detail]");
-  const placeholder = detail?.querySelector(".demo-detail-placeholder");
-  if (placeholder) placeholder.textContent = demoCopy("pick");
+  const prompt = document.querySelector("[data-demo-prompt]");
+  if (prompt) prompt.textContent = demoCopy("pickHint");
+  const closeBtn = document.querySelector("[data-demo-close]");
+  if (closeBtn) closeBtn.setAttribute("aria-label", demoCopy("close"));
   const status = document.querySelector("[data-demo-status]");
   if (status?.dataset.kind === "outside") status.textContent = demoCopy("outsideZone");
 }
