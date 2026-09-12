@@ -37,7 +37,7 @@ const COPY = {
       title: "L'app, en vrai",
       lead: "Carte interactive, règles claires et guidage jusqu'à la place. Pas une maquette générique : c'est le produit qu'on développe.",
       cta: "Voir comment ça marche",
-      caption: "Capture de l'application P-SmartKing : carte de Montréal avec une place disponible.",
+      caption: "Capture réelle de l'application P-SmartKing : carte et détail d'un tronçon à Montréal.",
     },
     form: {
       emailLabel: "Adresse courriel",
@@ -175,6 +175,8 @@ const COPY = {
       eyebrow: "Démo",
       title: "Touche la voirie. Lis la règle.",
       lead: "Aperçu limité au centre-ville. Touche un tronçon coloré sur la carte.",
+      limitedNote:
+        "Infos réduites pour la démo — l'app complète affiche horaires, photos de panneaux et plus encore.",
       mapTitle: "Carte de démonstration",
       badge: "Démo",
       searchLabel: "Rechercher une adresse",
@@ -288,6 +290,8 @@ const COPY = {
       eyebrow: "Demo",
       title: "Tap the street. Read the rule.",
       lead: "Limited to downtown. Tap a colored segment on the map.",
+      limitedNote:
+        "Reduced info for the demo — the full app shows schedules, sign photos, and more.",
       mapTitle: "Demo map",
       badge: "Demo",
       searchLabel: "Search an address",
@@ -313,7 +317,7 @@ const COPY = {
       title: "The app, for real",
       lead: "Interactive map, clear rules, and navigation to the spot. Not a generic mockup: this is the product we're building.",
       cta: "Try the map",
-      caption: "Screenshot of the P-SmartKing app: Montreal map with an available parking spot.",
+      caption: "Real screenshot of the P-SmartKing app: map and street segment details in Montreal.",
     },
     form: {
       emailLabel: "Email address",

@@ -284,8 +284,10 @@ input:focus-visible,
 }
 
 .header-inner {
-  width: min(var(--max-wide), calc(100% - 2 * var(--pad)));
-  margin-inline: auto;
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: max(10px, env(safe-area-inset-left)) max(var(--pad), env(safe-area-inset-right));
   min-height: var(--header-h);
   display: flex;
   align-items: center;
@@ -294,6 +296,7 @@ input:focus-visible,
 
 .header-inner > .logo {
   margin-right: auto;
+  margin-left: 0;
 }
 
 .logo {
@@ -1080,15 +1083,62 @@ input:focus-visible,
 
 .preview-device {
   margin: 0;
-  max-width: 320px;
   margin-inline: auto;
+  display: flex;
+  justify-content: center;
 }
 
-.preview-device img {
+.preview-phone {
+  filter: drop-shadow(0 28px 52px rgba(12, 27, 77, 0.22));
+}
+
+.preview-phone-frame {
+  position: relative;
+  padding: 12px;
+  border-radius: 48px;
+  background: linear-gradient(155deg, #3a3a40 0%, #121216 48%, #1e1e24 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+
+.preview-phone-notch {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92px;
+  height: 24px;
+  border-radius: 999px;
+  background: #050507;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.preview-phone-screen {
+  position: relative;
+  width: min(360px, 88vw);
+  aspect-ratio: 9 / 19.5;
+  border-radius: 36px;
+  overflow: hidden;
+  background: #000;
+}
+
+.preview-phone-screen img {
   width: 100%;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.preview-phone-home {
+  width: 34%;
+  height: 4px;
+  margin: 10px auto 2px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
 }
 
 /* Problem */
@@ -2109,7 +2159,12 @@ body:has(.breadcrumb) main {
 
   .preview-grid,
   .bento-featured-inner {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    align-items: center;
+  }
+
+  .preview-phone-screen {
+    width: min(420px, 40vw);
   }
 
   .hero-facts {
@@ -2885,6 +2940,20 @@ html[data-page="demo"] .demo-main {
   font-weight: 500;
 }
 
+.demo-scene-note {
+  margin: 0.7rem 0 0;
+  max-width: 20rem;
+  font-size: clamp(0.78rem, 1.2vw, 0.875rem);
+  line-height: 1.45;
+  font-weight: 600;
+  color: var(--royal-deep);
+}
+
+.demo-scene-cta {
+  margin-top: 0.9rem;
+  display: inline-flex;
+}
+
 .demo-phone-wrap {
   grid-column: 2;
   justify-self: center;
@@ -3098,6 +3167,13 @@ html[data-page="demo"] .demo-main {
   line-height: 1.45;
 }
 
+.demo-detail-slot {
+  margin: 0.35rem 0 0;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
 .demo-phone-home {
   width: 34%;
   height: 4px;
@@ -3142,6 +3218,15 @@ html[data-page="demo"] .demo-main {
     text-align: center;
     padding-right: 0;
     max-width: 28rem;
+  }
+
+  .demo-scene-note {
+    max-width: 28rem;
+    margin-inline: auto;
+  }
+
+  .demo-scene-cta {
+    margin-inline: auto;
   }
 
   .demo-scene-copy h1 {
